@@ -11,8 +11,51 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
 <body>
-    <div id="app" class="bg-dark">
-        <nav class="navbar navbar-expand-lg navbar-dark">
+    <section id="app" class="hero is-dark is-fullheight">
+        <div class="hero-head">
+            <header class="nav">
+              <div class="container">
+                <div class="nav-left">
+                  <a class="nav-item">
+                    <img src="" alt="Logo">
+                  </a>
+                </div>
+                <span class="nav-toggle">
+                  <span></span>
+                  <span></span>
+                  <span></span>
+                </span>
+                <div class="nav-right nav-menu">
+                  <a class="nav-item is-active">
+                    Home
+                  </a>
+                  <a class="nav-item">
+                    Examples
+                  </a>
+                  <a class="nav-item">
+                    Documentation
+                  </a>
+                  <span class="nav-item">
+                    <a class="button is-success is-inverted">
+                      <span class="icon">
+                        <i class="fa fa-github"></i>
+                      </span>
+                      <span>Download</span>
+                    </a>
+                  </span>
+                </div>
+              </div>
+            </header>
+        </div>
+
+        @yield('content')
+
+        <div class="hero-foot">
+
+        </div>
+    </section>
+
+        <!-- <nav class="navbar navbar-expand-lg navbar-dark">
             <a class="navbar-brand" href="#">Navbar</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -52,10 +95,9 @@
                     @endif
                 </ul>
             </div>
-        </nav>
+        </nav> -->
 
-        @yield('content')
-    </div>
+        
 
     @yield('script')
     <script src="{{ asset('js/app.js') }}"></script>
