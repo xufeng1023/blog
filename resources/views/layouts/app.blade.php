@@ -11,41 +11,58 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
 <body>
-    <section id="app" class="hero is-dark is-fullheight">
+    <section id="app" class="hero is-black is-fullheight">
         <div class="hero-head">
-            <header class="nav">
-              <div class="container">
-                <div class="nav-left">
-                  <a class="nav-item">
-                    <img src="" alt="Logo">
-                  </a>
-                </div>
-                <span class="nav-toggle">
-                  <span></span>
-                  <span></span>
-                  <span></span>
-                </span>
-                <div class="nav-right nav-menu">
-                  <a class="nav-item is-active">
-                    Home
-                  </a>
-                  <a class="nav-item">
-                    Examples
-                  </a>
-                  <a class="nav-item">
-                    Documentation
-                  </a>
-                  <span class="nav-item">
-                    <a class="button is-success is-inverted">
-                      <span class="icon">
-                        <i class="fa fa-github"></i>
-                      </span>
-                      <span>Download</span>
+            <nav class="navbar is-black">
+                <div class="navbar-brand">
+                    <a class="navbar-item" href="http://bulma.io">
+                        <img src="http://bulma.io/images/bulma-logo-white.png" alt="Bulma: a modern CSS framework based on Flexbox" width="112" height="28">
                     </a>
-                  </span>
+                    <div class="navbar-burger burger" data-target="navMenuColorblack-example">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
                 </div>
-              </div>
-            </header>
+                @if (Route::has('login'))
+                <div id="navMenuColorblack-example" class="navbar-menu">
+                    <div class="navbar-end">
+                        @auth
+                        <div class="navbar-item has-dropdown is-hoverable">
+                            <a class="navbar-link" href="#">
+                              {{ Auth::user()->name }}
+                            </a>
+                            <div class="navbar-dropdown">
+                                @if(auth()->user()->is_admin)
+                                    <a class="navbar-item" href="/admin">
+                                        admin
+                                    </a>
+                                    <hr class="navbar-divider">
+                                @endif
+                                <a class="navbar-item" href="/logout" onclick="event.preventDefault();
+                                         document.getElementById('logout-form').submit();">
+                                    logout
+                                </a>
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                    {{ csrf_field() }}
+                                </form>
+                            </div>
+                        </div>
+                        @else
+                        <div class="navbar-item">
+                            <div class="field is-grouped">
+                                <p class="control">
+                                    <a class="button is-primary" href="/login">
+                                        login
+                                    </a>
+                                </p>
+                            </div>
+                        </div>
+                        @endauth
+                    </div>
+                </div>
+                @endif
+            </nav>
         </div>
 
         @yield('content')
@@ -54,50 +71,6 @@
 
         </div>
     </section>
-
-        <!-- <nav class="navbar navbar-expand-lg navbar-dark">
-            <a class="navbar-brand" href="#">Navbar</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse flex-row-reverse" id="navbarSupportedContent">
-                <ul class="navbar-nav">
-                    <li class="nav-item">
-                        <a class="nav-link" href="/movies">Movies</a>
-                    </li>
-                    @if(Auth::check())
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="javascript:;" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                {{ Auth::user()->name }}
-                            </a>
-                            <div class="dropdown-menu dropdown-menu-right">
-                                @if(auth()->user()->is_admin)
-                                    <a class="dropdown-item" href="/admin">admin</a>
-                                @endif
-                                <a class="dropdown-item" href="{{ route('logout') }}"
-                                onclick="event.preventDefault();
-                                         document.getElementById('logout-form').submit();">
-                                    Logout
-                                </a>
-
-                                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                    {{ csrf_field() }}
-                                </form>
-                            </div>
-                        </li>
-                    @else
-                        <li class="nav-item">
-                            <a class="nav-link" href="/login">Login</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/register">Register</a>
-                        </li>
-                    @endif
-                </ul>
-            </div>
-        </nav> -->
-
-        
 
     @yield('script')
     <script src="{{ asset('js/app.js') }}"></script>

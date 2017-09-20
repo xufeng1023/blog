@@ -57,7 +57,9 @@ class PostTest extends TestCase
 
         $image = $this->create('Image', ['video_id' => $video->id]);
 
-        $this->get('/movie/'.$video->post->slug)->assertSee($video->thumbnail->slug);
+        $this->get('/movie/'.$video->post->slug);
+
+        $this->assertCount(1, $video->thumbnail);
 
         $this->deleteUselessFile($video->link);
         $this->deleteUselessFile($image->slug);

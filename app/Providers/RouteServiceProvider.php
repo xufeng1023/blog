@@ -23,9 +23,11 @@ class RouteServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
-
         parent::boot();
+
+        Route::bind('image', function($value) {
+            return \App\Image::whereSlug('upload/'.$value)->first();
+        });
     }
 
     /**
