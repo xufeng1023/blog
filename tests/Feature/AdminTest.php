@@ -36,6 +36,7 @@ class AdminTest extends TestCase
     {
         $data = $this->raw('Post');
         $slugWillBe = str_replace(' ', '-', strtolower($data['title']));
+        $slugWillBe = rtrim($slugWillBe, '.');
         $this->login()->post('/admin/posts', $data);
         $this->assertDatabaseHas('posts', ['slug' => $slugWillBe, 'title' => $data['title']]);
     }

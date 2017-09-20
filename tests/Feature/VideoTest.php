@@ -26,20 +26,20 @@ class VideoTest extends TestCase
         $this->get('/video/'.$video->slug)->assertStatus(404);
     }
 
-    public function test_expired_members_can_not_see_paid_videos()
-    {
-        $video = $this->create('Video');
-        $this->deleteUselessFile($video->link);
-        $this->login($this->create('User', ['plan' => 1]))->get('/video/'.$video->slug)->assertStatus(404);
-    }
+    // public function test_expired_members_can_not_see_paid_videos()
+    // {
+    //     $video = $this->create('Video');
+    //     $this->deleteUselessFile($video->link);
+    //     $this->login($this->create('User', ['plan' => 1]))->get('/video/'.$video->slug)->assertStatus(404);
+    // }
 
-    public function test_valid_members_can_see_paid_videos()
-    {
-        $video = $this->create('Video');
-        $user = $this->create('User', ['plan' => 1, 'expired_at' => Carbon::now()->addDay()]);
-        $this->deleteUselessFile($video->link);
-        $this->login($user)->get('/video/'.$video->slug)->assertStatus(200);
-    }
+    // public function test_valid_members_can_see_paid_videos()
+    // {
+    //     $video = $this->create('Video');
+    //     $user = $this->create('User', ['plan' => 1, 'expired_at' => Carbon::now()->addDay()]);
+    //     $this->deleteUselessFile($video->link);
+    //     $this->login($user)->get('/video/'.$video->slug)->assertStatus(200);
+    // }
 
     public function test_video_will_autoplay_after_one_another()
     {

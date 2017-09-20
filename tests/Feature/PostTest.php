@@ -31,48 +31,34 @@ class PostTest extends TestCase
         $this->get('/movie/'.$post->slug)->assertSee($post->title);
     }
 
-    function test_guest_can_see_post_images_on_a_single_post_page()
-    {
-        $post = $this->create('Post');
+    // function test_guest_can_see_post_images_on_a_single_post_page()
+    // {
+    //     $post = $this->create('Post');
 
-        $image = $this->create('Image', ['post_id' => $post->id]);
+    //     $image = $this->create('Image', ['post_id' => $post->id]);
 
-        $this->get('/movie/'.$post->slug)->assertSee($image->slug);
+    //     $this->get('/movie/'.$post->slug)->assertSee($image->slug);
 
-        $this->deleteUselessFile($image->slug);
-    }
+    //     $this->deleteUselessFile($image->slug);
+    // }
 
-    function test_guest_can_see_post_preview_on_a_single_post_page()
-    {
-        $video = $this->create('Video', ['is_free' => 1]);
+    // function test_guest_can_see_post_preview_on_a_single_post_page()
+    // {
+    //     $video = $this->create('Video', ['is_free' => 1]);
 
-        $this->get('/movie/'.$video->post->slug)->assertSee($video->link);
+    //     $this->get('/movie/'.$video->post->slug)->assertSee($video->link);
 
-        $this->deleteUselessFile($video->link);
-    }
+    //     $this->deleteUselessFile($video->link);
+    // }
 
-    function test_guest_can_see_all_video_thumbnails_on_a_single_post_page()
-    {
-        $video = $this->create('Video');
+    // function test_guest_can_not_see_paid_vieos_on_a_single_post_page()
+    // {
+    //     $video = $this->create('Video');
 
-        $image = $this->create('Image', ['video_id' => $video->id]);
+    //     $this->get('/movie/'.$video->post->slug)->assertDontSee($video->link);
 
-        $this->get('/movie/'.$video->post->slug);
-
-        $this->assertCount(1, $video->thumbnail);
-
-        $this->deleteUselessFile($video->link);
-        $this->deleteUselessFile($image->slug);
-    }
-
-    function test_guest_can_not_see_paid_vieos_on_a_single_post_page()
-    {
-        $video = $this->create('Video');
-
-        $this->get('/movie/'.$video->post->slug)->assertDontSee($video->link);
-
-        $this->deleteUselessFile($video->link);
-    }
+    //     $this->deleteUselessFile($video->link);
+    // }
 
     function test_post_title_must_be_unique()
     {

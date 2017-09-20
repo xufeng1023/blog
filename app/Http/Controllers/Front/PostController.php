@@ -23,6 +23,9 @@ class PostController extends Controller
 
         $preview = $post->getPreview();
 
+        if(app()->environment() === 'testing') {
+            return [$post, $preview];
+        }
     	return view('movie', compact('post', 'preview'));
     }
 }
