@@ -10,7 +10,7 @@ class VideoController extends Controller
 {
     public function stream(Video $video)
     {
-    	if($video->is_free || (auth()->user() && !auth()->user()->expired())) {
+    	if($video->is_free || (auth()->user() && auth()->user()->subscribed('main'))) {
             if(app()->environment() === 'testing') return;
             $video->play();
 	    }
@@ -21,6 +21,6 @@ class VideoController extends Controller
     public function next(Video $video)
     {
     	$slug = $video->nextVideoSlug();
-    	return Video::with('thumbnail')->where('slug', $slug)->first();
+    	return Video::with('thumbnail')->where('slug', $slug)->firstOrFail();
     }
 }

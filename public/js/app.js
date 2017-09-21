@@ -29790,7 +29790,9 @@ axios.defaults.headers.common['X-CSRF-TOKEN'] = '';
 		pay: function pay() {
 			axios.defaults.headers.common['Authorization'] = 'Bearer ' + this.user.text_token;
 
-			axios.post('http://127.0.0.2:8000/api/subscribe/' + this.user.id, { apiToken: this.user.api_token }).then(function (r) {
+			// axios.post('http://127.0.0.2:8000/api/subscribe/' + this.user.id, 
+			// 	{apiToken: this.user.api_token})
+			axios.post('http://127.0.0.2:8000/api/cancel').then(function (r) {
 				console.log(r.data);
 			});
 		}
