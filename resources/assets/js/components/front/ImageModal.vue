@@ -2,12 +2,14 @@
 	export default {
 		data() {
 			return {
-				src: ''
+				src: '',
+				isActive: false
 			}
 		},
 		created() {
 			Bus.$on('showImage', src => {
-				this.src = src
+				this.src = src,
+				this.isActive = true
 			});
 		}
 	}

@@ -12,7 +12,7 @@ class PostController extends Controller
     {
     	$posts = Post::with(['images' => function($query) {
     		$query->where('is_thumbnail', 1);
-    	}])->latest()->paginate(20);
+    	}])->latest()->paginate(16);
 
     	return view('movies', compact('posts'));
     }

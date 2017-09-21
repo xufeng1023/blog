@@ -1,6 +1,8 @@
 <template>
 	<a href="javascript:;" data-toggle="modal" data-target="#viewImageModal" @click="show">
-        <img :src="this.image.slug | FILE" width="100%">
+		<figure class="image is-1by1">
+	        <img :src="this.image.slug | FILE">
+	    </figure>
     </a>
 </template>
 

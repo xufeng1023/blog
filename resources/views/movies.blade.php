@@ -1,24 +1,28 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container-fluid">
-    <div class="row">
-        <div class="col-md-12">
-            @foreach($posts->chunk(4) as $chunks)
-                <div class="row">
-                    @foreach($chunks as $post)
-                        @if($post->images->first())
-                            <div class="col-sm-3">
-                                <a href="/movie/{{ $post->slug }}">
-                                    <img src="{{ asset('/storage/'.$post->images->first()->slug) }}" width="100%">
-                                    {{ $post->title }}
-                                </a>
-                            </div>
-                        @endif
-                    @endforeach
-                </div>
+<div class="container">
+    <div class="has-text-centered section">
+        <p class="title is-1">Title 1</p>
+        <p class="subtitle is-3">Subtitle 3</p>
+    </div>
+    @foreach($posts->chunk(4) as $chunks)
+        <div class="columns">
+            @foreach($chunks as $post)
+                @if($post->images->first())
+                    <div class="column">
+                        <a href="/movie/{{ $post->slug }}">
+                            <figure class="image is-1by1">
+                                <img src="{{ asset('/storage/'.$post->images->first()->slug) }}">
+                            </figure>
+                            <p>{{ $post->title }}</p>
+                        </a>
+                    </div>
+                @endif
             @endforeach
         </div>
-    </div>
+    @endforeach
+
+    {{ $posts->links('vendor.pagination.bulma') }}
 </div>
 @endsection
