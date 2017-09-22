@@ -42734,6 +42734,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
 	props: ['video'],
@@ -42747,8 +42750,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 		if (this.video.thumbnail) {
 			this.src = this.video.thumbnail.slug;
 		}
-		Bus.$on('previewChanged', function (data) {
+
+		this.$on('previewChanged', function (data) {
 			this.active = data.slug == this.video.slug ? 1 : 0;
+		}.bind(this));
+
+		this.$on('previewCleared', function (data) {
+			this.active = data.slug == this.video.slug ? 0 : 1;
 		}.bind(this));
 	},
 
@@ -42762,15 +42770,24 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 	},
 	methods: {
 		preview: function preview(slug) {
+			var _this = this;
+
 			axios.patch('/admin/videos/' + slug + '/preview').then(function () {
-				Bus.$emit('previewChanged', { 'slug': slug });
+				_this.$emit('previewChanged', { 'slug': slug });
+			});
+		},
+		clearPreview: function clearPreview(slug) {
+			var _this2 = this;
+
+			axios.patch('/admin/videos/' + slug + '/clearPreview').then(function () {
+				_this2.$emit('previewCleared', { 'slug': slug });
 			});
 		},
 		remove: function remove(slug) {
-			var _this = this;
+			var _this3 = this;
 
 			axios.delete('/admin/videos/' + slug).then(function (r) {
-				$(_this.$el).fadeOut(300, function () {
+				$(_this3.$el).fadeOut(300, function () {
 					Bus.$emit('flash', {
 						message: r.data.message,
 						type: 'success'
@@ -42780,12 +42797,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 			});
 		},
 		onChange: function onChange(e) {
-			var _this2 = this;
+			var _this4 = this;
 
 			var fm = new FormData();
 			fm.append('image', e.target.files[0]);
 			axios.post('/admin/videos/thumbnail/' + this.video.slug, fm).then(function (r) {
-				_this2.src = r.data.src;
+				_this4.src = r.data.src;
 				e.target.value = null;
 			});
 		}
@@ -42838,6 +42855,12 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }, [_c('span', {
     staticClass: "glyphicon glyphicon-trash"
   })]), _vm._v(" "), _c('button', {
+    directives: [{
+      name: "show",
+      rawName: "v-show",
+      value: (!_vm.active),
+      expression: "!active"
+    }],
     staticClass: "btn btn-success btn-xs",
     attrs: {
       "type": "button"
@@ -42849,6 +42872,24 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }
   }, [_c('span', {
     staticClass: "glyphicon glyphicon-thumbs-up"
+  })]), _vm._v(" "), _c('button', {
+    directives: [{
+      name: "show",
+      rawName: "v-show",
+      value: (_vm.active),
+      expression: "active"
+    }],
+    staticClass: "btn btn-warning btn-xs",
+    attrs: {
+      "type": "button"
+    },
+    on: {
+      "click": function($event) {
+        _vm.clearPreview(_vm.video.slug)
+      }
+    }
+  }, [_c('span', {
+    staticClass: "glyphicon glyphicon-thumbs-down"
   })])])])
 },staticRenderFns: []}
 module.exports.render._withStripped = true

@@ -54,16 +54,9 @@ class VideoTest extends TestCase
         $this->login($user)->get('/video/'.$video->slug)->assertStatus(200);
     }
 
-    public function test_video_will_autoplay_after_one_another()
+    public function test_return_not_found_if_video_not_exists()
     {
-    	$video1 = $this->create('Video', ['slug' => 'slug-1']);
-    	$video2 = $this->create('Video', [
-    		'post_id' => $video1->post->id,
-    		'slug' => 'slug-2'
-		]);
-    	$this->deleteUselessFile($video1->link);
-    	$this->deleteUselessFile($video2->link);
-    	$this->get('/video/next/'.$video1->slug)
-    		->assertSee($video2->slug);
+        $this->expectException('Illuminate\Database\Eloquent\ModelNotFoundException');
+    	$this->get('/video/slug-not-exists');
     }
 }

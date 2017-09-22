@@ -114,4 +114,9 @@ class VideoController extends Controller
     {
         $video->clearPreview()->newPreview();
     }
+
+    public function clearPreview(Video $video)
+    {
+        $video->clearOnePreview();
+    }
 }

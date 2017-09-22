@@ -48,6 +48,8 @@ class Post extends Model
 
     public function getPreview()
     {
-        return $this->videos()->orderBy('is_free', 'desc')->first();
+        $video = $this->videos()->orderBy('is_free', 'desc')->first();
+        if($video) $video->load('thumbnail');
+        return $video;
     }
 }

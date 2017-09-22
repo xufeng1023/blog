@@ -17,10 +17,4 @@ class VideoController extends Controller
 
         return response([], 404);
     }
-
-    public function next(Video $video)
-    {
-    	$slug = $video->nextVideoSlug();
-    	return Video::with('thumbnail')->where('slug', $slug)->firstOrFail();
-    }
 }

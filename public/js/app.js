@@ -29376,9 +29376,25 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
 	props: ['video'],
+	data: function data() {
+		return {
+			playing: false
+		};
+	},
+	created: function created() {
+		Bus.$on('nowPlaying', function (data) {
+			this.playing = this.video.slug == data ? true : false;
+		}.bind(this));
+	},
+
 	methods: {
 		play: function play() {
 			Bus.$emit('play', this.video);
@@ -29400,8 +29416,16 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     attrs: {
       "src": _vm._f("FILE")(_vm.video.thumbnail.slug)
     }
-  })])
-},staticRenderFns: []}
+  }), _vm._v(" "), (_vm.playing) ? _c('div', {
+    staticClass: "playing hero is-overlay"
+  }, [_vm._m(0)]) : _vm._e()])
+},staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    staticClass: "hero-body"
+  }, [_c('span', {
+    staticClass: "is-size-4 has-text-centered container"
+  }, [_vm._v("now playing...")])])
+}]}
 module.exports.render._withStripped = true
 if (false) {
   module.hot.accept()
@@ -29480,12 +29504,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 	watch: {
 		now: function now() {
 			this.video.pause();
-			//this.video.poster('/storage/' + this.now.thumbnail.slug);
-			this.video.poster(null);
-			this.video.src({
-				type: "video/mp4",
-				src: '/video/' + this.now.slug
-			});
+			this.video.poster('/storage/' + this.now.thumbnail.slug);
+
+			this.load();
 
 			this.video.load();
 			this.video.play();
@@ -29498,15 +29519,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 		this.video = videojs('video-player', { errorDisplay: false });
 
-		if (this.now.thumbnail) {
-			this.video.poster('/storage/' + this.now.thumbnail.slug);
-		}
-
-		this.video.src({
-			type: "video/mp4",
-			src: '/video/' + this.preview.slug
-		});
-
 		Bus.$on('play', function (video) {
 			_this.now = video;
 		});
@@ -29518,12 +29530,25 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 		});
 
 		this.video.on('ended', function () {
-			axios.get('/video/next/' + _this.now.slug).then(function (_ref) {
-				var data = _ref.data;
-
-				_this.now = data;
-			});
+			_this.next();
 		});
+	},
+
+	methods: {
+		load: function load() {
+			this.video.src({
+				type: "video/mp4",
+				src: '/video/' + this.now.slug + '?' + Math.random().toString(36).substring(2)
+			});
+
+			Bus.$emit('nowPlaying', this.now.slug);
+		},
+		next: function next() {
+			this.now.slug = this.now.slug.replace(/\d+$/, function (num) {
+				return ++num;
+			});
+			this.load();
+		}
 	}
 });
 

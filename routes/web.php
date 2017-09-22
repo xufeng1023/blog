@@ -7,15 +7,15 @@ Route::get('/', function() {
 Route::get('/movies', 'Front\PostController@index');
 Route::get('/movie/{post}', 'Front\PostController@show');
 Route::get('/video/{video}', 'Front\VideoController@stream');
-Route::get('/video/next/{video}', 'Front\VideoController@next');
 
-Route::prefix('admin')->middleware(['auth','admin'])->group(function() {
+Route::prefix('admin')->middleware('admin')->group(function() {
 	Route::get('/', 'PostController@index');
 	Route::post('/videos/thumbnail/{video}', 'VideoController@thumbnail');
 	Route::get('/posts/search', 'PostController@search');
 	Route::resource('posts', 'PostController');
 	Route::resource('videos', 'VideoController');
 	Route::patch('/videos/{video}/preview', 'VideoController@setPreview');
+	Route::patch('/videos/{video}/clearPreview', 'VideoController@clearPreview');
 	Route::resource('images', 'ImageController');
 	//
 	Route::get('/factory', function() {

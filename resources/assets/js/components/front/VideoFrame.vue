@@ -21,12 +21,9 @@
 		watch: {
 			now() {
 				this.video.pause();
-				//this.video.poster('/storage/' + this.now.thumbnail.slug);
-				this.video.poster(null);
-				this.video.src({
-					type: "video/mp4",
-					src: '/video/' + this.now.slug
-				});
+				this.video.poster('/storage/' + this.now.thumbnail.slug);
+
+				this.load();
 				
 				this.video.load();
 				this.video.play();
@@ -36,15 +33,6 @@
 			this.now = this.preview;
 			
 			this.video = videojs('video-player', {errorDisplay: false});
-
-			if(this.now.thumbnail) {
-				this.video.poster('/storage/' + this.now.thumbnail.slug);
-			}
-
-			this.video.src({
-				type: "video/mp4",
-				src: '/video/' + this.preview.slug
-			});
 
 			Bus.$on('play', video => {
 				this.now = video;
@@ -57,11 +45,22 @@
 			});
 
 			this.video.on('ended', () => {
-				axios.get('/video/next/' + this.now.slug)
-				.then(({data}) => {
-					this.now = data;
-				})
+				this.next();
 			})
+		},
+		methods: {
+			load() {
+				this.video.src({
+					type: "video/mp4",
+					src: '/video/' + this.now.slug + '?' + Math.random().toString(36).substring(2)
+				});
+
+				Bus.$emit('nowPlaying', this.now.slug);
+			},
+			next() {
+				this.now.slug = this.now.slug.replace(/\d+$/, num => { return ++num });
+				this.load();
+			}
 		}
 	}
 </script>

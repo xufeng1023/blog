@@ -14,22 +14,19 @@ class AdminTest extends TestCase
 
     function test_guests_can_not_access_admin_directory()
     {
-        $this->expectException('Illuminate\Auth\AuthenticationException');
-        $this->get('/admin')->assertRedirect('/login');
+        $this->expectException('Symfony\Component\HttpKernel\Exception\NotFoundHttpException');
+        $this->get('/admin');
     }
 
     function test_users_can_not_access_admin_directory()
     {
-        $this->login($this->create('User'))
-            ->get('/admin')
-            ->assertStatus(302);
+        $this->expectException('Symfony\Component\HttpKernel\Exception\NotFoundHttpException');
+        $this->login($this->create('User'))->get('/admin');
     }
 
     function test_only_admin_can_access_admin_directory()
     {
-        $this->login()
-            ->get('/admin')
-            ->assertStatus(200);
+        $this->login()->get('/admin')->assertStatus(200);
     }
 
     function test_admin_can_add_a_post()

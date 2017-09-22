@@ -17,7 +17,7 @@ class Admin
     public function handle($request, Closure $next)
     {
         if(!Auth::check() || !Auth::user()->is_admin) {
-            return back();
+            throw (new \Symfony\Component\HttpKernel\Exception\NotFoundHttpException);
         }
 
         return $next($request);

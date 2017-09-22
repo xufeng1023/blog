@@ -58,6 +58,12 @@ class Video extends Model
         $this->save();
     }
 
+    public function clearOnePreview()
+    {
+        $this->is_free = 0;
+        $this->save();
+    }
+
     public function nextVideoSlug()
     {
         return preg_replace_callback('/(\d+)$/', function($matches) {

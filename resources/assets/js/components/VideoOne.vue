@@ -11,8 +11,11 @@
 			<button type="button" class="btn btn-danger btn-xs" @click="remove(video.slug)">
 				<span class="glyphicon glyphicon-trash"></span>
 			</button>
-			<button type="button" class="btn btn-success btn-xs" @click="preview(video.slug)">
+			<button type="button" class="btn btn-success btn-xs" v-show="!active" @click="preview(video.slug)">
 				<span class="glyphicon glyphicon-thumbs-up"></span>
+			</button>
+			<button type="button" class="btn btn-warning btn-xs" v-show="active" @click="clearPreview(video.slug)">
+				<span class="glyphicon glyphicon-thumbs-down"></span>
 			</button>
 		</div>
 	</div>
@@ -31,8 +34,13 @@
 			if(this.video.thumbnail) {
 				this.src = this.video.thumbnail.slug
 			}
-			Bus.$on('previewChanged', function(data) {
+
+			this.$on('previewChanged', function(data) {
 				this.active = data.slug == this.video.slug ? 1 : 0
+			}.bind(this));
+
+			this.$on('previewCleared', function(data) {
+				this.active = data.slug == this.video.slug ? 0 : 1
 			}.bind(this))
 		},
 		filters: {
@@ -47,7 +55,13 @@
 			preview(slug){
 				axios.patch('/admin/videos/'+slug+'/preview')
 				.then(() => {
-					Bus.$emit('previewChanged', {'slug':slug})
+					this.$emit('previewChanged', {'slug':slug})
+				})
+			},
+			clearPreview(slug){
+				axios.patch('/admin/videos/'+slug+'/clearPreview')
+				.then(() => {
+					this.$emit('previewCleared', {'slug':slug})
 				})
 			},
 			remove(slug) {
