@@ -11,6 +11,6 @@ $factory->define(App\Subscription::class, function (Faker $faker) {
         'stripe_id' => 'sub_'.str_random(14),
         'stripe_plan' => $plan,
         'quantity' => 1,
-        'trial_ends_at' => Carbon::now()->addDay()
+        'ends_at' => Carbon::now()->addDay()
     ];
 });

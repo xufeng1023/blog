@@ -26,12 +26,21 @@ class VideoTest extends TestCase
         $this->get('/video/'.$video->slug)->assertStatus(404);
     }
 
-    // public function test_expired_members_can_not_see_paid_videos()
-    // {
-    //     $video = $this->create('Video');
-    //     $this->deleteUselessFile($video->link);
-    //     $this->login($this->create('User', ['plan' => 1]))->get('/video/'.$video->slug)->assertStatus(404);
-    // }
+    public function test_expired_members_can_not_see_paid_videos()
+    {
+        $video = $this->create('Video');
+        $this->deleteUselessFile($video->link);
+
+        $user = $this->create('User');
+
+        $sub = $this->create('Subscription', [
+            'user_id' => $user->id, 
+            'name' => 'main',
+            'ends_at' => Carbon::now()->subday()
+        ]);
+
+        $this->login($user)->get('/video/'.$video->slug)->assertStatus(404);
+    }
 
     public function test_new_members_can_see_paid_videos()
     {
