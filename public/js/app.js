@@ -29408,7 +29408,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('figure', {
-    staticClass: "image is-1by1",
+    staticClass: "image is-16by9 border-3",
     on: {
       "click": _vm.play
     }
@@ -29504,7 +29504,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 	watch: {
 		now: function now() {
 			this.video.pause();
-			this.video.poster('/storage/' + this.now.thumbnail.slug);
+			//this.video.poster('/storage/' + this.now.thumbnail.slug);
 
 			this.load();
 
@@ -29531,6 +29531,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 		this.video.on('ended', function () {
 			_this.next();
+		});
+
+		this.video.on('error', function (e) {
+			console.log(e);
+			e.stopImmediatePropagation();
+			var error = _this.video.error();
+			console.log('error!', error.code, error.type, error.message);
 		});
 	},
 

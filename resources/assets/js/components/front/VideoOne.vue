@@ -1,5 +1,5 @@
 <template>
-	<figure class="image is-1by1" @click="play">
+	<figure class="image is-16by9 border-3" @click="play">
 		<img :src="video.thumbnail.slug | FILE">
 		<div class="playing hero is-overlay" v-if="playing">
 			<div class="hero-body">

@@ -21,7 +21,7 @@
 		watch: {
 			now() {
 				this.video.pause();
-				this.video.poster('/storage/' + this.now.thumbnail.slug);
+				//this.video.poster('/storage/' + this.now.thumbnail.slug);
 
 				this.load();
 				
@@ -46,7 +46,14 @@
 
 			this.video.on('ended', () => {
 				this.next();
-			})
+			});
+
+			this.video.on('error', (e) => {
+				console.log(e)
+				e.stopImmediatePropagation();
+		        var error = this.video.error();
+		        console.log('error!', error.code, error.type , error.message);
+			});
 		},
 		methods: {
 			load() {

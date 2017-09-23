@@ -35,7 +35,7 @@
 				this.src = this.video.thumbnail.slug
 			}
 
-			this.$on('previewChanged', function(data) {
+			Bus.$on('previewChanged', function(data) {
 				this.active = data.slug == this.video.slug ? 1 : 0
 			}.bind(this));
 
@@ -55,7 +55,7 @@
 			preview(slug){
 				axios.patch('/admin/videos/'+slug+'/preview')
 				.then(() => {
-					this.$emit('previewChanged', {'slug':slug})
+					Bus.$emit('previewChanged', {'slug':slug})
 				})
 			},
 			clearPreview(slug){

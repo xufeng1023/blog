@@ -7,7 +7,7 @@
 @section('content')
 <div class="container">
     <div class="columns">
-        <div class="column is-three-quarters">
+        <div class="column is-two-thirds">
             @if($preview) 
                 <video-frame :preview="{{ $preview }}"></video-frame>
             @endif

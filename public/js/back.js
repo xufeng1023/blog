@@ -42751,7 +42751,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 			this.src = this.video.thumbnail.slug;
 		}
 
-		this.$on('previewChanged', function (data) {
+		Bus.$on('previewChanged', function (data) {
 			this.active = data.slug == this.video.slug ? 1 : 0;
 		}.bind(this));
 
@@ -42770,24 +42770,22 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 	},
 	methods: {
 		preview: function preview(slug) {
-			var _this = this;
-
 			axios.patch('/admin/videos/' + slug + '/preview').then(function () {
-				_this.$emit('previewChanged', { 'slug': slug });
+				Bus.$emit('previewChanged', { 'slug': slug });
 			});
 		},
 		clearPreview: function clearPreview(slug) {
-			var _this2 = this;
+			var _this = this;
 
 			axios.patch('/admin/videos/' + slug + '/clearPreview').then(function () {
-				_this2.$emit('previewCleared', { 'slug': slug });
+				_this.$emit('previewCleared', { 'slug': slug });
 			});
 		},
 		remove: function remove(slug) {
-			var _this3 = this;
+			var _this2 = this;
 
 			axios.delete('/admin/videos/' + slug).then(function (r) {
-				$(_this3.$el).fadeOut(300, function () {
+				$(_this2.$el).fadeOut(300, function () {
 					Bus.$emit('flash', {
 						message: r.data.message,
 						type: 'success'
@@ -42797,12 +42795,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 			});
 		},
 		onChange: function onChange(e) {
-			var _this4 = this;
+			var _this3 = this;
 
 			var fm = new FormData();
 			fm.append('image', e.target.files[0]);
 			axios.post('/admin/videos/thumbnail/' + this.video.slug, fm).then(function (r) {
-				_this4.src = r.data.src;
+				_this3.src = r.data.src;
 				e.target.value = null;
 			});
 		}
