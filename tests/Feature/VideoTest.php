@@ -57,6 +57,64 @@ class VideoTest extends TestCase
     public function test_return_not_found_if_video_not_exists()
     {
         $this->expectException('Illuminate\Database\Eloquent\ModelNotFoundException');
-    	$this->get('/video/slug-not-exists');
+    	$this->get('/video/slug-not-exists/checkSlug');
+    }
+
+    public function test_free_videos_will_play()
+    {
+        $video = $this->create('Video', ['is_free' => 1]);
+        $this->deleteUselessFile($video->link);
+        $this->get('/video/'.$video->slug.'/checkSlug')
+            ->assertSee($video->slug);
+    }
+
+    public function test_video_check_will_block_guests_for_paid_videos()
+    {
+        $video = $this->create('Video');
+        $this->deleteUselessFile($video->link);
+        $this->get('/video/'.$video->slug.'/checkSlug')
+            ->assertStatus(401);
+    }
+
+    public function test_video_check_will_block_unsubscribed_users_for_paid_videos()
+    {
+        $user = $this->create('User');
+        $video = $this->create('Video');
+        $this->deleteUselessFile($video->link);
+        $this->login($user)->get('/video/'.$video->slug.'/checkSlug')
+            ->assertStatus(402);
+    }
+
+    public function test_video_check_will_block_expired_users_for_paid_videos()
+    {
+        $user = $this->create('User');
+
+        $this->create('Subscription', [
+            'user_id' => $user->id,
+            'name' => 'main',
+            'ends_at' => Carbon::now()->subweek()
+        ]);
+
+        $video = $this->create('Video');
+        $this->deleteUselessFile($video->link);
+
+        $this->login($user)->get('/video/'.$video->slug.'/checkSlug')
+            ->assertStatus(402);
+    }
+
+    public function test_subscribed_users_will_pass_video_check_for_paid_videos()
+    {
+        $user = $this->create('User');
+
+        $this->create('Subscription', [
+            'user_id' => $user->id,
+            'name' => 'main'
+        ]);
+
+        $video = $this->create('Video');
+        $this->deleteUselessFile($video->link);
+
+        $this->login($user)->get('/video/'.$video->slug.'/checkSlug')
+            ->assertSee($video->slug);
     }
 }

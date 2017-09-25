@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Post extends Model
 {
-    protected $fillable = ['title', 'slug', 'views', 'plan', 'expired_at'];
+    protected $fillable = ['title', 'slug', 'views'];
 
     public function getRouteKeyName()
     {
@@ -51,5 +51,11 @@ class Post extends Model
         $video = $this->videos()->orderBy('is_free', 'desc')->first();
         if($video) $video->load('thumbnail');
         return $video;
+    }
+
+    public function updateViews()
+    {
+        $this->increment('views');
+        $this->save();
     }
 }

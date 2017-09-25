@@ -1,10 +1,10 @@
 <template>
-	<figure class="image is-16by9 border-3" @click="play">
+	<figure class="image is-16by9 border-3 hand sd" @click="play" @mouseleave="mouseLeft = true" @mouseover="mouseLeft = false">
 		<img :src="video.thumbnail.slug | FILE">
-		<div class="playing hero is-overlay" v-if="playing">
-			<div class="hero-body">
-				<span class="is-size-4 has-text-centered container">now playing...</span>
-			</div>
+		<div class="playing fc is-overlay" v-if="playing" v-show="mouseLeft">
+			<span class="icon has-text-danger">
+				<i class="fa fa-youtube-play fa-3x"></i>
+			</span>
 		</div>
 	</figure>
 </template>
@@ -14,12 +14,13 @@
 		props: ['video'],
 		data() {
 			return {
-				playing: false
+				playing: false,
+				mouseLeft: true 
 			}
 		},
 		created() {
 			Bus.$on('nowPlaying', function(data) {
-				this.playing = this.video.slug == data ? true : false
+				this.playing = this.video.slug != data ? true : false
 			}.bind(this));
 		},
 		methods: {

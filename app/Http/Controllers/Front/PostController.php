@@ -28,4 +28,9 @@ class PostController extends Controller
         }
     	return view('movie', compact('post', 'preview'));
     }
+
+    public function updateViews(Post $post)
+    {
+        $post->updateViews();
+    }
 }

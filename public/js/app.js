@@ -29329,19 +29329,25 @@ var app = new Vue({
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
-var Component = __webpack_require__(1)(
-  /* script */
-  __webpack_require__(68),
-  /* template */
-  __webpack_require__(69),
-  /* styles */
-  null,
-  /* scopeId */
-  null,
-  /* moduleIdentifier (server only) */
-  null
+var normalizeComponent = __webpack_require__(1)
+/* script */
+var __vue_script__ = __webpack_require__(68)
+/* template */
+var __vue_template__ = __webpack_require__(69)
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
 )
-Component.options.__file = "C:\\Users\\xu feng\\Desktop\\blog\\resources\\assets\\js\\components\\front\\VideoOne.vue"
+Component.options.__file = "resources\\assets\\js\\components\\front\\VideoOne.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] VideoOne.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -29386,12 +29392,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 	props: ['video'],
 	data: function data() {
 		return {
-			playing: false
+			playing: false,
+			mouseLeft: true
 		};
 	},
 	created: function created() {
 		Bus.$on('nowPlaying', function (data) {
-			this.playing = this.video.slug == data ? true : false;
+			this.playing = this.video.slug != data ? true : false;
 		}.bind(this));
 	},
 
@@ -29406,27 +29413,59 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* 69 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('figure', {
-    staticClass: "image is-16by9 border-3",
-    on: {
-      "click": _vm.play
-    }
-  }, [_c('img', {
-    attrs: {
-      "src": _vm._f("FILE")(_vm.video.thumbnail.slug)
-    }
-  }), _vm._v(" "), (_vm.playing) ? _c('div', {
-    staticClass: "playing hero is-overlay"
-  }, [_vm._m(0)]) : _vm._e()])
-},staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', {
-    staticClass: "hero-body"
-  }, [_c('span', {
-    staticClass: "is-size-4 has-text-centered container"
-  }, [_vm._v("now playing...")])])
-}]}
-module.exports.render._withStripped = true
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "figure",
+    {
+      staticClass: "image is-16by9 border-3 hand sd",
+      on: {
+        click: _vm.play,
+        mouseleave: function($event) {
+          _vm.mouseLeft = true
+        },
+        mouseover: function($event) {
+          _vm.mouseLeft = false
+        }
+      }
+    },
+    [
+      _c("img", { attrs: { src: _vm._f("FILE")(_vm.video.thumbnail.slug) } }),
+      _vm._v(" "),
+      _vm.playing
+        ? _c(
+            "div",
+            {
+              directives: [
+                {
+                  name: "show",
+                  rawName: "v-show",
+                  value: _vm.mouseLeft,
+                  expression: "mouseLeft"
+                }
+              ],
+              staticClass: "playing fc is-overlay"
+            },
+            [_vm._m(0)]
+          )
+        : _vm._e()
+    ]
+  )
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("span", { staticClass: "icon has-text-danger" }, [
+      _c("i", { staticClass: "fa fa-youtube-play fa-3x" })
+    ])
+  }
+]
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
@@ -29439,19 +29478,25 @@ if (false) {
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
-var Component = __webpack_require__(1)(
-  /* script */
-  __webpack_require__(71),
-  /* template */
-  __webpack_require__(72),
-  /* styles */
-  null,
-  /* scopeId */
-  null,
-  /* moduleIdentifier (server only) */
-  null
+var normalizeComponent = __webpack_require__(1)
+/* script */
+var __vue_script__ = __webpack_require__(71)
+/* template */
+var __vue_template__ = __webpack_require__(72)
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
 )
-Component.options.__file = "C:\\Users\\xu feng\\Desktop\\blog\\resources\\assets\\js\\components\\front\\VideoFrame.vue"
+Component.options.__file = "resources\\assets\\js\\components\\front\\VideoFrame.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] VideoFrame.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -29480,6 +29525,12 @@ module.exports = Component.exports
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Notification_vue__ = __webpack_require__(85);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Notification_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__Notification_vue__);
+//
+//
+//
+//
 //
 //
 //
@@ -29492,22 +29543,23 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 
+
+
 /* harmony default export */ __webpack_exports__["default"] = ({
-	props: ['preview'],
+	props: ['preview', 'post'],
+	components: { notification: __WEBPACK_IMPORTED_MODULE_0__Notification_vue___default.a },
 	data: function data() {
 		return {
 			now: null,
-			video: null
+			video: null,
+			msg: ''
 		};
 	},
 
 	watch: {
 		now: function now() {
 			this.video.pause();
-			//this.video.poster('/storage/' + this.now.thumbnail.slug);
-
 			this.load();
-
 			this.video.load();
 			this.video.play();
 		}
@@ -29515,17 +29567,19 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 	mounted: function mounted() {
 		var _this = this;
 
+		var self = this;
 		this.now = this.preview;
 
-		this.video = videojs('video-player', { errorDisplay: false });
-
-		Bus.$on('play', function (video) {
-			_this.now = video;
-		});
-
-		this.video.ready(function () {
+		this.video = videojs('video-player', {
+			errorDisplay: false
+		}, function () {
+			this.volume(0.4);
+			this.setTimeout(function () {
+				self.updatePostViews();
+			}, 30000);
 			this.hotkeys({
-				seekStep: 10
+				seekStep: 10,
+				enableVolumeScroll: false
 			});
 		});
 
@@ -29533,19 +29587,28 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 			_this.next();
 		});
 
-		this.video.on('error', function (e) {
-			console.log(e);
-			e.stopImmediatePropagation();
-			var error = _this.video.error();
-			console.log('error!', error.code, error.type, error.message);
+		Bus.$on('play', function (video) {
+			_this.now = video;
 		});
 	},
 
 	methods: {
 		load: function load() {
-			this.video.src({
-				type: "video/mp4",
-				src: '/video/' + this.now.slug + '?' + Math.random().toString(36).substring(2)
+			var _this2 = this;
+
+			axios.get('/video/' + this.now.slug + '/checkSlug').then(function () {
+				_this2.video.src({
+					type: "video/mp4",
+					src: '/video/' + _this2.now.slug + '?' + Math.random().toString(36).substring(2)
+				});
+
+				_this2.msg = '';
+			}).catch(function (e) {
+				if (e.response.status === 404) return;
+
+				_this2.msg = e.response.data;
+				_this2.video.reset();
+				_this2.video.poster('/storage/' + _this2.now.thumbnail.slug);
 			});
 
 			Bus.$emit('nowPlaying', this.now.slug);
@@ -29555,6 +29618,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 				return ++num;
 			});
 			this.load();
+		},
+		updatePostViews: function updatePostViews() {
+			axios.post('/post/' + this.post + '/updateViews');
 		}
 	}
 });
@@ -29563,18 +29629,32 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* 72 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('video', {
-    staticClass: "video-js vjs-big-play-centered",
-    attrs: {
-      "id": "video-player",
-      "data-setup": "{}",
-      "controls": "",
-      "autoplay": ""
-    }
-  })
-},staticRenderFns: []}
-module.exports.render._withStripped = true
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    { staticClass: "field" },
+    [
+      _c("video", {
+        staticClass: "video-js vjs-big-play-centered sd",
+        attrs: {
+          id: "video-player",
+          "data-setup": "{}",
+          controls: "",
+          autoplay: ""
+        }
+      }),
+      _vm._v(" "),
+      _c("notification", { attrs: { msg: _vm.msg } })
+    ],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
@@ -29587,19 +29667,25 @@ if (false) {
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
-var Component = __webpack_require__(1)(
-  /* script */
-  __webpack_require__(74),
-  /* template */
-  __webpack_require__(75),
-  /* styles */
-  null,
-  /* scopeId */
-  null,
-  /* moduleIdentifier (server only) */
-  null
+var normalizeComponent = __webpack_require__(1)
+/* script */
+var __vue_script__ = __webpack_require__(74)
+/* template */
+var __vue_template__ = __webpack_require__(75)
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
 )
-Component.options.__file = "C:\\Users\\xu feng\\Desktop\\blog\\resources\\assets\\js\\components\\front\\ImageOne.vue"
+Component.options.__file = "resources\\assets\\js\\components\\front\\ImageOne.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] ImageOne.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -29650,25 +29736,30 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* 75 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('a', {
-    attrs: {
-      "href": "javascript:;",
-      "data-toggle": "modal",
-      "data-target": "#viewImageModal"
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "a",
+    {
+      attrs: {
+        href: "javascript:;",
+        "data-toggle": "modal",
+        "data-target": "#viewImageModal"
+      },
+      on: { click: _vm.show }
     },
-    on: {
-      "click": _vm.show
-    }
-  }, [_c('figure', {
-    staticClass: "image is-1by1"
-  }, [_c('img', {
-    attrs: {
-      "src": _vm._f("FILE")(this.image.slug)
-    }
-  })])])
-},staticRenderFns: []}
-module.exports.render._withStripped = true
+    [
+      _c("figure", { staticClass: "image is-1by1 sd" }, [
+        _c("img", { attrs: { src: _vm._f("FILE")(this.image.slug) } })
+      ])
+    ]
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
@@ -29681,19 +29772,25 @@ if (false) {
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
-var Component = __webpack_require__(1)(
-  /* script */
-  __webpack_require__(77),
-  /* template */
-  null,
-  /* styles */
-  null,
-  /* scopeId */
-  null,
-  /* moduleIdentifier (server only) */
-  null
+var normalizeComponent = __webpack_require__(1)
+/* script */
+var __vue_script__ = __webpack_require__(77)
+/* template */
+var __vue_template__ = null
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
 )
-Component.options.__file = "C:\\Users\\xu feng\\Desktop\\blog\\resources\\assets\\js\\components\\front\\ImageModal.vue"
+Component.options.__file = "resources\\assets\\js\\components\\front\\ImageModal.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
 
 /* hot reload */
@@ -29743,19 +29840,25 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
-var Component = __webpack_require__(1)(
-  /* script */
-  __webpack_require__(79),
-  /* template */
-  __webpack_require__(80),
-  /* styles */
-  null,
-  /* scopeId */
-  null,
-  /* moduleIdentifier (server only) */
-  null
+var normalizeComponent = __webpack_require__(1)
+/* script */
+var __vue_script__ = __webpack_require__(79)
+/* template */
+var __vue_template__ = __webpack_require__(80)
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
 )
-Component.options.__file = "C:\\Users\\xu feng\\Desktop\\blog\\resources\\assets\\js\\components\\front\\Pay.vue"
+Component.options.__file = "resources\\assets\\js\\components\\front\\Pay.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] Pay.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -29835,84 +29938,186 @@ axios.defaults.headers.common['X-CSRF-TOKEN'] = '';
 /* 80 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', {
-    staticClass: "card border-info mb-3",
-    staticStyle: {
-      "max-width": "20rem"
-    }
-  }, [_c('div', {
-    staticClass: "card-header"
-  }, [_vm._v("Card Info")]), _vm._v(" "), _c('div', {
-    staticClass: "card-body text-info"
-  }, [_c('form', {
-    on: {
-      "submit": function($event) {
-        $event.preventDefault();
-        _vm.pay($event)
-      }
-    }
-  }, [_vm._m(0), _vm._v(" "), _vm._m(1), _vm._v(" "), _c('button', {
-    staticClass: "btn btn-primary",
-    attrs: {
-      "type": "submit"
-    }
-  }, [_vm._v("Pay")])])])])
-},staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', {
-    staticClass: "form-group"
-  }, [_c('label', {
-    attrs: {
-      "for": "card-number"
-    }
-  }, [_vm._v("Card Number")]), _vm._v(" "), _c('input', {
-    staticClass: "form-control",
-    attrs: {
-      "type": "text",
-      "id": "card-number",
-      "placeholder": "Card number"
-    }
-  })])
-},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', {
-    staticClass: "row"
-  }, [_c('div', {
-    staticClass: "col"
-  }, [_c('div', {
-    staticClass: "form-group"
-  }, [_c('label', {
-    attrs: {
-      "for": "expiration"
-    }
-  }, [_vm._v("Expiration")]), _vm._v(" "), _c('input', {
-    staticClass: "form-control",
-    attrs: {
-      "type": "text",
-      "id": "expiration",
-      "placeholder": "Expiration"
-    }
-  })])]), _vm._v(" "), _c('div', {
-    staticClass: "col"
-  }, [_c('div', {
-    staticClass: "form-group"
-  }, [_c('label', {
-    attrs: {
-      "for": "cvc"
-    }
-  }, [_vm._v("CVC")]), _vm._v(" "), _c('input', {
-    staticClass: "form-control",
-    attrs: {
-      "type": "text",
-      "id": "cvc",
-      "placeholder": "CVC"
-    }
-  })])])])
-}]}
-module.exports.render._withStripped = true
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    {
+      staticClass: "card border-info mb-3",
+      staticStyle: { "max-width": "20rem" }
+    },
+    [
+      _c("div", { staticClass: "card-header" }, [_vm._v("Card Info")]),
+      _vm._v(" "),
+      _c("div", { staticClass: "card-body text-info" }, [
+        _c(
+          "form",
+          {
+            on: {
+              submit: function($event) {
+                $event.preventDefault()
+                _vm.pay($event)
+              }
+            }
+          },
+          [
+            _vm._m(0),
+            _vm._v(" "),
+            _vm._m(1),
+            _vm._v(" "),
+            _c(
+              "button",
+              { staticClass: "btn btn-primary", attrs: { type: "submit" } },
+              [_vm._v("Pay")]
+            )
+          ]
+        )
+      ])
+    ]
+  )
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "form-group" }, [
+      _c("label", { attrs: { for: "card-number" } }, [_vm._v("Card Number")]),
+      _vm._v(" "),
+      _c("input", {
+        staticClass: "form-control",
+        attrs: { type: "text", id: "card-number", placeholder: "Card number" }
+      })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "row" }, [
+      _c("div", { staticClass: "col" }, [
+        _c("div", { staticClass: "form-group" }, [
+          _c("label", { attrs: { for: "expiration" } }, [_vm._v("Expiration")]),
+          _vm._v(" "),
+          _c("input", {
+            staticClass: "form-control",
+            attrs: { type: "text", id: "expiration", placeholder: "Expiration" }
+          })
+        ])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "col" }, [
+        _c("div", { staticClass: "form-group" }, [
+          _c("label", { attrs: { for: "cvc" } }, [_vm._v("CVC")]),
+          _vm._v(" "),
+          _c("input", {
+            staticClass: "form-control",
+            attrs: { type: "text", id: "cvc", placeholder: "CVC" }
+          })
+        ])
+      ])
+    ])
+  }
+]
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
      require("vue-hot-reload-api").rerender("data-v-2a712fbc", module.exports)
+  }
+}
+
+/***/ }),
+/* 81 */,
+/* 82 */,
+/* 83 */,
+/* 84 */,
+/* 85 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(1)
+/* script */
+var __vue_script__ = __webpack_require__(86)
+/* template */
+var __vue_template__ = __webpack_require__(87)
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources\\assets\\js\\components\\front\\Notification.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
+if (Component.options.functional) {console.error("[vue-loader] Notification.vue: functional components are not supported with templates, they should use render functions.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-18ab8df2", Component.options)
+  } else {
+    hotAPI.reload("data-v-18ab8df2", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 86 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+	props: ['msg']
+});
+
+/***/ }),
+/* 87 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _vm.msg
+    ? _c("div", { staticClass: "notification is-danger" }, [
+        _vm._v("\n \t \t" + _vm._s(_vm.msg) + "\n\t")
+      ])
+    : _vm._e()
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+     require("vue-hot-reload-api").rerender("data-v-18ab8df2", module.exports)
   }
 }
 

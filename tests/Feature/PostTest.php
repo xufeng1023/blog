@@ -67,4 +67,12 @@ class PostTest extends TestCase
     	$this->login()->post('/admin/posts', ['title' => $post->title])
     		->assertSessionHasErrors('title');
     }
+
+    function test_post_views_update()
+    {
+        $post = $this->create('Post');
+
+        $this->post('/post/'.$post->slug.'/updateViews');
+        $this->assertDatabaseHas('posts', ['id' => $post->id, 'views' => 1]);
+    }
 }

@@ -1,13 +1,20 @@
 @import "~bulma/bulma";
+@import "~font-awesome/scss/font-awesome";
 
-$border-3: 3px solid #fff; 
-$h-100: 100%;
-
-figure {
-	border: $border-3;
+#app {
+	background-image: url(/images/pattern2.png);
+	background-blend-mode: soft-light;
 }
-figure .hero-body {
-	height: $h-100;
+.hand {
+	cursor: pointer;
+}
+.sd {
+	box-shadow: 0 0 7px 1px rgba(0, 0, 0, 0.43);
+}
+.fc {
+	display: flex;
+    justify-content: center;
+    align-items: center;
 }
 .video-player-dimensions {
 	width: 100%;
@@ -16,12 +23,11 @@ figure .hero-body {
 .video-js {
 	width: auto;
 	height: auto;
-    /*background-color: transparent;*/
 }
 .video-js .vjs-tech {
 	position: relative;
 	margin-bottom: -0.2em;
 }
 .playing {
-	background: rgba(255, 255, 255, 0.7);   
+	background: rgba(255, 255, 255, 0.5);   
 }
