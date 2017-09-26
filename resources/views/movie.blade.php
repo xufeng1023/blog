@@ -5,7 +5,7 @@
 @endsection
 
 @section('content')
-<div>
+<div class="container is-fluid">
     <div class="columns">
         <div class="column is-two-thirds">
             @if($preview) 

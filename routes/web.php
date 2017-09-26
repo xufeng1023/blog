@@ -8,7 +8,10 @@ Route::get('/movies', 'Front\PostController@index');
 Route::get('/movie/{post}', 'Front\PostController@show');
 Route::get('/video/{video}', 'Front\VideoController@stream');
 Route::get('/video/{video}/checkSlug', 'Front\VideoController@checkSlug');
+Route::get('/plans', 'StripeController@plans');
+Route::get('/settings', 'Front\UserController@index');
 Route::post('/post/{post}/updateViews', 'Front\PostController@updateViews');
+Route::post('/settings/account', 'Front\UserController@updateAccount');
 
 Route::prefix('admin')->middleware('admin')->group(function() {
 	Route::get('/', 'PostController@index');

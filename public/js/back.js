@@ -29254,25 +29254,19 @@ module.exports = Vue$3;
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
-var normalizeComponent = __webpack_require__(1)
-/* script */
-var __vue_script__ = __webpack_require__(52)
-/* template */
-var __vue_template__ = __webpack_require__(53)
-/* styles */
-var __vue_styles__ = null
-/* scopeId */
-var __vue_scopeId__ = null
-/* moduleIdentifier (server only) */
-var __vue_module_identifier__ = null
-var Component = normalizeComponent(
-  __vue_script__,
-  __vue_template__,
-  __vue_styles__,
-  __vue_scopeId__,
-  __vue_module_identifier__
+var Component = __webpack_require__(1)(
+  /* script */
+  __webpack_require__(52),
+  /* template */
+  __webpack_require__(53),
+  /* styles */
+  null,
+  /* scopeId */
+  null,
+  /* moduleIdentifier (server only) */
+  null
 )
-Component.options.__file = "resources\\assets\\js\\components\\PostTitleInput.vue"
+Component.options.__file = "C:\\Users\\xu feng\\Desktop\\blog\\resources\\assets\\js\\components\\PostTitleInput.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] PostTitleInput.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -42036,25 +42030,19 @@ function injectStyle (ssrContext) {
   if (disposed) return
   __webpack_require__(39)
 }
-var normalizeComponent = __webpack_require__(1)
-/* script */
-var __vue_script__ = __webpack_require__(44)
-/* template */
-var __vue_template__ = __webpack_require__(45)
-/* styles */
-var __vue_styles__ = injectStyle
-/* scopeId */
-var __vue_scopeId__ = null
-/* moduleIdentifier (server only) */
-var __vue_module_identifier__ = null
-var Component = normalizeComponent(
-  __vue_script__,
-  __vue_template__,
-  __vue_styles__,
-  __vue_scopeId__,
-  __vue_module_identifier__
+var Component = __webpack_require__(1)(
+  /* script */
+  __webpack_require__(44),
+  /* template */
+  __webpack_require__(45),
+  /* styles */
+  injectStyle,
+  /* scopeId */
+  null,
+  /* moduleIdentifier (server only) */
+  null
 )
-Component.options.__file = "resources\\assets\\js\\components\\Flash.vue"
+Component.options.__file = "C:\\Users\\xu feng\\Desktop\\blog\\resources\\assets\\js\\components\\Flash.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] Flash.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -42509,25 +42497,21 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* 45 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    {
-      directives: [
-        { name: "show", rawName: "v-show", value: _vm.show, expression: "show" }
-      ],
-      class: [_vm.alert, _vm.alertType],
-      attrs: { id: "flash" }
-    },
-    [_c("strong", [_vm._v(_vm._s(_vm.message))])]
-  )
-}
-var staticRenderFns = []
-render._withStripped = true
-module.exports = { render: render, staticRenderFns: staticRenderFns }
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    directives: [{
+      name: "show",
+      rawName: "v-show",
+      value: (_vm.show),
+      expression: "show"
+    }],
+    class: [_vm.alert, _vm.alertType],
+    attrs: {
+      "id": "flash"
+    }
+  }, [_c('strong', [_vm._v(_vm._s(_vm.message))])])
+},staticRenderFns: []}
+module.exports.render._withStripped = true
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
@@ -42540,25 +42524,19 @@ if (false) {
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
-var normalizeComponent = __webpack_require__(1)
-/* script */
-var __vue_script__ = __webpack_require__(47)
-/* template */
-var __vue_template__ = __webpack_require__(48)
-/* styles */
-var __vue_styles__ = null
-/* scopeId */
-var __vue_scopeId__ = null
-/* moduleIdentifier (server only) */
-var __vue_module_identifier__ = null
-var Component = normalizeComponent(
-  __vue_script__,
-  __vue_template__,
-  __vue_styles__,
-  __vue_scopeId__,
-  __vue_module_identifier__
+var Component = __webpack_require__(1)(
+  /* script */
+  __webpack_require__(47),
+  /* template */
+  __webpack_require__(48),
+  /* styles */
+  null,
+  /* scopeId */
+  null,
+  /* moduleIdentifier (server only) */
+  null
 )
-Component.options.__file = "resources\\assets\\js\\components\\VideoInput.vue"
+Component.options.__file = "C:\\Users\\xu feng\\Desktop\\blog\\resources\\assets\\js\\components\\VideoInput.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] VideoInput.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -42661,37 +42639,28 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* 48 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "form-group" }, [
-    _c("label", [_vm._v("Video")]),
-    _vm._v(" "),
-    _c("input", {
-      attrs: { type: "file", name: "video", accept: "video/*" },
-      on: { change: _vm.onChange }
-    }),
-    _vm._v(" "),
-    _c(
-      "p",
-      {
-        directives: [
-          {
-            name: "show",
-            rawName: "v-show",
-            value: _vm.progress,
-            expression: "progress"
-          }
-        ]
-      },
-      [_vm._v(_vm._s(_vm.progress))]
-    )
-  ])
-}
-var staticRenderFns = []
-render._withStripped = true
-module.exports = { render: render, staticRenderFns: staticRenderFns }
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    staticClass: "form-group"
+  }, [_c('label', [_vm._v("Video")]), _vm._v(" "), _c('input', {
+    attrs: {
+      "type": "file",
+      "name": "video",
+      "accept": "video/*"
+    },
+    on: {
+      "change": _vm.onChange
+    }
+  }), _vm._v(" "), _c('p', {
+    directives: [{
+      name: "show",
+      rawName: "v-show",
+      value: (_vm.progress),
+      expression: "progress"
+    }]
+  }, [_vm._v(_vm._s(_vm.progress))])])
+},staticRenderFns: []}
+module.exports.render._withStripped = true
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
@@ -42704,25 +42673,19 @@ if (false) {
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
-var normalizeComponent = __webpack_require__(1)
-/* script */
-var __vue_script__ = __webpack_require__(50)
-/* template */
-var __vue_template__ = __webpack_require__(51)
-/* styles */
-var __vue_styles__ = null
-/* scopeId */
-var __vue_scopeId__ = null
-/* moduleIdentifier (server only) */
-var __vue_module_identifier__ = null
-var Component = normalizeComponent(
-  __vue_script__,
-  __vue_template__,
-  __vue_styles__,
-  __vue_scopeId__,
-  __vue_module_identifier__
+var Component = __webpack_require__(1)(
+  /* script */
+  __webpack_require__(50),
+  /* template */
+  __webpack_require__(51),
+  /* styles */
+  null,
+  /* scopeId */
+  null,
+  /* moduleIdentifier (server only) */
+  null
 )
-Component.options.__file = "resources\\assets\\js\\components\\VideoOne.vue"
+Component.options.__file = "C:\\Users\\xu feng\\Desktop\\blog\\resources\\assets\\js\\components\\VideoOne.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] VideoOne.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -42848,98 +42811,86 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* 51 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    { staticClass: "thumbnail", class: { "is-thumbnail": _vm.active } },
-    [
-      _vm.src
-        ? _c(
-            "a",
-            {
-              attrs: { href: _vm._f("VID")(_vm.video.slug), target: "_blank" }
-            },
-            [_c("img", { attrs: { src: _vm._f("IMG")(_vm.src) } })]
-          )
-        : _vm._e(),
-      _vm._v(" "),
-      _c("div", { staticClass: "caption" }, [
-        _c("h6", { domProps: { textContent: _vm._s(_vm.video.slug) } }),
-        _vm._v(" "),
-        _c("p", [
-          _c("input", {
-            attrs: { type: "file", accept: "image/*" },
-            on: { change: _vm.onChange }
-          })
-        ]),
-        _vm._v(" "),
-        _c(
-          "button",
-          {
-            staticClass: "btn btn-danger btn-xs",
-            attrs: { type: "button" },
-            on: {
-              click: function($event) {
-                _vm.remove(_vm.video.slug)
-              }
-            }
-          },
-          [_c("span", { staticClass: "glyphicon glyphicon-trash" })]
-        ),
-        _vm._v(" "),
-        _c(
-          "button",
-          {
-            directives: [
-              {
-                name: "show",
-                rawName: "v-show",
-                value: !_vm.active,
-                expression: "!active"
-              }
-            ],
-            staticClass: "btn btn-success btn-xs",
-            attrs: { type: "button" },
-            on: {
-              click: function($event) {
-                _vm.preview(_vm.video.slug)
-              }
-            }
-          },
-          [_c("span", { staticClass: "glyphicon glyphicon-thumbs-up" })]
-        ),
-        _vm._v(" "),
-        _c(
-          "button",
-          {
-            directives: [
-              {
-                name: "show",
-                rawName: "v-show",
-                value: _vm.active,
-                expression: "active"
-              }
-            ],
-            staticClass: "btn btn-warning btn-xs",
-            attrs: { type: "button" },
-            on: {
-              click: function($event) {
-                _vm.clearPreview(_vm.video.slug)
-              }
-            }
-          },
-          [_c("span", { staticClass: "glyphicon glyphicon-thumbs-down" })]
-        )
-      ])
-    ]
-  )
-}
-var staticRenderFns = []
-render._withStripped = true
-module.exports = { render: render, staticRenderFns: staticRenderFns }
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    staticClass: "thumbnail",
+    class: {
+      'is-thumbnail': _vm.active
+    }
+  }, [(_vm.src) ? _c('a', {
+    attrs: {
+      "href": _vm._f("VID")(_vm.video.slug),
+      "target": "_blank"
+    }
+  }, [_c('img', {
+    attrs: {
+      "src": _vm._f("IMG")(_vm.src)
+    }
+  })]) : _vm._e(), _vm._v(" "), _c('div', {
+    staticClass: "caption"
+  }, [_c('h6', {
+    domProps: {
+      "textContent": _vm._s(_vm.video.slug)
+    }
+  }), _vm._v(" "), _c('p', [_c('input', {
+    attrs: {
+      "type": "file",
+      "accept": "image/*"
+    },
+    on: {
+      "change": _vm.onChange
+    }
+  })]), _vm._v(" "), _c('button', {
+    staticClass: "btn btn-danger btn-xs",
+    attrs: {
+      "type": "button"
+    },
+    on: {
+      "click": function($event) {
+        _vm.remove(_vm.video.slug)
+      }
+    }
+  }, [_c('span', {
+    staticClass: "glyphicon glyphicon-trash"
+  })]), _vm._v(" "), _c('button', {
+    directives: [{
+      name: "show",
+      rawName: "v-show",
+      value: (!_vm.active),
+      expression: "!active"
+    }],
+    staticClass: "btn btn-success btn-xs",
+    attrs: {
+      "type": "button"
+    },
+    on: {
+      "click": function($event) {
+        _vm.preview(_vm.video.slug)
+      }
+    }
+  }, [_c('span', {
+    staticClass: "glyphicon glyphicon-thumbs-up"
+  })]), _vm._v(" "), _c('button', {
+    directives: [{
+      name: "show",
+      rawName: "v-show",
+      value: (_vm.active),
+      expression: "active"
+    }],
+    staticClass: "btn btn-warning btn-xs",
+    attrs: {
+      "type": "button"
+    },
+    on: {
+      "click": function($event) {
+        _vm.clearPreview(_vm.video.slug)
+      }
+    }
+  }, [_c('span', {
+    staticClass: "glyphicon glyphicon-thumbs-down"
+  })])])])
+},staticRenderFns: []}
+module.exports.render._withStripped = true
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
@@ -42988,35 +42939,31 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* 53 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c("input", {
-    directives: [
-      {
-        name: "model",
-        rawName: "v-model",
-        value: _vm.computedTitle,
-        expression: "computedTitle"
-      }
-    ],
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('input', {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.computedTitle),
+      expression: "computedTitle"
+    }],
     staticClass: "form-control",
-    attrs: { type: "text", name: "title" },
-    domProps: { value: _vm.computedTitle },
+    attrs: {
+      "type": "text",
+      "name": "title"
+    },
+    domProps: {
+      "value": (_vm.computedTitle)
+    },
     on: {
-      input: function($event) {
-        if ($event.target.composing) {
-          return
-        }
+      "input": function($event) {
+        if ($event.target.composing) { return; }
         _vm.computedTitle = $event.target.value
       }
     }
   })
-}
-var staticRenderFns = []
-render._withStripped = true
-module.exports = { render: render, staticRenderFns: staticRenderFns }
+},staticRenderFns: []}
+module.exports.render._withStripped = true
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
@@ -43029,25 +42976,19 @@ if (false) {
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
-var normalizeComponent = __webpack_require__(1)
-/* script */
-var __vue_script__ = __webpack_require__(55)
-/* template */
-var __vue_template__ = __webpack_require__(56)
-/* styles */
-var __vue_styles__ = null
-/* scopeId */
-var __vue_scopeId__ = null
-/* moduleIdentifier (server only) */
-var __vue_module_identifier__ = null
-var Component = normalizeComponent(
-  __vue_script__,
-  __vue_template__,
-  __vue_styles__,
-  __vue_scopeId__,
-  __vue_module_identifier__
+var Component = __webpack_require__(1)(
+  /* script */
+  __webpack_require__(55),
+  /* template */
+  __webpack_require__(56),
+  /* styles */
+  null,
+  /* scopeId */
+  null,
+  /* moduleIdentifier (server only) */
+  null
 )
-Component.options.__file = "resources\\assets\\js\\components\\ImageInput.vue"
+Component.options.__file = "C:\\Users\\xu feng\\Desktop\\blog\\resources\\assets\\js\\components\\ImageInput.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] ImageInput.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -43196,99 +43137,69 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* 56 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    [
-      _c("div", { staticClass: "form-group" }, [
-        _c("label", [_vm._v("Images")]),
-        _vm._v(" "),
-        _c("input", {
-          attrs: {
-            type: "file",
-            name: "screenshots[]",
-            accept: "image/*",
-            multiple: ""
-          },
-          on: { change: _vm.onChange }
-        })
-      ]),
-      _vm._v(" "),
-      _vm._l(_vm.computedImages, function(pic) {
-        return _c(
-          "div",
-          { staticClass: "row" },
-          _vm._l(pic, function(slug) {
-            return _c("div", { staticClass: "col-xs-3" }, [
-              _c(
-                "div",
-                {
-                  staticClass: "thumbnail",
-                  class: { "is-thumbnail": slug.is_thumbnail }
-                },
-                [
-                  _c(
-                    "a",
-                    {
-                      attrs: {
-                        href: _vm._f("LINK")(slug.slug),
-                        target: "_blank"
-                      }
-                    },
-                    [
-                      _c("img", {
-                        attrs: { src: _vm._f("SRC")(slug.slug), width: "100%" }
-                      })
-                    ]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "button",
-                    {
-                      staticClass: "btn btn-success btn-xs",
-                      attrs: { type: "button" },
-                      on: {
-                        click: function($event) {
-                          _vm.thumb(slug.slug)
-                        }
-                      }
-                    },
-                    [
-                      _c("span", {
-                        staticClass: "glyphicon glyphicon-thumbs-up"
-                      })
-                    ]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "button",
-                    {
-                      staticClass: "btn btn-danger btn-xs",
-                      attrs: { type: "button" },
-                      on: {
-                        click: function($event) {
-                          _vm.remove(slug.slug)
-                        }
-                      }
-                    },
-                    [_c("span", { staticClass: "glyphicon glyphicon-trash" })]
-                  )
-                ]
-              )
-            ])
-          })
-        )
-      })
-    ],
-    2
-  )
-}
-var staticRenderFns = []
-render._withStripped = true
-module.exports = { render: render, staticRenderFns: staticRenderFns }
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', [_c('div', {
+    staticClass: "form-group"
+  }, [_c('label', [_vm._v("Images")]), _vm._v(" "), _c('input', {
+    attrs: {
+      "type": "file",
+      "name": "screenshots[]",
+      "accept": "image/*",
+      "multiple": ""
+    },
+    on: {
+      "change": _vm.onChange
+    }
+  })]), _vm._v(" "), _vm._l((_vm.computedImages), function(pic) {
+    return _c('div', {
+      staticClass: "row"
+    }, _vm._l((pic), function(slug) {
+      return _c('div', {
+        staticClass: "col-xs-3"
+      }, [_c('div', {
+        staticClass: "thumbnail",
+        class: {
+          'is-thumbnail': slug.is_thumbnail
+        }
+      }, [_c('a', {
+        attrs: {
+          "href": _vm._f("LINK")(slug.slug),
+          "target": "_blank"
+        }
+      }, [_c('img', {
+        attrs: {
+          "src": _vm._f("SRC")(slug.slug),
+          "width": "100%"
+        }
+      })]), _vm._v(" "), _c('button', {
+        staticClass: "btn btn-success btn-xs",
+        attrs: {
+          "type": "button"
+        },
+        on: {
+          "click": function($event) {
+            _vm.thumb(slug.slug)
+          }
+        }
+      }, [_c('span', {
+        staticClass: "glyphicon glyphicon-thumbs-up"
+      })]), _vm._v(" "), _c('button', {
+        staticClass: "btn btn-danger btn-xs",
+        attrs: {
+          "type": "button"
+        },
+        on: {
+          "click": function($event) {
+            _vm.remove(slug.slug)
+          }
+        }
+      }, [_c('span', {
+        staticClass: "glyphicon glyphicon-trash"
+      })])])])
+    }))
+  })], 2)
+},staticRenderFns: []}
+module.exports.render._withStripped = true
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
@@ -43301,25 +43212,19 @@ if (false) {
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
-var normalizeComponent = __webpack_require__(1)
-/* script */
-var __vue_script__ = __webpack_require__(58)
-/* template */
-var __vue_template__ = __webpack_require__(59)
-/* styles */
-var __vue_styles__ = null
-/* scopeId */
-var __vue_scopeId__ = null
-/* moduleIdentifier (server only) */
-var __vue_module_identifier__ = null
-var Component = normalizeComponent(
-  __vue_script__,
-  __vue_template__,
-  __vue_styles__,
-  __vue_scopeId__,
-  __vue_module_identifier__
+var Component = __webpack_require__(1)(
+  /* script */
+  __webpack_require__(58),
+  /* template */
+  __webpack_require__(59),
+  /* styles */
+  null,
+  /* scopeId */
+  null,
+  /* moduleIdentifier (server only) */
+  null
 )
-Component.options.__file = "resources\\assets\\js\\components\\UpdatePostForm.vue"
+Component.options.__file = "C:\\Users\\xu feng\\Desktop\\blog\\resources\\assets\\js\\components\\UpdatePostForm.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] UpdatePostForm.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -43391,56 +43296,42 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* 59 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c(
-    "form",
-    { attrs: { action: _vm._f("action")(_vm.post.slug), method: "POST" } },
-    [
-      _c("input", { attrs: { type: "hidden", name: "_method", value: "PUT" } }),
-      _vm._v(" "),
-      _c("div", { staticClass: "form-group" }, [
-        _c("label", [_vm._v("Title")]),
-        _vm._v(" "),
-        _c(
-          "div",
-          { staticClass: "input-group" },
-          [
-            _c("title-input", { attrs: { title: _vm.post.title } }),
-            _vm._v(" "),
-            _vm._m(0)
-          ],
-          1
-        )
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "form-group" }, [
-        _c("label", [
-          _vm._v("Views: "),
-          _c("span", { staticClass: "badge" }, [_vm._v(_vm._s(_vm.post.views))])
-        ])
-      ])
-    ]
-  )
-}
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("span", { staticClass: "input-group-btn" }, [
-      _c(
-        "button",
-        { staticClass: "btn btn-success", attrs: { type: "submit" } },
-        [_vm._v("update")]
-      )
-    ])
-  }
-]
-render._withStripped = true
-module.exports = { render: render, staticRenderFns: staticRenderFns }
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('form', {
+    attrs: {
+      "action": _vm._f("action")(_vm.post.slug),
+      "method": "POST"
+    }
+  }, [_c('input', {
+    attrs: {
+      "type": "hidden",
+      "name": "_method",
+      "value": "PUT"
+    }
+  }), _vm._v(" "), _c('div', {
+    staticClass: "form-group"
+  }, [_c('label', [_vm._v("Title")]), _vm._v(" "), _c('div', {
+    staticClass: "input-group"
+  }, [_c('title-input', {
+    attrs: {
+      "title": _vm.post.title
+    }
+  }), _vm._v(" "), _vm._m(0)], 1)]), _vm._v(" "), _c('div', {
+    staticClass: "form-group"
+  }, [_c('label', [_vm._v("Views: "), _c('span', {
+    staticClass: "badge"
+  }, [_vm._v(_vm._s(_vm.post.views))])])])])
+},staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('span', {
+    staticClass: "input-group-btn"
+  }, [_c('button', {
+    staticClass: "btn btn-success",
+    attrs: {
+      "type": "submit"
+    }
+  }, [_vm._v("update")])])
+}]}
+module.exports.render._withStripped = true
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
@@ -43453,25 +43344,19 @@ if (false) {
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
-var normalizeComponent = __webpack_require__(1)
-/* script */
-var __vue_script__ = __webpack_require__(61)
-/* template */
-var __vue_template__ = __webpack_require__(62)
-/* styles */
-var __vue_styles__ = null
-/* scopeId */
-var __vue_scopeId__ = null
-/* moduleIdentifier (server only) */
-var __vue_module_identifier__ = null
-var Component = normalizeComponent(
-  __vue_script__,
-  __vue_template__,
-  __vue_styles__,
-  __vue_scopeId__,
-  __vue_module_identifier__
+var Component = __webpack_require__(1)(
+  /* script */
+  __webpack_require__(61),
+  /* template */
+  __webpack_require__(62),
+  /* styles */
+  null,
+  /* scopeId */
+  null,
+  /* moduleIdentifier (server only) */
+  null
 )
-Component.options.__file = "resources\\assets\\js\\components\\SearchPostBar.vue"
+Component.options.__file = "C:\\Users\\xu feng\\Desktop\\blog\\resources\\assets\\js\\components\\SearchPostBar.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] SearchPostBar.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -43550,58 +43435,40 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* 62 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c(
-    "form",
-    {
-      staticClass: "navbar-form navbar-right",
-      attrs: { id: "post-search-bar" }
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('form', {
+    staticClass: "navbar-form navbar-right",
+    attrs: {
+      "id": "post-search-bar"
+    }
+  }, [_c('div', {
+    staticClass: "input-group"
+  }, [_c('input', {
+    staticClass: "form-control",
+    attrs: {
+      "type": "text"
     },
-    [
-      _c("div", { staticClass: "input-group" }, [
-        _c("input", {
-          staticClass: "form-control",
-          attrs: { type: "text" },
-          on: { keyup: _vm.search }
-        }),
-        _vm._v(" "),
-        _vm._m(0)
-      ]),
-      _vm._v(" "),
-      _vm.posts
-        ? _c(
-            "div",
-            { staticClass: "list-group" },
-            _vm._l(_vm.posts, function(post) {
-              return _c(
-                "a",
-                {
-                  staticClass: "list-group-item",
-                  attrs: { href: _vm._f("LINK")(post.slug) }
-                },
-                [_vm._v("\n\t\t\t" + _vm._s(post.title) + "\n\t\t")]
-              )
-            })
-          )
-        : _vm._e()
-    ]
-  )
-}
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("span", { staticClass: "input-group-addon" }, [
-      _c("span", { staticClass: "glyphicon glyphicon-search" })
-    ])
-  }
-]
-render._withStripped = true
-module.exports = { render: render, staticRenderFns: staticRenderFns }
+    on: {
+      "keyup": _vm.search
+    }
+  }), _vm._v(" "), _vm._m(0)]), _vm._v(" "), (_vm.posts) ? _c('div', {
+    staticClass: "list-group"
+  }, _vm._l((_vm.posts), function(post) {
+    return _c('a', {
+      staticClass: "list-group-item",
+      attrs: {
+        "href": _vm._f("LINK")(post.slug)
+      }
+    }, [_vm._v("\n\t\t\t" + _vm._s(post.title) + "\n\t\t")])
+  })) : _vm._e()])
+},staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('span', {
+    staticClass: "input-group-addon"
+  }, [_c('span', {
+    staticClass: "glyphicon glyphicon-search"
+  })])
+}]}
+module.exports.render._withStripped = true
 if (false) {
   module.hot.accept()
   if (module.hot.data) {

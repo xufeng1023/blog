@@ -38,6 +38,9 @@
                                     </a>
                                     <hr class="navbar-divider">
                                 @endif
+                                <a class="navbar-item" href="/settings">
+                                    settings
+                                </a>
                                 <a class="navbar-item" href="/logout" onclick="event.preventDefault();
                                          document.getElementById('logout-form').submit();">
                                     logout

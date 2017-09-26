@@ -13898,6 +13898,11 @@ label.panel-block:hover {
 #app {
   background-image: url(/images/pattern2.png);
   background-blend-mode: soft-light;
+  background-color: rgba(10, 10, 10, 0.91);
+}
+
+.navbar-dropdown a {
+  color: initial !important;
 }
 
 .hand {

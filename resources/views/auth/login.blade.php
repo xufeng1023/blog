@@ -8,7 +8,7 @@
                 {{ csrf_field() }}
 
                 <div class="field">
-                    <label for="email" class="label">E-Mail Address</label>
+                    <label for="email">E-Mail Address</label>
 
                     <div class="control">
                         <input id="email" type="email" class="input{{ $errors->has('email') ? ' is-danger' : '' }}" name="email" value="{{ old('email') }}" required autofocus>
@@ -21,7 +21,7 @@
                 </div>
 
                 <div class="field">
-                    <label for="password" class="label">Password</label>
+                    <label for="password">Password</label>
 
                     <div class="control">
                         <input id="password" type="password" class="input{{ $errors->has('password') ? ' is-danger' : '' }}" name="password" required>
