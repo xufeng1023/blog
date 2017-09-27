@@ -12,6 +12,7 @@ Route::get('/plans', 'StripeController@plans');
 Route::get('/settings', 'Front\UserController@index');
 Route::post('/post/{post}/updateViews', 'Front\PostController@updateViews');
 Route::post('/settings/account', 'Front\UserController@updateAccount');
+Route::get('/settings/card', 'Front\UserController@card');
 
 Route::prefix('admin')->middleware('admin')->group(function() {
 	Route::get('/', 'PostController@index');

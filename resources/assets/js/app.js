@@ -22,6 +22,7 @@ Vue.component('videoFrame', require('./components/front/VideoFrame.vue'));
 Vue.component('imageOne', require('./components/front/ImageOne.vue'));
 Vue.component('imageModal', require('./components/front/ImageModal.vue'));
 Vue.component('plans', require('./components/front/Plans.vue'));
+Vue.component('pay', require('./components/front/Pay.vue'));
 
 Vue.filter('FILE', (value) => { return '/storage/' + value; });
 

@@ -6,7 +6,7 @@
         <div class="column is-3">
             @include('settings.sidebar')
         </div>
-        <div class="column is-4 is-offset-1">
+        <div class="column is-8 is-offset-1">
             <h1 class="title is-3">Update Your Account</h1>
             <form method="POST" action="/settings/account">
                 {{ csrf_field() }}

@@ -29316,7 +29316,8 @@ Vue.component('videoOne', __webpack_require__(67));
 Vue.component('videoFrame', __webpack_require__(70));
 Vue.component('imageOne', __webpack_require__(76));
 Vue.component('imageModal', __webpack_require__(79));
-Vue.component('plans', __webpack_require__(93));
+Vue.component('plans', __webpack_require__(81));
+Vue.component('pay', __webpack_require__(84));
 
 Vue.filter('FILE', function (value) {
     return '/storage/' + value;
@@ -29855,27 +29856,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 81 */,
-/* 82 */,
-/* 83 */,
-/* 84 */,
-/* 85 */,
-/* 86 */,
-/* 87 */,
-/* 88 */,
-/* 89 */,
-/* 90 */,
-/* 91 */,
-/* 92 */,
-/* 93 */
+/* 81 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var Component = __webpack_require__(1)(
   /* script */
-  __webpack_require__(94),
+  __webpack_require__(82),
   /* template */
-  __webpack_require__(95),
+  __webpack_require__(83),
   /* styles */
   null,
   /* scopeId */
@@ -29907,7 +29896,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 94 */
+/* 82 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -29939,7 +29928,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 95 */
+/* 83 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -29956,6 +29945,237 @@ if (false) {
   module.hot.accept()
   if (module.hot.data) {
      require("vue-hot-reload-api").rerender("data-v-40e7797e", module.exports)
+  }
+}
+
+/***/ }),
+/* 84 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var Component = __webpack_require__(1)(
+  /* script */
+  __webpack_require__(85),
+  /* template */
+  __webpack_require__(86),
+  /* styles */
+  null,
+  /* scopeId */
+  null,
+  /* moduleIdentifier (server only) */
+  null
+)
+Component.options.__file = "C:\\Users\\xu feng\\Desktop\\blog\\resources\\assets\\js\\components\\front\\Pay.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
+if (Component.options.functional) {console.error("[vue-loader] Pay.vue: functional components are not supported with templates, they should use render functions.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-2a712fbc", Component.options)
+  } else {
+    hotAPI.reload("data-v-2a712fbc", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 85 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+axios.defaults.headers.common['X-CSRF-TOKEN'] = '';
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+	props: ['user'],
+	data: function data() {
+		return {
+			number: '',
+			exp: '',
+			cvc: ''
+		};
+	},
+
+	methods: {
+		formatNumber: function formatNumber() {
+			this.number = this.number.replace(/\D/g, '').replace(/(\d{4})/g, '$1 ').substr(0, 19);
+		},
+		formatExp: function formatExp() {
+			this.exp = this.exp.replace(/\D/g, '').replace(/(\d{1,2})(\d{2})/, '$1/$2').substr(0, 5);
+		},
+		formatCvc: function formatCvc() {
+			this.cvc = this.cvc.replace(/\D/g, '').substr(0, 3);
+		},
+		pay: function pay() {
+			axios.defaults.headers.common['Authorization'] = 'Bearer ' + this.user.text_token;
+
+			// axios.post('http://127.0.0.2:8000/api/subscribe/' + this.user.id, 
+			// 	{apiToken: this.user.api_token})
+			axios.post('http://127.0.0.2:8000/api/cancel').then(function (r) {
+				console.log(r.data);
+			});
+		}
+	}
+});
+
+/***/ }),
+/* 86 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('form', {
+    on: {
+      "submit": function($event) {
+        $event.preventDefault();
+        _vm.pay($event)
+      }
+    }
+  }, [_c('div', {
+    staticClass: "field"
+  }, [_c('label', {
+    attrs: {
+      "for": "card-number"
+    }
+  }, [_vm._v("Card Number")]), _vm._v(" "), _c('div', {
+    staticClass: "control"
+  }, [_c('input', {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.number),
+      expression: "number"
+    }],
+    staticClass: "input",
+    attrs: {
+      "id": "card-number",
+      "type": "text",
+      "name": "name",
+      "required": ""
+    },
+    domProps: {
+      "value": (_vm.number)
+    },
+    on: {
+      "keyup": _vm.formatNumber,
+      "input": function($event) {
+        if ($event.target.composing) { return; }
+        _vm.number = $event.target.value
+      }
+    }
+  })])]), _vm._v(" "), _c('div', {
+    staticClass: "columns"
+  }, [_c('div', {
+    staticClass: "column"
+  }, [_c('div', {
+    staticClass: "field"
+  }, [_c('label', {
+    attrs: {
+      "for": "expiration"
+    }
+  }, [_vm._v("Expiration")]), _vm._v(" "), _c('input', {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.exp),
+      expression: "exp"
+    }],
+    staticClass: "input",
+    attrs: {
+      "type": "text",
+      "id": "expiration",
+      "placeholder": "MM/YY",
+      "required": ""
+    },
+    domProps: {
+      "value": (_vm.exp)
+    },
+    on: {
+      "keyup": _vm.formatExp,
+      "input": function($event) {
+        if ($event.target.composing) { return; }
+        _vm.exp = $event.target.value
+      }
+    }
+  })])]), _vm._v(" "), _c('div', {
+    staticClass: "column"
+  }, [_c('div', {
+    staticClass: "field"
+  }, [_c('label', {
+    attrs: {
+      "for": "cvc"
+    }
+  }, [_vm._v("CVC")]), _vm._v(" "), _c('input', {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.cvc),
+      expression: "cvc"
+    }],
+    staticClass: "input",
+    attrs: {
+      "type": "text",
+      "id": "cvc",
+      "required": ""
+    },
+    domProps: {
+      "value": (_vm.cvc)
+    },
+    on: {
+      "keyup": _vm.formatCvc,
+      "input": function($event) {
+        if ($event.target.composing) { return; }
+        _vm.cvc = $event.target.value
+      }
+    }
+  })])])]), _vm._v(" "), _c('button', {
+    staticClass: "button is-primary",
+    attrs: {
+      "type": "submit"
+    }
+  }, [_vm._v("Pay")])])
+},staticRenderFns: []}
+module.exports.render._withStripped = true
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+     require("vue-hot-reload-api").rerender("data-v-2a712fbc", module.exports)
   }
 }
 

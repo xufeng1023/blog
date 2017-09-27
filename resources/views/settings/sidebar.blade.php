@@ -1,8 +1,8 @@
 <aside class="menu">
-    <p class="menu-label">
-        Account
-    </p>
     <ul class="menu-list">
-        <li><a class="is-active">Update Account</a></li>
+        <li><a class="is-active" href="/settings">Update Account</a></li>
+        <li><a href="/settings/subscription">Subscription</a></li>
+        <li><a href="/settings/card">Credit Card</a></li>
+        <li><a href="">Cancel</a></li>
     </ul>
 </aside>

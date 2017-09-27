@@ -17,6 +17,11 @@ class UserController extends Controller
     	return view('settings.index');
     }
 
+    public function card()
+    {
+        return view('settings.card');
+    }
+
     public function updateAccount(Request $request)
     {
     	$this->validate($request, [
