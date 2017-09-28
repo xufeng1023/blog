@@ -15,14 +15,14 @@ window.Vue = require('vue');
 
 window.Bus = new Vue();
 
-window.api = 'http://127.0.0.2:8000/';
+window.api = 'http://127.0.0.2:8000/api/';
 
 Vue.component('videoOne', require('./components/front/VideoOne.vue'));
 Vue.component('videoFrame', require('./components/front/VideoFrame.vue'));
 Vue.component('imageOne', require('./components/front/ImageOne.vue'));
 Vue.component('imageModal', require('./components/front/ImageModal.vue'));
 Vue.component('plans', require('./components/front/Plans.vue'));
-Vue.component('pay', require('./components/front/Pay.vue'));
+Vue.component('updateCard', require('./components/front/UpdateCard.vue'));
 
 Vue.filter('FILE', (value) => { return '/storage/' + value; });
 
