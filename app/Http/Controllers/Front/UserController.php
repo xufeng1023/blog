@@ -22,6 +22,16 @@ class UserController extends Controller
         return view('settings.card');
     }
 
+    public function cancel()
+    {
+        return view('settings.cancel');
+    }
+
+    public function changePlan()
+    {
+        return view('settings.plan');
+    }
+
     public function updateAccount(Request $request)
     {
     	$this->validate($request, [

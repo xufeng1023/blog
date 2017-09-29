@@ -16,12 +16,26 @@ class User extends Authenticatable
         'name', 'email', 'password',
     ];
 
-    protected $visible = ['api_token', 'email', 'id', 'name', 'text_token'];
+    protected $appends = ['plan'];
+
+    protected $visible = ['api_token', 'email', 'id', 'name', 'text_token', 'plan'];
 
     public function saveApiToken()
     {
     	$token = $this->createToken('video')->accessToken;
         $this->text_token = $token;
         $this->save();
+    }
+
+    public function subscription()
+    {
+        return $this->hasOne(Subscription::class);
+    }
+
+    public function getPlanAttribute()
+    {
+        if($this->subscription) {
+            return $this->subscription->stripe_plan;
+        }
     }
 }
