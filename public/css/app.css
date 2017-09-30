@@ -13901,6 +13901,12 @@ label.panel-block:hover {
   background-color: rgba(10, 10, 10, 0.91);
 }
 
+hr {
+  height: 0;
+  border-top: 1px solid #000000;
+  border-bottom: 1px solid #606060;
+}
+
 .navbar-dropdown a {
   color: initial !important;
 }
@@ -13912,6 +13918,23 @@ label.panel-block:hover {
 .sd {
   -webkit-box-shadow: 0 0 7px 1px rgba(0, 0, 0, 0.43);
           box-shadow: 0 0 7px 1px rgba(0, 0, 0, 0.43);
+}
+
+.flex {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.fd-v {
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+sup {
+  padding-top: 0.3em;
 }
 
 .fc {
@@ -13947,5 +13970,23 @@ label.panel-block:hover {
 
 .button.is-danger.is-outlined:focus {
   background-color: transparent;
+}
+
+.hero.is-halfheight .hero-body,
+.hero.is-fullheight .hero-body {
+  -webkit-box-align: inherit;
+      -ms-flex-align: inherit;
+          align-items: inherit;
+}
+
+.menu-list a:hover {
+  background: inherit;
+  color: #00d1b2 !important;
+}
+
+.message.plan .message-header {
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
 }
 

@@ -24,6 +24,7 @@ Vue.component('imageModal', require('./components/front/ImageModal.vue'));
 Vue.component('changePlan', require('./components/front/ChangePlan.vue'));
 Vue.component('updateCard', require('./components/front/UpdateCard.vue'));
 Vue.component('cancel', require('./components/front/Cancel.vue'));
+Vue.component('card', require('./components/front/Card.vue'));
 
 Vue.filter('FILE', (value) => { return '/storage/' + value; });
 

@@ -1,7 +1,7 @@
 <template>
 	<div class="field">
 		<div class="select is-fullwidth">
-		  	<select>
+		  	<select name="plan">
 		    	<option>Select a plan</option>
 		    	<option v-for="plan in plans" :value="plan.plan_id" :selected="current == plan.plan_id">
 			    	{{ plan.name }}

@@ -7,7 +7,6 @@
 
 <script>
 	import card from './Card.vue';
-	axios.defaults.headers.common['X-CSRF-TOKEN'] = '';
 	
 	export default {
 		props: ['user'],

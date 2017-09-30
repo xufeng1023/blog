@@ -12,6 +12,7 @@
           	@if(Auth::check())
 		        <pay :user="{{ auth()->user() }}"></pay>
 		    @else
+        <p><a href="/join">Join</a></p>
 		        <a href="/login">login</a>
 		    @endif
         </div>

@@ -6,7 +6,44 @@
         <div class="column is-4 is-offset-4">
             <form method="POST" action="{{ route('register') }}">
                 {{ csrf_field() }}
-
+                <div class="columns">
+                    <div class="column">
+                        <article class="message is-warning plan">
+                            <div class="message-header fd-v">
+                                <p>Daily</p>
+                                <div class="flex">
+                                    <sup class="is-size-5">$</sup>
+                                    <span class="is-size-1">1.99</span>
+                                </div>
+                            </div>
+                            <div class="message-body">
+                                <div class="fc fd-v">
+                                    <p class="is-size-6 has-text-grey has-text-weight-semibold">watch all videos</p>
+                                    <p class="is-size-6 has-text-grey has-text-weight-semibold field">billed until cancel</p>
+                                    <button class="button is-warning">choose</button>
+                                </div>
+                            </div>
+                        </article>
+                    </div>
+                    <div class="column">
+                        <article class="message is-danger plan">
+                            <div class="message-header fd-v">
+                                <p>Monthly</p>
+                                <div class="flex">
+                                    <sup class="is-size-5">$</sup>
+                                    <span class="is-size-1">25.00</span>
+                                </div>
+                            </div>
+                            <div class="message-body">
+                                <div class="fc fd-v">
+                                    <p class="is-size-6 has-text-grey has-text-weight-semibold">watch all videos</p>
+                                    <p class="is-size-6 has-text-grey has-text-weight-semibold field">billed until cancel</p>
+                                    <button class="button is-danger">choose</button>
+                                </div>
+                            </div>
+                        </article>
+                    </div>
+                </div>
                 <div class="field">
                     <label for="name">Username</label>
 
@@ -53,11 +90,13 @@
                         <input id="password-confirm" name="password_confirmation" type="password" class="input" required>
                     </div>
                 </div>
+                <hr>
+                <card></card>
 
                 <div class="field">
                     <div class="control">
                         <button type="submit" class="button is-primary">
-                            Register
+                            Join
                         </button>
                     </div>
                 </div>

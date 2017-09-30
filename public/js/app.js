@@ -29316,9 +29316,10 @@ Vue.component('videoOne', __webpack_require__(67));
 Vue.component('videoFrame', __webpack_require__(70));
 Vue.component('imageOne', __webpack_require__(76));
 Vue.component('imageModal', __webpack_require__(79));
-Vue.component('changePlan', __webpack_require__(102));
-Vue.component('updateCard', __webpack_require__(84));
-Vue.component('cancel', __webpack_require__(90));
+Vue.component('changePlan', __webpack_require__(81));
+Vue.component('updateCard', __webpack_require__(87));
+Vue.component('cancel', __webpack_require__(93));
+Vue.component('card', __webpack_require__(89));
 
 Vue.filter('FILE', function (value) {
     return '/storage/' + value;
@@ -29865,7 +29866,80 @@ var Component = __webpack_require__(1)(
   /* script */
   __webpack_require__(82),
   /* template */
-  __webpack_require__(83),
+  __webpack_require__(86),
+  /* styles */
+  null,
+  /* scopeId */
+  null,
+  /* moduleIdentifier (server only) */
+  null
+)
+Component.options.__file = "C:\\Users\\xu feng\\Desktop\\blog\\resources\\assets\\js\\components\\front\\ChangePlan.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
+if (Component.options.functional) {console.error("[vue-loader] ChangePlan.vue: functional components are not supported with templates, they should use render functions.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-759ea515", Component.options)
+  } else {
+    hotAPI.reload("data-v-759ea515", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 82 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Plans_vue__ = __webpack_require__(83);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Plans_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__Plans_vue__);
+//
+//
+//
+//
+//
+//
+//
+
+
+axios.defaults.headers.common['X-CSRF-TOKEN'] = '';
+/* harmony default export */ __webpack_exports__["default"] = ({
+	props: ['user'],
+	components: { plans: __WEBPACK_IMPORTED_MODULE_0__Plans_vue___default.a },
+	methods: {
+		change: function change(e) {
+			var formData = new FormData(e.target);
+			formData.append('apiToken', this.user.api_token);
+			axios.defaults.headers.common['Authorization'] = 'Bearer ' + this.user.text_token;
+			axios.post(api + 'changePlan/' + this.user.id, formData).then(function (r) {
+				console.log(r.data);
+			});
+		}
+	}
+});
+
+/***/ }),
+/* 83 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var Component = __webpack_require__(1)(
+  /* script */
+  __webpack_require__(84),
+  /* template */
+  __webpack_require__(85),
   /* styles */
   null,
   /* scopeId */
@@ -29897,7 +29971,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 82 */
+/* 84 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -29935,7 +30009,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 83 */
+/* 85 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -29943,7 +30017,11 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "field"
   }, [_c('div', {
     staticClass: "select is-fullwidth"
-  }, [_c('select', [_c('option', [_vm._v("Select a plan")]), _vm._v(" "), _vm._l((_vm.plans), function(plan) {
+  }, [_c('select', {
+    attrs: {
+      "name": "plan"
+    }
+  }, [_c('option', [_vm._v("Select a plan")]), _vm._v(" "), _vm._l((_vm.plans), function(plan) {
     return _c('option', {
       domProps: {
         "value": plan.plan_id,
@@ -29961,15 +30039,46 @@ if (false) {
 }
 
 /***/ }),
-/* 84 */
+/* 86 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('form', {
+    on: {
+      "submit": function($event) {
+        $event.preventDefault();
+        _vm.change($event)
+      }
+    }
+  }, [_c('plans', {
+    attrs: {
+      "current": this.user.plan
+    }
+  }), _vm._v(" "), _c('button', {
+    staticClass: "button is-primary",
+    attrs: {
+      "type": "submit"
+    }
+  }, [_vm._v("Change")])], 1)
+},staticRenderFns: []}
+module.exports.render._withStripped = true
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+     require("vue-hot-reload-api").rerender("data-v-759ea515", module.exports)
+  }
+}
+
+/***/ }),
+/* 87 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var Component = __webpack_require__(1)(
   /* script */
-  __webpack_require__(85),
+  __webpack_require__(88),
   /* template */
-  __webpack_require__(89),
+  __webpack_require__(92),
   /* styles */
   null,
   /* scopeId */
@@ -30001,12 +30110,12 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 85 */
+/* 88 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Card_vue__ = __webpack_require__(86);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Card_vue__ = __webpack_require__(89);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Card_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__Card_vue__);
 //
 //
@@ -30017,7 +30126,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 
 
-axios.defaults.headers.common['X-CSRF-TOKEN'] = '';
 
 /* harmony default export */ __webpack_exports__["default"] = ({
 	props: ['user'],
@@ -30039,15 +30147,15 @@ axios.defaults.headers.common['X-CSRF-TOKEN'] = '';
 });
 
 /***/ }),
-/* 86 */
+/* 89 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var Component = __webpack_require__(1)(
   /* script */
-  __webpack_require__(87),
+  __webpack_require__(90),
   /* template */
-  __webpack_require__(88),
+  __webpack_require__(91),
   /* styles */
   null,
   /* scopeId */
@@ -30079,7 +30187,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 87 */
+/* 90 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -30146,7 +30254,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 88 */
+/* 91 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -30306,7 +30414,7 @@ if (false) {
 }
 
 /***/ }),
-/* 89 */
+/* 92 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -30333,15 +30441,15 @@ if (false) {
 }
 
 /***/ }),
-/* 90 */
+/* 93 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var Component = __webpack_require__(1)(
   /* script */
-  __webpack_require__(101),
+  __webpack_require__(94),
   /* template */
-  __webpack_require__(100),
+  __webpack_require__(95),
   /* styles */
   null,
   /* scopeId */
@@ -30373,39 +30481,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 91 */,
-/* 92 */,
-/* 93 */,
-/* 94 */,
-/* 95 */,
-/* 96 */,
-/* 97 */,
-/* 98 */,
-/* 99 */,
-/* 100 */
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('button', {
-    staticClass: "button is-danger is-outlined",
-    class: {
-      'is-loading': _vm.sending
-    },
-    on: {
-      "click": _vm.cancel
-    }
-  }, [_vm._v("Cancel")])
-},staticRenderFns: []}
-module.exports.render._withStripped = true
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-     require("vue-hot-reload-api").rerender("data-v-014c1216", module.exports)
-  }
-}
-
-/***/ }),
-/* 101 */
+/* 94 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -30443,96 +30519,25 @@ axios.defaults.headers.common['X-CSRF-TOKEN'] = '';
 });
 
 /***/ }),
-/* 102 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var disposed = false
-var Component = __webpack_require__(1)(
-  /* script */
-  __webpack_require__(103),
-  /* template */
-  __webpack_require__(104),
-  /* styles */
-  null,
-  /* scopeId */
-  null,
-  /* moduleIdentifier (server only) */
-  null
-)
-Component.options.__file = "C:\\Users\\xu feng\\Desktop\\blog\\resources\\assets\\js\\components\\front\\ChangePlan.vue"
-if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
-if (Component.options.functional) {console.error("[vue-loader] ChangePlan.vue: functional components are not supported with templates, they should use render functions.")}
-
-/* hot reload */
-if (false) {(function () {
-  var hotAPI = require("vue-hot-reload-api")
-  hotAPI.install(require("vue"), false)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-759ea515", Component.options)
-  } else {
-    hotAPI.reload("data-v-759ea515", Component.options)
-  }
-  module.hot.dispose(function (data) {
-    disposed = true
-  })
-})()}
-
-module.exports = Component.exports
-
-
-/***/ }),
-/* 103 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Plans_vue__ = __webpack_require__(81);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Plans_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__Plans_vue__);
-//
-//
-//
-//
-//
-//
-//
-
-
-
-/* harmony default export */ __webpack_exports__["default"] = ({
-	props: ['user'],
-	components: { plans: __WEBPACK_IMPORTED_MODULE_0__Plans_vue___default.a }
-});
-
-/***/ }),
-/* 104 */
+/* 95 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('form', {
+  return _c('button', {
+    staticClass: "button is-danger is-outlined",
+    class: {
+      'is-loading': _vm.sending
+    },
     on: {
-      "submit": function($event) {
-        $event.preventDefault();
-        _vm.change($event)
-      }
+      "click": _vm.cancel
     }
-  }, [_c('plans', {
-    attrs: {
-      "current": this.user.plan
-    }
-  }), _vm._v(" "), _c('button', {
-    staticClass: "button is-primary",
-    attrs: {
-      "type": "submit"
-    }
-  }, [_vm._v("Change")])], 1)
+  }, [_vm._v("Cancel")])
 },staticRenderFns: []}
 module.exports.render._withStripped = true
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-     require("vue-hot-reload-api").rerender("data-v-759ea515", module.exports)
+     require("vue-hot-reload-api").rerender("data-v-014c1216", module.exports)
   }
 }
 
