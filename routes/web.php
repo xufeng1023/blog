@@ -15,6 +15,7 @@ Route::get('/settings/cancel', 'Front\UserController@cancel');
 Route::get('/settings/plan', 'Front\UserController@changePlan');
 Route::post('/post/{post}/updateViews', 'Front\PostController@updateViews');
 Route::post('/settings/account', 'Front\UserController@updateAccount');
+Route::post('/user/instance', 'Front\UserController@createInstance');
 
 
 Route::prefix('admin')->middleware('admin')->group(function() {

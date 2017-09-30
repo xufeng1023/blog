@@ -24,6 +24,7 @@ class User extends Authenticatable
     {
     	$token = $this->createToken('video')->accessToken;
         $this->text_token = $token;
+        $this->api_token = str_random(60);
         $this->save();
     }
 
