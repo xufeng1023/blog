@@ -3,7 +3,6 @@
 </template>
 
 <script>
-	axios.defaults.headers.common['X-CSRF-TOKEN'] = '';
 	export default {
 		props: ['user'],
 		data() {
@@ -14,7 +13,6 @@
 		methods: {
 			cancel() {
 				this.sending = true;
-				axios.defaults.headers.common['Authorization'] = 'Bearer ' + this.user.text_token;
 
 				axios.post(api + 'cancel/' + this.user.id, {apiToken: this.user.api_token})
 				.then(r => {

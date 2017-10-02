@@ -29344,6 +29344,14 @@ var token = document.head.querySelector('meta[name="csrf-token"]');
 
 if (token) {
     window.axios.defaults.headers.common['X-CSRF-TOKEN'] = token.content;
+    token.remove();
+}
+
+var apiToken = document.head.querySelector('meta[name="api-token"]');
+
+if (apiToken) {
+    window.axios.defaults.headers.common['Authorization'] = 'Bearer ' + apiToken.content;
+    apiToken.remove();
 }
 
 window.Vue = __webpack_require__(31);
@@ -29351,7 +29359,6 @@ window.Vue = __webpack_require__(31);
 window.Bus = new Vue();
 
 window.api = 'http://127.0.0.2:8000/api/';
-window.noapi = 'http://127.0.0.2:8000/';
 
 Vue.component('videoOne', __webpack_require__(68));
 Vue.component('videoFrame', __webpack_require__(71));
@@ -29361,7 +29368,7 @@ Vue.component('changePlan', __webpack_require__(82));
 Vue.component('updateCard', __webpack_require__(88));
 Vue.component('cancel', __webpack_require__(93));
 Vue.component('card', __webpack_require__(33));
-Vue.component('join', __webpack_require__(108));
+Vue.component('join', __webpack_require__(96));
 
 Vue.filter('FILE', function (value) {
     return '/storage/' + value;
@@ -29956,7 +29963,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 
 
-axios.defaults.headers.common['X-CSRF-TOKEN'] = '';
+
 /* harmony default export */ __webpack_exports__["default"] = ({
 	props: ['user'],
 	components: { plans: __WEBPACK_IMPORTED_MODULE_0__Plans_vue___default.a },
@@ -29964,7 +29971,7 @@ axios.defaults.headers.common['X-CSRF-TOKEN'] = '';
 		change: function change(e) {
 			var formData = new FormData(e.target);
 			formData.append('apiToken', this.user.api_token);
-			axios.defaults.headers.common['Authorization'] = 'Bearer ' + this.user.text_token;
+
 			axios.post(api + 'changePlan/' + this.user.id, formData).then(function (r) {
 				console.log(r.data);
 			});
@@ -30176,8 +30183,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 		update: function update(e) {
 			var formData = new FormData(e.target);
 			formData.append('apiToken', this.user.api_token);
-
-			axios.defaults.headers.common['Authorization'] = 'Bearer ' + this.user.text_token;
 
 			axios.post(api + 'updateCard/' + this.user.id, formData).then(function (r) {
 				console.log(r.data);
@@ -30493,7 +30498,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 
-axios.defaults.headers.common['X-CSRF-TOKEN'] = '';
 /* harmony default export */ __webpack_exports__["default"] = ({
 	props: ['user'],
 	data: function data() {
@@ -30507,7 +30511,6 @@ axios.defaults.headers.common['X-CSRF-TOKEN'] = '';
 			var _this = this;
 
 			this.sending = true;
-			axios.defaults.headers.common['Authorization'] = 'Bearer ' + this.user.text_token;
 
 			axios.post(api + 'cancel/' + this.user.id, { apiToken: this.user.api_token }).then(function (r) {
 				console.log(r.data);
@@ -30544,24 +30547,107 @@ if (false) {
 }
 
 /***/ }),
-/* 96 */,
-/* 97 */,
-/* 98 */,
-/* 99 */,
-/* 100 */,
-/* 101 */,
-/* 102 */,
-/* 103 */,
-/* 104 */,
-/* 105 */
+/* 96 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var Component = __webpack_require__(1)(
   /* script */
-  __webpack_require__(106),
+  __webpack_require__(97),
   /* template */
-  __webpack_require__(107),
+  null,
+  /* styles */
+  null,
+  /* scopeId */
+  null,
+  /* moduleIdentifier (server only) */
+  null
+)
+Component.options.__file = "C:\\Users\\xu feng\\Desktop\\blog\\resources\\assets\\js\\components\\front\\Join.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-fdc6cc74", Component.options)
+  } else {
+    hotAPI.reload("data-v-fdc6cc74", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 97 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Price_vue__ = __webpack_require__(98);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Price_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__Price_vue__);
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+	components: { price: __WEBPACK_IMPORTED_MODULE_0__Price_vue___default.a },
+	methods: {
+		onSubmit: function onSubmit(e) {
+			var formData = new FormData(e.target);
+			if (formData.has('plan') === false) {
+				alert('choose a plan');
+				return;
+			}
+			axios.post(api + 'token', formData).then(function (_ref) {
+				var data = _ref.data;
+
+				formData.set('payKey', data);
+
+				axios.post('/join', formData).then(function (_ref2) {
+					var data = _ref2.data;
+
+					formData.set('apiToken', data.api_token);
+
+					axios.post(api + 'subscribe/' + data.id, formData).then(function (_ref3) {
+						var data = _ref3.data;
+
+						location.reload();
+					}).catch(function (_ref4) {
+						var response = _ref4.response;
+
+						console.log(response.data);
+					});
+				}).catch(function (_ref5) {
+					var response = _ref5.response;
+
+					console.log(response.data);
+				});
+			}).catch(function (_ref6) {
+				var response = _ref6.response;
+
+				console.log(response.data);
+			});
+		}
+	}
+});
+
+/***/ }),
+/* 98 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var Component = __webpack_require__(1)(
+  /* script */
+  __webpack_require__(99),
+  /* template */
+  __webpack_require__(100),
   /* styles */
   null,
   /* scopeId */
@@ -30593,7 +30679,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 106 */
+/* 99 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -30653,7 +30739,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 107 */
+/* 100 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -30708,81 +30794,6 @@ if (false) {
      require("vue-hot-reload-api").rerender("data-v-43d5c8dd", module.exports)
   }
 }
-
-/***/ }),
-/* 108 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var disposed = false
-var Component = __webpack_require__(1)(
-  /* script */
-  __webpack_require__(109),
-  /* template */
-  null,
-  /* styles */
-  null,
-  /* scopeId */
-  null,
-  /* moduleIdentifier (server only) */
-  null
-)
-Component.options.__file = "C:\\Users\\xu feng\\Desktop\\blog\\resources\\assets\\js\\components\\front\\Join.vue"
-if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
-
-/* hot reload */
-if (false) {(function () {
-  var hotAPI = require("vue-hot-reload-api")
-  hotAPI.install(require("vue"), false)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-fdc6cc74", Component.options)
-  } else {
-    hotAPI.reload("data-v-fdc6cc74", Component.options)
-  }
-  module.hot.dispose(function (data) {
-    disposed = true
-  })
-})()}
-
-module.exports = Component.exports
-
-
-/***/ }),
-/* 109 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Price_vue__ = __webpack_require__(105);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Price_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__Price_vue__);
-
-
-
-/* harmony default export */ __webpack_exports__["default"] = ({
-	components: { price: __WEBPACK_IMPORTED_MODULE_0__Price_vue___default.a },
-	methods: {
-		onSubmit: function onSubmit(e) {
-			var formData = new FormData(e.target);
-
-			axios.post('/user/instance', formData).then(function (_ref) {
-				var data = _ref.data;
-
-				axios.defaults.headers.common['Authorization'] = 'Bearer ' + data.text_token;
-
-				axios.post(api + 'token', formData).then(function (_ref2) {
-					var data = _ref2.data;
-
-					console.log(data);
-				});
-			}).catch(function (_ref3) {
-				var response = _ref3.response;
-
-				console.log(response);
-			});
-		}
-	}
-});
 
 /***/ })
 /******/ ]);

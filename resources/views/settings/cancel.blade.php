@@ -8,7 +8,7 @@
         </div>
         <div class="column is-8 is-offset-1">
             <h1 class="title is-3">Cancel Subscription</h1>
-            <h3 class="subtitle is-6">Taking a break? All right but don't forget to come back and check out new videos. There's new uploads every day.</h3>
+            <h3 class="subtitle is-6">Taking a break? All right but don't forget to come back on use. There's new uploads every day.</h3>
             <cancel :user="{{ auth()->user() }}"></cancel>
         </div>
     </div>

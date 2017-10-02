@@ -18,12 +18,10 @@ class User extends Authenticatable
 
     protected $appends = ['plan'];
 
-    protected $visible = ['api_token', 'email', 'id', 'name', 'text_token', 'plan'];
+    protected $visible = ['api_token', 'email', 'id', 'name', 'plan'];
 
     public function saveApiToken()
     {
-    	$token = $this->createToken('video')->accessToken;
-        $this->text_token = $token;
         $this->api_token = str_random(60);
         $this->save();
     }

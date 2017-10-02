@@ -6,7 +6,6 @@
         <div class="column is-4 is-offset-4">
             <join inline-template>
                 <form method="POST" @submit.prevent="onSubmit">
-                    {{ csrf_field() }}
                     <div class="columns">
                         <div class="column">
                             <price price="1.99" color="is-warning" plan="Daily"></price>

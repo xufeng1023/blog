@@ -74,6 +74,8 @@ class RegisterController extends Controller
     {
         $user->saveApiToken();
 
+        if($request->wantsJson()) return $user;
+
         return redirect($this->redirectTo);
     }
 }

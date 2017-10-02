@@ -6,18 +6,32 @@
 		methods: {
 			onSubmit(e) {
 				let formData = new FormData(e.target);
-
-				axios.post('/user/instance', formData)
+				if(formData.has('plan') === false) {
+					alert('choose a plan');
+					return;
+				}
+				axios.post(api + 'token', formData)
 				.then(({data}) => {
-					axios.defaults.headers.common['Authorization'] = 'Bearer ' + data.text_token;
+					formData.set('payKey', data);
 
-					axios.post(api + 'token', formData)
+					axios.post('/join', formData)
 					.then(({data}) => {
-						console.log(data)
+						formData.set('apiToken', data.api_token);
+
+						axios.post(api + 'subscribe/' + data.id, formData)
+						.then(({data}) => {
+							location.reload();
+						})
+						.catch(({response}) => {
+							console.log(response.data)
+						})
+					})
+					.catch(({response}) => {
+						console.log(response.data)
 					})
 				})
 				.catch(({response}) => {
-					console.log(response)
+					console.log(response.data)
 				})
 			}
 		}

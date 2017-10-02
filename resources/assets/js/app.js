@@ -9,6 +9,14 @@ let token = document.head.querySelector('meta[name="csrf-token"]');
 
 if (token) {
     window.axios.defaults.headers.common['X-CSRF-TOKEN'] = token.content;
+    token.remove();
+}
+
+let apiToken = document.head.querySelector('meta[name="api-token"]');
+
+if (apiToken) {
+    window.axios.defaults.headers.common['Authorization'] = 'Bearer ' + apiToken.content;
+    apiToken.remove();
 }
 
 window.Vue = require('vue');
@@ -16,7 +24,6 @@ window.Vue = require('vue');
 window.Bus = new Vue();
 
 window.api = 'http://127.0.0.2:8000/api/';
-window.noapi = 'http://127.0.0.2:8000/';
 
 Vue.component('videoOne', require('./components/front/VideoOne.vue'));
 Vue.component('videoFrame', require('./components/front/VideoFrame.vue'));
