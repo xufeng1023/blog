@@ -19,11 +19,11 @@ if (apiToken) {
     apiToken.remove();
 }
 
+window.api = 'http://127.0.0.2:8000/api/';
+
 window.Vue = require('vue');
 
 window.Bus = new Vue();
-
-window.api = 'http://127.0.0.2:8000/api/';
 
 Vue.component('videoOne', require('./components/front/VideoOne.vue'));
 Vue.component('videoFrame', require('./components/front/VideoFrame.vue'));
@@ -32,11 +32,31 @@ Vue.component('imageModal', require('./components/front/ImageModal.vue'));
 Vue.component('changePlan', require('./components/front/ChangePlan.vue'));
 Vue.component('updateCard', require('./components/front/UpdateCard.vue'));
 Vue.component('cancel', require('./components/front/Cancel.vue'));
-Vue.component('card', require('./components/front/Card.vue'));
 Vue.component('join', require('./components/front/Join.vue'));
+Vue.component('login', require('./components/front/Login.vue'));
 
 Vue.filter('FILE', (value) => { return '/storage/' + value; });
 
 const app = new Vue({
-    el: '#app'
+    el: '#app',
+    mounted() {
+		this.navBarInit();
+	},
+	methods: {
+		navBarInit() {
+			var $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
+
+			if ($navbarBurgers.length > 0) {
+	    		$navbarBurgers.forEach(function ($el) {
+	      			$el.addEventListener('click', function () {
+	        			var target = $el.dataset.target;
+	        			var $target = document.getElementById(target);
+
+	        			$el.classList.toggle('is-active');
+	        			$target.classList.toggle('is-active');
+	      			});
+	    		});
+	  		}
+		}
+	}
 });

@@ -13,7 +13,7 @@
 		        <pay :user="{{ auth()->user() }}"></pay>
 		    @else
         <p><a href="/join">Join</a></p>
-		        <a href="/login">login</a>
+		        <a href="/movies">Enter</a>
 		    @endif
         </div>
     </div>

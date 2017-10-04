@@ -29343,22 +29343,22 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 var token = document.head.querySelector('meta[name="csrf-token"]');
 
 if (token) {
-    window.axios.defaults.headers.common['X-CSRF-TOKEN'] = token.content;
-    token.remove();
+	window.axios.defaults.headers.common['X-CSRF-TOKEN'] = token.content;
+	token.remove();
 }
 
 var apiToken = document.head.querySelector('meta[name="api-token"]');
 
 if (apiToken) {
-    window.axios.defaults.headers.common['Authorization'] = 'Bearer ' + apiToken.content;
-    apiToken.remove();
+	window.axios.defaults.headers.common['Authorization'] = 'Bearer ' + apiToken.content;
+	apiToken.remove();
 }
+
+window.api = 'http://127.0.0.2:8000/api/';
 
 window.Vue = __webpack_require__(31);
 
 window.Bus = new Vue();
-
-window.api = 'http://127.0.0.2:8000/api/';
 
 Vue.component('videoOne', __webpack_require__(68));
 Vue.component('videoFrame', __webpack_require__(71));
@@ -29367,15 +29367,36 @@ Vue.component('imageModal', __webpack_require__(80));
 Vue.component('changePlan', __webpack_require__(82));
 Vue.component('updateCard', __webpack_require__(88));
 Vue.component('cancel', __webpack_require__(93));
-Vue.component('card', __webpack_require__(33));
 Vue.component('join', __webpack_require__(96));
+Vue.component('login', __webpack_require__(110));
 
 Vue.filter('FILE', function (value) {
-    return '/storage/' + value;
+	return '/storage/' + value;
 });
 
 var app = new Vue({
-    el: '#app'
+	el: '#app',
+	mounted: function mounted() {
+		this.navBarInit();
+	},
+
+	methods: {
+		navBarInit: function navBarInit() {
+			var $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
+
+			if ($navbarBurgers.length > 0) {
+				$navbarBurgers.forEach(function ($el) {
+					$el.addEventListener('click', function () {
+						var target = $el.dataset.target;
+						var $target = document.getElementById(target);
+
+						$el.classList.toggle('is-active');
+						$target.classList.toggle('is-active');
+					});
+				});
+			}
+		}
+	}
 });
 
 /***/ }),
@@ -30593,18 +30614,40 @@ module.exports = Component.exports
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Price_vue__ = __webpack_require__(98);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Price_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__Price_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__Card_vue__ = __webpack_require__(33);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__Card_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__Card_vue__);
+
 
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-	components: { price: __WEBPACK_IMPORTED_MODULE_0__Price_vue___default.a },
+	data: function data() {
+		return {
+			errors: []
+		};
+	},
+
+	components: { price: __WEBPACK_IMPORTED_MODULE_0__Price_vue___default.a, card: __WEBPACK_IMPORTED_MODULE_1__Card_vue___default.a },
 	methods: {
+		onTop: function onTop() {
+			window.scrollTo(0, -50000);
+		},
 		onSubmit: function onSubmit(e) {
+			var _this = this;
+
+			this.errors = [];
+
 			var formData = new FormData(e.target);
+
 			if (formData.has('plan') === false) {
-				alert('choose a plan');
-				return;
+				this.onTop();
+				return this.errors = { plan: 'Choose a plan!' };
 			}
+
+			if (!formData.get('expiration').includes('/')) {
+				return this.errors = { card: 'Invalid expiration date!' };
+			}
+
 			axios.post(api + 'token', formData).then(function (_ref) {
 				var data = _ref.data;
 
@@ -30622,17 +30665,19 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 					}).catch(function (_ref4) {
 						var response = _ref4.response;
 
-						console.log(response.data);
+						axios.delete('/user/delete/' + response.data);
+						_this.onTop();
+						_this.errors = { plan: 'Sorry! Payment failed, please refresh the page and try again.' };
 					});
 				}).catch(function (_ref5) {
 					var response = _ref5.response;
 
-					console.log(response.data);
+					_this.errors = response.data.errors;
 				});
 			}).catch(function (_ref6) {
 				var response = _ref6.response;
 
-				console.log(response.data);
+				_this.errors = response.data;
 			});
 		}
 	}
@@ -30792,6 +30837,290 @@ if (false) {
   module.hot.accept()
   if (module.hot.data) {
      require("vue-hot-reload-api").rerender("data-v-43d5c8dd", module.exports)
+  }
+}
+
+/***/ }),
+/* 101 */,
+/* 102 */,
+/* 103 */,
+/* 104 */,
+/* 105 */,
+/* 106 */,
+/* 107 */,
+/* 108 */,
+/* 109 */,
+/* 110 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var Component = __webpack_require__(1)(
+  /* script */
+  __webpack_require__(111),
+  /* template */
+  __webpack_require__(112),
+  /* styles */
+  null,
+  /* scopeId */
+  null,
+  /* moduleIdentifier (server only) */
+  null
+)
+Component.options.__file = "C:\\Users\\xu feng\\Desktop\\blog\\resources\\assets\\js\\components\\front\\Login.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
+if (Component.options.functional) {console.error("[vue-loader] Login.vue: functional components are not supported with templates, they should use render functions.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-5c0ff6fd", Component.options)
+  } else {
+    hotAPI.reload("data-v-5c0ff6fd", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 111 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+	data: function data() {
+		return {
+			isActive: false,
+			errors: []
+		};
+	},
+
+	methods: {
+		onSubmit: function onSubmit(e) {
+			var _this = this;
+
+			var fm = new FormData(e.target);
+
+			axios.post('/login', fm).then(function (_ref) {
+				var data = _ref.data;
+
+				location.reload();
+			}).catch(function (_ref2) {
+				var response = _ref2.response;
+
+				_this.errors = response.data.errors;
+			});
+		}
+	}
+});
+
+/***/ }),
+/* 112 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', [_c('a', {
+    staticClass: "button is-primary",
+    attrs: {
+      "href": "/login"
+    },
+    on: {
+      "click": function($event) {
+        $event.preventDefault();
+        _vm.isActive = true
+      }
+    }
+  }, [_vm._v("login")]), _vm._v(" "), _c('div', {
+    staticClass: "modal",
+    class: {
+      'is-active': _vm.isActive
+    }
+  }, [_c('div', {
+    staticClass: "modal-background",
+    on: {
+      "click": function($event) {
+        _vm.isActive = false
+      }
+    }
+  }), _vm._v(" "), _c('div', {
+    staticClass: "modal-card"
+  }, [_c('header', {
+    staticClass: "modal-card-head"
+  }, [_c('p', {
+    staticClass: "modal-card-title"
+  }, [_vm._v("Log In")]), _vm._v(" "), _c('button', {
+    staticClass: "delete",
+    attrs: {
+      "aria-label": "close"
+    },
+    on: {
+      "click": function($event) {
+        _vm.isActive = false
+      }
+    }
+  })]), _vm._v(" "), _c('section', {
+    staticClass: "modal-card-body"
+  }, [_c('form', {
+    attrs: {
+      "method": "POST",
+      "action": "/login"
+    },
+    on: {
+      "submit": function($event) {
+        $event.preventDefault();
+        _vm.onSubmit($event)
+      }
+    }
+  }, [_c('div', {
+    staticClass: "field"
+  }, [_c('label', {
+    staticClass: "has-text-black",
+    attrs: {
+      "for": "email"
+    }
+  }, [_vm._v("E-Mail Address")]), _vm._v(" "), _c('div', {
+    staticClass: "control"
+  }, [_c('input', {
+    staticClass: "input",
+    class: {
+      'is-danger': _vm.errors.email
+    },
+    attrs: {
+      "id": "email",
+      "type": "email",
+      "name": "email",
+      "value": "",
+      "required": "",
+      "autofocus": ""
+    }
+  })]), _vm._v(" "), (_vm.errors.email) ? _c('p', {
+    staticClass: "help is-danger"
+  }, [_vm._v("\n                            " + _vm._s(_vm.errors.email[0]) + "\n                        ")]) : _vm._e()]), _vm._v(" "), _c('div', {
+    staticClass: "field"
+  }, [_c('label', {
+    staticClass: "has-text-black",
+    attrs: {
+      "for": "password"
+    }
+  }, [_vm._v("Password")]), _vm._v(" "), _c('div', {
+    staticClass: "control"
+  }, [_c('input', {
+    staticClass: "input",
+    class: {
+      'is-danger': _vm.errors.email
+    },
+    attrs: {
+      "id": "password",
+      "type": "password",
+      "name": "password",
+      "required": ""
+    }
+  })]), _vm._v(" "), (_vm.errors.email) ? _c('p', {
+    staticClass: "help is-danger"
+  }, [_vm._v("\n                            " + _vm._s(_vm.errors.email[0]) + "\n                        ")]) : _vm._e()]), _vm._v(" "), _vm._m(0), _vm._v(" "), _vm._m(1)])])])])])
+},staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    staticClass: "field"
+  }, [_c('div', {
+    staticClass: "control"
+  }, [_c('label', {
+    staticClass: "checkbox has-text-black"
+  }, [_c('input', {
+    attrs: {
+      "type": "checkbox",
+      "name": "remember"
+    }
+  }), _vm._v(" Remember Me\n\t                        ")])])])
+},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    staticClass: "field"
+  }, [_c('div', {
+    staticClass: "control"
+  }, [_c('button', {
+    staticClass: "button is-primary",
+    attrs: {
+      "type": "submit"
+    }
+  }, [_vm._v("\n\t                            Login\n\t                        ")]), _vm._v(" "), _c('a', {
+    staticClass: "button is-link has-text-black",
+    attrs: {
+      "href": "/password/reset"
+    }
+  }, [_vm._v("\n\t                            Forgot Your Password?\n\t                        ")])])])
+}]}
+module.exports.render._withStripped = true
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+     require("vue-hot-reload-api").rerender("data-v-5c0ff6fd", module.exports)
   }
 }
 

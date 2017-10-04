@@ -19,14 +19,14 @@
                         <a class="navbar-item" href="/">
                             <img src="http://bulma.io/images/bulma-logo-white.png" alt="Bulma: a modern CSS framework based on Flexbox" width="112" height="28">
                         </a>
-                        <div class="navbar-burger burger" data-target="navMenuColorblack-example">
+                        <div class="navbar-burger burger" data-target="navMenu">
                             <span></span>
                             <span></span>
                             <span></span>
                         </div>
                     </div>
                     @if (Route::has('login'))
-                    <div id="navMenuColorblack-example" class="navbar-menu">
+                    <div id="navMenu" class="navbar-menu">
                         <div class="navbar-end">
                             @auth
                             <div class="navbar-item has-dropdown is-hoverable">
@@ -56,9 +56,7 @@
                             <div class="navbar-item">
                                 <div class="field is-grouped">
                                     <p class="control">
-                                        <a class="button is-primary" href="/login">
-                                            login
-                                        </a>
+                                        <login></login>
                                     </p>
                                 </div>
                             </div>
