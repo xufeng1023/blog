@@ -16,14 +16,12 @@
 
 				axios.post(api + 'cancel/' + this.user.id, {apiToken: this.user.api_token})
 				.then(r => {
-					console.log(r.data);
+					location.reload();
 				})
 				.catch(r => {
+					this.sending = false;
 					console.error(r.response.data);
 				})
-				.then(() => {
-					this.sending = false;
-				});
 			}
 		}
 	}

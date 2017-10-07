@@ -16,7 +16,7 @@ class User extends Authenticatable
         'name', 'email', 'password',
     ];
 
-    protected $appends = ['plan'];
+    protected $appends = ['plan', 'ends_at'];
 
     protected $visible = ['api_token', 'email', 'id', 'name', 'plan'];
 
@@ -28,8 +28,15 @@ class User extends Authenticatable
 
     public function getPlanAttribute()
     {
-        if($this->subscription) {
-            return $this->subscription->stripe_plan;
+        if($sub = $this->subscription('main')) {
+            return $sub->stripe_plan;
+        }
+    }
+
+    public function getEndsAtAttribute()
+    {
+        if($sub = $this->subscription('main')) {
+            return $sub->ends_at;
         }
     }
 }

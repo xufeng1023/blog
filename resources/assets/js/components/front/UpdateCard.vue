@@ -1,27 +1,37 @@
 <template>
 	<form @submit.prevent="update">
+		<div class="notification is-danger" v-if="errors" v-text="errors"></div>
 		<card></card>
-		<button class="button is-primary" type="submit">Update</button>
+		<submit text="Update"></submit>
 	</form>
 </template>
 
 <script>
 	import card from './Card.vue';
+	import submit from './Submit.vue';
 	
 	export default {
 		props: ['user'],
-		components: {card},
+		data() {
+			return {
+				errors: ''
+			}
+		},
+		components: {card, submit},
 		methods: {
 			update(e) {
+				Bus.$emit('loading-start');
+				this.errors = '';
 				let formData = new FormData(e.target);
 				formData.append('apiToken', this.user.api_token);
 
 				axios.post(api + 'updateCard/' + this.user.id, formData)
 				.then(r => {
-					console.log(r.data);
+					location.reload();
 				})
 				.catch(r => {
-					console.error(r.response.data);
+					Bus.$emit('loading-end');
+					this.errors = r.response.data;
 				});
 			}
 		}

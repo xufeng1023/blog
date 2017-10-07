@@ -29975,6 +29975,8 @@ module.exports = Component.exports
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Plans_vue__ = __webpack_require__(84);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Plans_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__Plans_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__Submit_vue__ = __webpack_require__(113);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__Submit_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__Submit_vue__);
 //
 //
 //
@@ -29982,19 +29984,40 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+
 
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
 	props: ['user'],
-	components: { plans: __WEBPACK_IMPORTED_MODULE_0__Plans_vue___default.a },
+	data: function data() {
+		return {
+			errors: ''
+		};
+	},
+
+	components: { plans: __WEBPACK_IMPORTED_MODULE_0__Plans_vue___default.a, submit: __WEBPACK_IMPORTED_MODULE_1__Submit_vue___default.a },
 	methods: {
 		change: function change(e) {
+			var _this = this;
+
+			Bus.$emit('loading-start');
+			this.errors = '';
 			var formData = new FormData(e.target);
+
+			if (!formData.get('plan')) {
+				this.errors = 'Select a plan!';
+				Bus.$emit('loading-end');
+			}
+
 			formData.append('apiToken', this.user.api_token);
 
 			axios.post(api + 'changePlan/' + this.user.id, formData).then(function (r) {
-				console.log(r.data);
+				location.reload();
+			}).catch(function (r) {
+				Bus.$emit('loading-end');
+				_this.errors = r.response.data;
 			});
 		}
 	}
@@ -30064,17 +30087,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 	props: ['current'],
 	data: function data() {
 		return {
-			plans: []
+			plans: [{ plan_id: 'Monthly', name: 'Month' }, { plan_id: 'Daily', name: 'Daily' }]
 		};
-	},
-	created: function created() {
-		var _this = this;
-
-		axios.get('/plans').then(function (_ref) {
-			var data = _ref.data;
-
-			_this.plans = data;
-		});
 	}
 });
 
@@ -30091,7 +30105,11 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     attrs: {
       "name": "plan"
     }
-  }, [_c('option', [_vm._v("Select a plan")]), _vm._v(" "), _vm._l((_vm.plans), function(plan) {
+  }, [_c('option', {
+    attrs: {
+      "value": ""
+    }
+  }, [_vm._v("Select a plan")]), _vm._v(" "), _vm._l((_vm.plans), function(plan) {
     return _c('option', {
       domProps: {
         "value": plan.plan_id,
@@ -30120,16 +30138,20 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         _vm.change($event)
       }
     }
-  }, [_c('plans', {
+  }, [(_vm.errors) ? _c('div', {
+    staticClass: "notification is-danger",
+    domProps: {
+      "textContent": _vm._s(_vm.errors)
+    }
+  }) : _vm._e(), _vm._v(" "), _c('plans', {
     attrs: {
       "current": this.user.plan
     }
-  }), _vm._v(" "), _c('button', {
-    staticClass: "button is-primary",
+  }), _vm._v(" "), _c('submit', {
     attrs: {
-      "type": "submit"
+      "text": "Change"
     }
-  }, [_vm._v("Change")])], 1)
+  })], 1)
 },staticRenderFns: []}
 module.exports.render._withStripped = true
 if (false) {
@@ -30187,6 +30209,8 @@ module.exports = Component.exports
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Card_vue__ = __webpack_require__(33);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Card_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__Card_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__Submit_vue__ = __webpack_require__(113);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__Submit_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__Submit_vue__);
 //
 //
 //
@@ -30194,21 +30218,34 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+
 
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
 	props: ['user'],
-	components: { card: __WEBPACK_IMPORTED_MODULE_0__Card_vue___default.a },
+	data: function data() {
+		return {
+			errors: ''
+		};
+	},
+
+	components: { card: __WEBPACK_IMPORTED_MODULE_0__Card_vue___default.a, submit: __WEBPACK_IMPORTED_MODULE_1__Submit_vue___default.a },
 	methods: {
 		update: function update(e) {
+			var _this = this;
+
+			Bus.$emit('loading-start');
+			this.errors = '';
 			var formData = new FormData(e.target);
 			formData.append('apiToken', this.user.api_token);
 
 			axios.post(api + 'updateCard/' + this.user.id, formData).then(function (r) {
-				console.log(r.data);
+				location.reload();
 			}).catch(function (r) {
-				console.error(r.response.data);
+				Bus.$emit('loading-end');
+				_this.errors = r.response.data;
 			});
 		}
 	}
@@ -30277,6 +30314,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 		},
 		formatCvc: function formatCvc() {
 			this.cvc = this.cvc.replace(/\D/g, '').substr(0, 3);
+		},
+		onKeypress: function onKeypress() {
+			if (event.keyCode < 48 || event.keyCode > 57) event.preventDefault();
 		}
 	}
 });
@@ -30315,6 +30355,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     },
     on: {
       "keyup": _vm.formatNumber,
+      "keypress": _vm.onKeypress,
       "input": function($event) {
         if ($event.target.composing) { return; }
         _vm.number = $event.target.value
@@ -30352,6 +30393,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     },
     on: {
       "keyup": _vm.formatExp,
+      "keypress": _vm.onKeypress,
       "input": function($event) {
         if ($event.target.composing) { return; }
         _vm.exp = $event.target.value
@@ -30426,6 +30468,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     },
     on: {
       "keyup": _vm.formatCvc,
+      "keypress": _vm.onKeypress,
       "input": function($event) {
         if ($event.target.composing) { return; }
         _vm.cvc = $event.target.value
@@ -30453,12 +30496,16 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         _vm.update($event)
       }
     }
-  }, [_c('card'), _vm._v(" "), _c('button', {
-    staticClass: "button is-primary",
-    attrs: {
-      "type": "submit"
+  }, [(_vm.errors) ? _c('div', {
+    staticClass: "notification is-danger",
+    domProps: {
+      "textContent": _vm._s(_vm.errors)
     }
-  }, [_vm._v("Update")])], 1)
+  }) : _vm._e(), _vm._v(" "), _c('card'), _vm._v(" "), _c('submit', {
+    attrs: {
+      "text": "Update"
+    }
+  })], 1)
 },staticRenderFns: []}
 module.exports.render._withStripped = true
 if (false) {
@@ -30534,11 +30581,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 			this.sending = true;
 
 			axios.post(api + 'cancel/' + this.user.id, { apiToken: this.user.api_token }).then(function (r) {
-				console.log(r.data);
+				location.reload();
 			}).catch(function (r) {
-				console.error(r.response.data);
-			}).then(function () {
 				_this.sending = false;
+				console.error(r.response.data);
 			});
 		}
 	}
@@ -30616,6 +30662,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Price_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__Price_vue__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__Card_vue__ = __webpack_require__(33);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__Card_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__Card_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__Submit_vue__ = __webpack_require__(113);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__Submit_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__Submit_vue__);
+
 
 
 
@@ -30627,7 +30676,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 		};
 	},
 
-	components: { price: __WEBPACK_IMPORTED_MODULE_0__Price_vue___default.a, card: __WEBPACK_IMPORTED_MODULE_1__Card_vue___default.a },
+	components: { price: __WEBPACK_IMPORTED_MODULE_0__Price_vue___default.a, card: __WEBPACK_IMPORTED_MODULE_1__Card_vue___default.a, submit: __WEBPACK_IMPORTED_MODULE_2__Submit_vue___default.a },
 	methods: {
 		onTop: function onTop() {
 			window.scrollTo(0, -50000);
@@ -30635,16 +30684,20 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 		onSubmit: function onSubmit(e) {
 			var _this = this;
 
+			Bus.$emit('loading-start');
+
 			this.errors = [];
 
 			var formData = new FormData(e.target);
 
 			if (formData.has('plan') === false) {
 				this.onTop();
+				Bus.$emit('loading-end');
 				return this.errors = { plan: 'Choose a plan!' };
 			}
 
 			if (!formData.get('expiration').includes('/')) {
+				Bus.$emit('loading-end');
 				return this.errors = { card: 'Invalid expiration date!' };
 			}
 
@@ -30665,19 +30718,28 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 					}).catch(function (_ref4) {
 						var response = _ref4.response;
 
-						axios.delete('/user/delete/' + response.data);
+						axios.delete('/user/delete');
 						_this.onTop();
 						_this.errors = { plan: 'Sorry! Payment failed, please refresh the page and try again.' };
+						Bus.$emit('loading-end');
 					});
 				}).catch(function (_ref5) {
 					var response = _ref5.response;
 
-					_this.errors = response.data.errors;
+					axios.delete('/user/delete');
+					if (response.data.errors) {
+						_this.errors = response.data.errors;
+					} else {
+						_this.onTop();
+						_this.errors = { plan: 'Sorry! Payment failed, please refresh the page and try again.' };
+					}
+					Bus.$emit('loading-end');
 				});
 			}).catch(function (_ref6) {
 				var response = _ref6.response;
 
 				_this.errors = response.data;
+				Bus.$emit('loading-end');
 			});
 		}
 	}
@@ -31100,6 +31162,114 @@ if (false) {
   module.hot.accept()
   if (module.hot.data) {
      require("vue-hot-reload-api").rerender("data-v-5c0ff6fd", module.exports)
+  }
+}
+
+/***/ }),
+/* 104 */,
+/* 105 */,
+/* 106 */,
+/* 107 */,
+/* 108 */,
+/* 109 */,
+/* 110 */,
+/* 111 */,
+/* 112 */,
+/* 113 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var Component = __webpack_require__(1)(
+  /* script */
+  __webpack_require__(114),
+  /* template */
+  __webpack_require__(115),
+  /* styles */
+  null,
+  /* scopeId */
+  null,
+  /* moduleIdentifier (server only) */
+  null
+)
+Component.options.__file = "C:\\Users\\xu feng\\Desktop\\blog\\resources\\assets\\js\\components\\front\\Submit.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
+if (Component.options.functional) {console.error("[vue-loader] Submit.vue: functional components are not supported with templates, they should use render functions.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-14f024b4", Component.options)
+  } else {
+    hotAPI.reload("data-v-14f024b4", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 114 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+	props: ['text'],
+	data: function data() {
+		return {
+			loading: false
+		};
+	},
+	created: function created() {
+		var _this = this;
+
+		Bus.$on('loading-start', function () {
+			_this.loading = true;
+		});
+		Bus.$on('loading-end', function () {
+			_this.loading = false;
+		});
+	}
+});
+
+/***/ }),
+/* 115 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('button', {
+    staticClass: "button is-success is-fullwidth",
+    class: {
+      'is-loading': _vm.loading
+    },
+    attrs: {
+      "type": "submit"
+    },
+    domProps: {
+      "textContent": _vm._s(_vm.text)
+    }
+  })
+},staticRenderFns: []}
+module.exports.render._withStripped = true
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+     require("vue-hot-reload-api").rerender("data-v-14f024b4", module.exports)
   }
 }
 

@@ -3,7 +3,7 @@
 		<div class="field">
 	    	<label for="card-number">Card Number</label>
 	    	<div class="control">
-                <input id="card-number" type="text" class="input" v-model="number" @keyup="formatNumber" name="number" required>
+                <input id="card-number" type="text" class="input" v-model="number" @keyup="formatNumber" @keypress="onKeypress" name="number" required>
             </div>
 	  	</div>
 	  	<div class="columns">
@@ -11,7 +11,7 @@
 		      	<div class="field">
 			    	<label for="expiration">Expiration</label>
 			    	<div class="control">
-				    	<input type="text" class="input" id="expiration" v-model="exp" @keyup="formatExp" placeholder="MM/YY" name="expiration" required>
+				    	<input type="text" class="input" id="expiration" v-model="exp" @keyup="formatExp" @keypress="onKeypress" placeholder="MM/YY" name="expiration" required>
 				    	<input type="hidden" name="month" v-model="month">
 				    	<input type="hidden" name="year" v-model="year">
 				    </div>
@@ -21,7 +21,7 @@
 		      	<div class="field">
 			    	<label for="cvc">CVC</label>
 			    	<div class="control">
-				    	<input type="text" class="input" id="cvc" name="cvc" v-model="cvc" @keyup="formatCvc" required>
+				    	<input type="text" class="input" id="cvc" name="cvc" v-model="cvc" @keyup="formatCvc" @keypress="onKeypress" required>
 				    </div>
 			  	</div>
 		    </div>
@@ -54,6 +54,9 @@
 			},
 			formatCvc() {
 				this.cvc = this.cvc.replace(/\D/g, '').substr(0, 3);
+			},
+			onKeypress() {
+				if( (event.keyCode < 48 || event.keyCode > 57) ) event.preventDefault(); 
 			}
 		}
 	}

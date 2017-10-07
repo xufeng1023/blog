@@ -2,7 +2,7 @@
 	<div class="field">
 		<div class="select is-fullwidth">
 		  	<select name="plan">
-		    	<option>Select a plan</option>
+		    	<option value="">Select a plan</option>
 		    	<option v-for="plan in plans" :value="plan.plan_id" :selected="current == plan.plan_id">
 			    	{{ plan.name }}
 			    </option>
@@ -16,14 +16,17 @@
 		props: ['current'],
 		data() {
 			return {
-				plans: []
+				plans: [
+					{plan_id: 'Monthly', name: 'Month'},
+					{plan_id: 'Daily', name: 'Daily'}
+				]
 			}
 		},
-		created() {
-			axios.get('/plans')
-			.then(({data}) => {
-				this.plans = data;
-			})
-		}
+		// created() {
+		// 	axios.get('/plans')
+		// 	.then(({data}) => {
+		// 		this.plans = data;
+		// 	})
+		// }
 	}
 </script>

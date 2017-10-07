@@ -52,9 +52,7 @@
 
                     <div class="field">
                         <div class="control">
-                            <button type="submit" class="button is-success is-fullwidth">
-                                Join
-                            </button>
+                            <submit text="Join"></submit>
                         </div>
                     </div>
                 </form>
