@@ -56,6 +56,9 @@
                             <div class="navbar-item">
                                 <div class="field is-grouped">
                                     <p class="control">
+                                        <a class="button is-warning" href="/join">Join</a>
+                                    </p>
+                                    <p class="control">
                                         <login></login>
                                     </p>
                                 </div>

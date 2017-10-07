@@ -4,6 +4,7 @@
 <div class="container">
     <div class="columns">
         <div class="column is-4 is-offset-4">
+            <h1 class="title is-4 has-text-centered">Select your plan</h1>
             <join inline-template>
                 <form method="POST" @submit.prevent="onSubmit">
                     <div class="notification is-danger" v-if="errors.plan" v-text="errors.plan"></div>
@@ -51,7 +52,7 @@
 
                     <div class="field">
                         <div class="control">
-                            <button type="submit" class="button is-primary">
+                            <button type="submit" class="button is-success is-fullwidth">
                                 Join
                             </button>
                         </div>

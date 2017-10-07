@@ -108,7 +108,8 @@ class VideoTest extends TestCase
 
         $this->create('Subscription', [
             'user_id' => $user->id,
-            'name' => 'main'
+            'name' => 'main',
+            'stripe_plan' => 'Monthly'
         ]);
 
         $video = $this->create('Video');

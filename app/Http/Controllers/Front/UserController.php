@@ -11,7 +11,7 @@ class UserController extends Controller
 {
 	public function __construct()
 	{
-		$this->middleware('auth')->except('createInstance');
+		$this->middleware('auth');
 	}
 
     public function index()
@@ -37,8 +37,8 @@ class UserController extends Controller
     public function updateAccount(Request $request)
     {
     	$this->validate($request, [
-            'name' => 'required|string|max:255|unique:users,name,'.auth()->id().'id',
-            'email' => 'required|string|email|max:255|unique:users,email,'.auth()->id().'id',
+            'name' => 'required|string|max:255|unique:users,name,'.auth()->id().',id',
+            'email' => 'required|string|email|max:255|unique:users,email,'.auth()->id().',id',
             'password' => $request->password ? 'string|min:6|confirmed' : ''
         ]);
 

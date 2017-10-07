@@ -29368,7 +29368,7 @@ Vue.component('changePlan', __webpack_require__(82));
 Vue.component('updateCard', __webpack_require__(88));
 Vue.component('cancel', __webpack_require__(93));
 Vue.component('join', __webpack_require__(96));
-Vue.component('login', __webpack_require__(110));
+Vue.component('login', __webpack_require__(101));
 
 Vue.filter('FILE', function (value) {
 	return '/storage/' + value;
@@ -30841,24 +30841,15 @@ if (false) {
 }
 
 /***/ }),
-/* 101 */,
-/* 102 */,
-/* 103 */,
-/* 104 */,
-/* 105 */,
-/* 106 */,
-/* 107 */,
-/* 108 */,
-/* 109 */,
-/* 110 */
+/* 101 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var Component = __webpack_require__(1)(
   /* script */
-  __webpack_require__(111),
+  __webpack_require__(102),
   /* template */
-  __webpack_require__(112),
+  __webpack_require__(103),
   /* styles */
   null,
   /* scopeId */
@@ -30890,15 +30881,11 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 111 */
+/* 102 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-//
-//
-//
-//
 //
 //
 //
@@ -30978,24 +30965,29 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 				_this.errors = response.data.errors;
 			});
+		},
+		open: function open() {
+			this.errors = [];
+			this.$refs.form.reset();
+			this.isActive = true;
 		}
 	}
 });
 
 /***/ }),
-/* 112 */
+/* 103 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', [_c('a', {
-    staticClass: "button is-primary",
+    staticClass: "button is-link has-text-white",
     attrs: {
       "href": "/login"
     },
     on: {
       "click": function($event) {
         $event.preventDefault();
-        _vm.isActive = true
+        _vm.open($event)
       }
     }
   }, [_vm._v("login")]), _vm._v(" "), _c('div', {
@@ -31012,23 +31004,10 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }
   }), _vm._v(" "), _c('div', {
     staticClass: "modal-card"
-  }, [_c('header', {
-    staticClass: "modal-card-head"
-  }, [_c('p', {
-    staticClass: "modal-card-title"
-  }, [_vm._v("Log In")]), _vm._v(" "), _c('button', {
-    staticClass: "delete",
-    attrs: {
-      "aria-label": "close"
-    },
-    on: {
-      "click": function($event) {
-        _vm.isActive = false
-      }
-    }
-  })]), _vm._v(" "), _c('section', {
+  }, [_c('section', {
     staticClass: "modal-card-body"
   }, [_c('form', {
+    ref: "form",
     attrs: {
       "method": "POST",
       "action": "/login"

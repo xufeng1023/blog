@@ -26,11 +26,6 @@ class User extends Authenticatable
         $this->save();
     }
 
-    public function subscription()
-    {
-        return $this->hasOne(Subscription::class);
-    }
-
     public function getPlanAttribute()
     {
         if($this->subscription) {

@@ -11,6 +11,9 @@ hr {
     border-top: 1px solid #000000;
     border-bottom: 1px solid #504f4f;
 }
+.button.is-link {
+	text-decoration: none;
+}
 .navbar-dropdown a {
 	color: initial !important;
 }

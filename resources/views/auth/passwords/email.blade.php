@@ -15,7 +15,7 @@
                 {{ csrf_field() }}
 
                 <div class="field">
-                    <label for="email" class="label">E-Mail Address</label>
+                    <label for="email" class="has-text-white">E-Mail Address</label>
 
                     <div class="control">
                         <input id="email" type="email" class="input{{ $errors->has('email') ? ' is-danger' : '' }}" name="email" value="{{ old('email') }}" required>

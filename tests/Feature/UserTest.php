@@ -20,16 +20,8 @@ class UserTest extends TestCase
     	$data = ['name' => 'name', 'email' => 'email@email.com'];
     	$user = $this->create('User', $data);
     	
-    	$data = ['name' => 'name2', 'email' => 'email2@email.com'];
+    	$data = ['name' => $user->name, 'email' => 'email2@email.com'];
 		$this->login($user)->post('/settings/account', $data);
     	$this->assertDatabaseHas('users', $data);
-    }
-
-    public function test_create_an_user_instance_without_saving_to_database_b4_join()
-    {
-        $data = $this->raw('User', ['password' => '123123']);
-        $response = $this->postJson('/user/instance', $data);
-        $this->assertInstanceOf('App\User', $response->original);
-        $this->assertDatabaseMissing('Users', $data);
     }
 }

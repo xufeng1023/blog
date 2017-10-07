@@ -1,16 +1,12 @@
 <template>
 	<div>
-		<a class="button is-primary" href="/login" @click.prevent="isActive = true">login</a>
+		<a class="button is-link has-text-white" href="/login" @click.prevent="open">login</a>
 
 		<div class="modal" :class="{'is-active': isActive}">
 	  		<div class="modal-background" @click="isActive = false"></div>
 	  		<div class="modal-card">
-			    <header class="modal-card-head">
-			      	<p class="modal-card-title">Log In</p>
-			      	<button class="delete" aria-label="close" @click="isActive = false"></button>
-			    </header>
 			    <section class="modal-card-body">
-			      	<form method="POST" action="/login" @submit.prevent="onSubmit">
+			      	<form method="POST" action="/login" @submit.prevent="onSubmit" ref="form">
 		                <div class="field">
 		                    <label for="email" class="has-text-black">E-Mail Address</label>
 		                    <div class="control">
@@ -76,6 +72,11 @@
 				.catch(({response}) => {
 					this.errors = response.data.errors
 				})
+			},
+			open() {
+				this.errors = [];
+				this.$refs.form.reset();
+				this.isActive = true;
 			}
 		}
 	}
