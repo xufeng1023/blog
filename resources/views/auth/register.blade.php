@@ -10,10 +10,10 @@
                     <div class="notification is-danger" v-if="errors.plan" v-text="errors.plan"></div>
                     <div class="columns">
                         <div class="column">
-                            <price price="1.99" color="is-warning" plan="Daily"></price>
+                            <price price="1.49" color="is-warning" plan="Daily"></price>
                         </div>
                         <div class="column">
-                            <price price="25.00" color="is-danger" plan="Monthly"></price>
+                            <price price="30.00" color="is-danger" plan="Monthly"></price>
                         </div>
                     </div>
                     <div class="field">
