@@ -10,7 +10,13 @@
     	Subscription
   	</p>
   	<ul class="menu-list">
-        <li><a href="/settings/plan" class="{{ $uri == 'settings/plan'? 'is-active':'' }}">Change Plan</a></li>
+      @if(!auth()->user()->subscription('main')->cancelled())
+        <li>
+          <a href="/settings/plan" class="{{ $uri == 'settings/plan'? 'is-active':'' }}">
+            Change Plan
+          </a>
+      </li>
+      @endif
         <li><a href="/settings/cancel" class="{{ $uri == 'settings/cancel'? 'is-active':'' }}">Cancel</a></li>
     </ul>
 </aside>

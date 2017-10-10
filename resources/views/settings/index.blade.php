@@ -8,6 +8,10 @@
         </div>
         <div class="column is-8 is-offset-1">
             <h1 class="title is-3">Update Your Account</h1>
+            
+            @if(session()->has('success'))
+                <notify msg="{{ session('success.msg') }}" color="{{ session('success.color') }}"></notify>
+            @endif
             <form method="POST" action="/settings/account">
                 {{ csrf_field() }}
 
