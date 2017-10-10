@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('style')
-    <link href="http://vjs.zencdn.net/6.2.7/video-js.css" rel="stylesheet">
+    <link href="https://vjs.zencdn.net/6.2.7/video-js.css" rel="stylesheet">
 @endsection
 
 @section('content')
@@ -48,6 +48,6 @@
 @endsection
 
 @section('script')
-    <script src="http://vjs.zencdn.net/6.2.7/video.js"></script>
+    <script src="https://vjs.zencdn.net/6.2.7/video.js"></script>
     <script src="//cdn.sc.gl/videojs-hotkeys/latest/videojs.hotkeys.min.js"></script>
 @endsection

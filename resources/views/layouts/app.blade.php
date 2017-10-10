@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="api-token" content="{{ env('API_TOKEN') }}">
+    <meta name="api" content="{{ env('API') }}">
     <title>{{ config('app.name', 'Laravel') }}</title>
     @yield('style')
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
@@ -17,7 +18,7 @@
                 <nav class="navbar is-black">
                     <div class="navbar-brand">
                         <a class="navbar-item" href="/">
-                            <img src="http://bulma.io/images/bulma-logo-white.png" alt="Bulma: a modern CSS framework based on Flexbox" width="112" height="28">
+                            DollyIsland
                         </a>
                         <div class="navbar-burger burger" data-target="navMenu">
                             <span></span>

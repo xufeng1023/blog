@@ -75,7 +75,10 @@
 
 					this.msg = e.response.data;
 					this.video.reset();
-					this.video.poster('/storage/' + this.now.thumbnail.slug);
+
+					if(this.now.thumbnail) {
+						this.video.poster('/storage/' + this.now.thumbnail.slug);
+					}
 				})
 				
 				Bus.$emit('nowPlaying', this.now.slug);

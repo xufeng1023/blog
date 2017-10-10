@@ -19,7 +19,12 @@ if (apiToken) {
     apiToken.remove();
 }
 
-window.api = 'http://127.0.0.2:8000/api/';
+let api = document.head.querySelector('meta[name="api"]');
+
+if (api) {
+    window.api = api.content + '/api/';
+    api.remove();
+}
 
 window.Vue = require('vue');
 
