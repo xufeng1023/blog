@@ -18,7 +18,7 @@
                 <nav class="navbar is-black">
                     <div class="navbar-brand">
                         <a class="navbar-item" href="/">
-                            DollyIsland
+                            <img src="{{ asset('images/logo3.png') }}" width="100" alt="dollyisland">
                         </a>
                         <div class="navbar-burger burger" data-target="navMenu">
                             <span></span>
