@@ -14,6 +14,12 @@ hr {
 .button.is-link {
 	text-decoration: none;
 }
+.navbar.is-black {
+	background-color: rgba(10, 10, 10, 0.13);
+}
+.navbar.is-black a.navbar-item:hover {
+	background-color: transparent !important;
+}
 .navbar-dropdown a {
 	color: initial !important;
 }

@@ -13,7 +13,7 @@
                             <price price="1.49" color="is-warning" plan="Daily"></price>
                         </div>
                         <div class="column">
-                            <price price="30.00" color="is-danger" plan="Monthly"></price>
+                            <price price="15.00" color="is-danger" plan="Monthly"></price>
                         </div>
                     </div>
                     <div class="field">

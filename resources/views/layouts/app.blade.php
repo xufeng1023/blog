@@ -71,9 +71,9 @@
                 </nav>
             </div>
         @endif
-        <div class="hero-body">
-            @yield('content')
-        </div>
+        
+        @yield('content')
+        
         <div class="hero-foot">
 
         </div>
