@@ -3,7 +3,7 @@
 @section('content')
 <div>
     <a href="/join">
-        <img src="{{ asset('images/Banner.jpg') }}">
+        <img src="{{ asset('images/Banner3.jpg') }}">
     </a>
 </div>
 <div class="hero-body">
