@@ -34,7 +34,7 @@
                             </div>
                             @auth
                             <div class="navbar-item has-dropdown is-hoverable">
-                                <a class="navbar-link" href="#">
+                                <a class="navbar-link" href="javascript:;">
                                   {{ Auth::user()->name }}
                                 </a>
                                 <div class="navbar-dropdown">
