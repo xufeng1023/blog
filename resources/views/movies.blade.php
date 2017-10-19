@@ -10,12 +10,11 @@
     <div class="container">
         @foreach($posts->chunk(4) as $chunks)
             <div class="columns">
-                <div class="column is-2"></div>
                 @foreach($chunks as $post)
                     @if($post->images->first())
-                        <div class="column is-2">
+                        <div class="column is-4">
                             <a href="/movie/{{ $post->slug }}">
-                                <figure class="image is-1by1">
+                                <figure class="image is-16by9">
                                     <img src="{{ asset('/storage/'.$post->images->first()->slug) }}">
                                 </figure>
                                 <p>{{ $post->title }}</p>

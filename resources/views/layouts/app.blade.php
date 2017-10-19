@@ -29,6 +29,9 @@
                     @if (Route::has('login'))
                     <div id="navMenu" class="navbar-menu">
                         <div class="navbar-end">
+                            <div class="navbar-item">
+                                <a href="/movies">Movies</a>
+                            </div>
                             @auth
                             <div class="navbar-item has-dropdown is-hoverable">
                                 <a class="navbar-link" href="#">
