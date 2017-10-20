@@ -8,7 +8,7 @@
 			autoplay 
 		>
 	    </video>
-	    <notification :msg="msg"></notification>
+	    <notification :msg="msg" color="is-danger"></notification>
 	</div>
 	
 </template>
