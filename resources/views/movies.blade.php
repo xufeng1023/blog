@@ -8,7 +8,7 @@
 </div>
 <div class="hero-body">
     <div class="container">
-        @foreach($posts->chunk(4) as $chunks)
+        @foreach($posts->chunk(3) as $chunks)
             <div class="columns">
                 @foreach($chunks as $post)
                     @if($post->images->first())

@@ -7,7 +7,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="api-token" content="{{ env('API_TOKEN') }}">
     <meta name="api" content="{{ env('API') }}">
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>{{ config('app.name', 'Laravel') }}-provide adult content</title>
     @yield('style')
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
