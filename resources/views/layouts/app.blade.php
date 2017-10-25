@@ -77,9 +77,15 @@
         
         @yield('content')
         
-        <div class="hero-foot">
-
-        </div>
+        @if($uri != '/')
+            <footer class="hero-foot">
+                <div class="section is-size-7 has-text-grey">
+                    <hr>
+                    <P class="">By entering this site you swear that you are of legal age in your area to view adult material and that you wish to view such material.</P>
+                    <p>© {{ date('Y') }} {{ config('app.name', 'DollyIsland') }}.</p>
+                </div>
+            </footer>
+        @endif
     </section>
 
     @yield('script')
