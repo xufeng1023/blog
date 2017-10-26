@@ -33,21 +33,11 @@
                                 <a href="/movies">Movies</a>
                             </div>
                             @auth
-                            <div class="navbar-item has-dropdown is-hoverable">
-                                <a class="navbar-link" href="javascript:;">
-                                  {{ Auth::user()->name }}
-                                </a>
-                                <div class="navbar-dropdown">
-                                    @if(auth()->user()->is_admin)
-                                        <a class="navbar-item" href="/admin">
-                                            admin
-                                        </a>
-                                        <hr class="navbar-divider">
-                                    @endif
-                                    <a class="navbar-item" href="/settings">
-                                        settings
-                                    </a>
-                                    <a class="navbar-item" href="/logout" onclick="event.preventDefault();
+                                <div class="navbar-item">
+                                    <a href="/settings">settings</a>
+                                </div>
+                                <div class="navbar-item">
+                                    <a href="/logout" onclick="event.preventDefault();
                                              document.getElementById('logout-form').submit();">
                                         logout
                                     </a>
@@ -55,18 +45,17 @@
                                         {{ csrf_field() }}
                                     </form>
                                 </div>
-                            </div>
+                                @if(auth()->user()->is_admin)
+                                    <div class="navbar-item">
+                                        <a href="/admin">admin</a>
+                                    </div>
+                                @endif
                             @else
-                            <div class="navbar-item">
-                                <div class="field is-grouped">
-                                    <p class="control">
-                                        <a class="button is-warning" href="/join">Join</a>
-                                    </p>
-                                    <p class="control">
-                                        <login></login>
-                                    </p>
+                                <login></login>
+
+                                <div class="navbar-item">
+                                    <a class="button is-warning is-fullwidth" href="/join">Join</a>
                                 </div>
-                            </div>
                             @endauth
                         </div>
                     </div>

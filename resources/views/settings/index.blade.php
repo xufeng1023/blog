@@ -16,19 +16,6 @@
                 {{ csrf_field() }}
 
                 <div class="field">
-                    <label for="name">Username</label>
-
-                    <div class="control">
-                        <input id="name" type="text" class="input{{ $errors->has('name') ? ' is-danger' : '' }}" name="name" value="{{ auth()->user()->name }}" required autofocus>
-                    </div>
-                    @if ($errors->has('name'))
-                        <p class="help is-danger">
-                            {{ $errors->first('name') }}
-                        </p>
-                    @endif
-                </div>
-
-                <div class="field">
                     <label for="email">E-Mail Address</label>
 
                     <div class="control">

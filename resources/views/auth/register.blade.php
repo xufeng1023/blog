@@ -17,14 +17,6 @@
                         </div>
                     </div>
                     <div class="field">
-                        <label for="name">Username</label>
-                        <div class="control">
-                            <input id="name" type="text" class="input" :class="{'is-danger': errors.name}" name="name" required autofocus>
-                        </div>
-                        <p class="help is-danger" v-if="errors.name" v-text="errors.name[0]"></p>
-                    </div>
-
-                    <div class="field">
                         <label for="email">E-Mail Address</label>
                         <div class="control">
                             <input id="email" type="email" class="input" :class="{'is-danger': errors.email}" name="email" required>

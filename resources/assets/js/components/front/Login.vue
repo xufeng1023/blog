@@ -1,6 +1,6 @@
 <template>
-	<div>
-		<a class="button is-primary has-text-white" href="/login" @click.prevent="open">login</a>
+	<div class="navbar-item">
+		<a href="/login" @click.prevent="open">login</a>
 
 		<div class="modal" :class="{'is-active': isActive}">
 	  		<div class="modal-background" @click="isActive = false"></div>

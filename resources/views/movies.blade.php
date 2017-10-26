@@ -3,7 +3,7 @@
 @section('content')
 <div>
     <a href="/join">
-        <img src="{{ asset('images/Banner3.jpg') }}">
+        <img src="{{ asset('images/Banner3.jpg') }}" width="100%" alt="Join DollyIsland">
     </a>
 </div>
 <div class="hero-body">
