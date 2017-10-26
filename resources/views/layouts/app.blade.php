@@ -15,7 +15,7 @@
     <section id="app" class="hero is-black is-fullheight">
         @if($uri != '/')
             <div class="hero-head">
-                <nav class="navbar is-black">
+                <nav class="navbar is-dark">
                     <div class="navbar-brand">
                         <a class="navbar-item" href="/">
                             <img src="{{ asset('images/logo3.png') }}" width="100" alt="dollyisland">
@@ -29,29 +29,72 @@
                     @if (Route::has('login'))
                     <div id="navMenu" class="navbar-menu">
                         <div class="navbar-end">
-                            <div class="navbar-item">
-                                <a href="/movies">Movies</a>
-                            </div>
+                            <a class="navbar-item" href="/movies">Movies</a>
                             @auth
-                                <div class="navbar-item">
-                                    <a href="/settings">settings</a>
-                                </div>
-                                <div class="navbar-item">
-                                    <a href="/logout" onclick="event.preventDefault();
-                                             document.getElementById('logout-form').submit();">
-                                        logout
-                                    </a>
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                        {{ csrf_field() }}
-                                    </form>
-                                </div>
+                                <a class="navbar-item" href="/settings">settings</a>
+                                <a class="navbar-item" href="/logout" onclick="event.preventDefault();
+                                         document.getElementById('logout-form').submit();">
+                                    logout
+                                </a>
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                    {{ csrf_field() }}
+                                </form>
                                 @if(auth()->user()->is_admin)
-                                    <div class="navbar-item">
-                                        <a href="/admin">admin</a>
-                                    </div>
+                                    <a class="navbar-item" href="/admin">admin</a>
                                 @endif
                             @else
-                                <login></login>
+                                <login inline-template>
+                                    <a class="navbar-item" href="/login" @click.prevent="open">login</a>
+
+        <div class="modal" :class="{'is-active': isActive}">
+            <div class="modal-background" @click="isActive = false"></div>
+            <div class="modal-card">
+                <section class="modal-card-body">
+                    <form method="POST" action="/login" @submit.prevent="onSubmit" ref="form">
+                        <div class="field">
+                            <label for="email" class="has-text-black">E-Mail Address</label>
+                            <div class="control">
+                                <input id="email" type="email" class="input" :class="{'is-danger': errors.email}" name="email" value="" required autofocus>
+                            </div>
+                            <p class="help is-danger" v-if="errors.email" v-text="errors.email[0]">
+                                
+                            </p>
+                        </div>
+
+                        <div class="field">
+                            <label for="password" class="has-text-black">Password</label>
+                            <div class="control">
+                                <input id="password" type="password" class="input" :class="{'is-danger': errors.email}" name="password" required>
+                            </div>
+                            <p class="help is-danger" v-if="errors.email" v-text="errors.email[0]">
+                                
+                            </p>
+                        </div>
+
+                        <div class="field">
+                            <div class="control">
+                                <label class="checkbox has-text-black">
+                                    <input type="checkbox" name="remember"> Remember Me
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="field">
+                            <div class="control">
+                                <button type="submit" class="button is-primary">
+                                    Login
+                                </button>
+
+                                <a class="button is-link has-text-black" href="/password/reset">
+                                    Forgot Your Password?
+                                </a>
+                            </div>
+                        </div>
+                    </form>
+                </section>
+            </div>
+        </div>
+                                </login>
 
                                 <div class="navbar-item">
                                     <a class="button is-warning is-fullwidth" href="/join">Join</a>
