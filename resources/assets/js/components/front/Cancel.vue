@@ -16,11 +16,11 @@
 
 				axios.post(api + 'cancel/' + this.user.id, {apiToken: this.user.api_token})
 				.then(r => {
-					location.reload();
+					location.assign('/settings/subscription');
 				})
 				.catch(r => {
 					this.sending = false;
-					console.error(r.response.data);
+					//console.error(r.response.data);
 				})
 			}
 		}

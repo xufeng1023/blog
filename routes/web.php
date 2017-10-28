@@ -12,7 +12,7 @@ Route::get('/plans', 'StripeController@plans');
 Route::get('/settings', 'Front\UserController@index');
 Route::get('/settings/card', 'Front\UserController@card');
 Route::get('/settings/cancel', 'Front\UserController@cancel');
-Route::get('/settings/plan', 'Front\UserController@changePlan');
+Route::get('/settings/subscription', 'Front\UserController@changePlan');
 Route::post('/post/{post}/updateViews', 'Front\PostController@updateViews');
 Route::post('/settings/account', 'Front\UserController@updateAccount');
 Route::post('/user/instance', 'Front\UserController@createInstance');

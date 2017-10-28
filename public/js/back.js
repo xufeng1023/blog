@@ -29251,8 +29251,7 @@ module.exports = Vue$3;
 
 /***/ }),
 /* 32 */,
-/* 33 */,
-/* 34 */
+/* 33 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
@@ -29292,6 +29291,7 @@ module.exports = Component.exports
 
 
 /***/ }),
+/* 34 */,
 /* 35 */,
 /* 36 */,
 /* 37 */
@@ -29315,7 +29315,7 @@ window.Bus = new Vue();
 Vue.component('flash', __webpack_require__(42));
 Vue.component('videoInput', __webpack_require__(50));
 Vue.component('videoOne', __webpack_require__(53));
-Vue.component('postTitleInput', __webpack_require__(34));
+Vue.component('postTitleInput', __webpack_require__(33));
 Vue.component('imageInput', __webpack_require__(58));
 Vue.component('updatePostForm', __webpack_require__(61));
 Vue.component('searchPostBar', __webpack_require__(64));
@@ -43257,7 +43257,7 @@ module.exports = Component.exports
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__PostTitleInput_vue__ = __webpack_require__(34);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__PostTitleInput_vue__ = __webpack_require__(33);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__PostTitleInput_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__PostTitleInput_vue__);
 //
 //

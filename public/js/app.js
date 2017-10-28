@@ -29256,6 +29256,47 @@ module.exports = Vue$3;
 var disposed = false
 var Component = __webpack_require__(1)(
   /* script */
+  __webpack_require__(87),
+  /* template */
+  __webpack_require__(88),
+  /* styles */
+  null,
+  /* scopeId */
+  null,
+  /* moduleIdentifier (server only) */
+  null
+)
+Component.options.__file = "C:\\Users\\xu feng\\Desktop\\blog\\resources\\assets\\js\\components\\front\\Submit.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
+if (Component.options.functional) {console.error("[vue-loader] Submit.vue: functional components are not supported with templates, they should use render functions.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-14f024b4", Component.options)
+  } else {
+    hotAPI.reload("data-v-14f024b4", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 33 */,
+/* 34 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var Component = __webpack_require__(1)(
+  /* script */
   __webpack_require__(76),
   /* template */
   __webpack_require__(77),
@@ -29290,47 +29331,6 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 33 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var disposed = false
-var Component = __webpack_require__(1)(
-  /* script */
-  __webpack_require__(88),
-  /* template */
-  __webpack_require__(89),
-  /* styles */
-  null,
-  /* scopeId */
-  null,
-  /* moduleIdentifier (server only) */
-  null
-)
-Component.options.__file = "C:\\Users\\xu feng\\Desktop\\blog\\resources\\assets\\js\\components\\front\\Submit.vue"
-if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
-if (Component.options.functional) {console.error("[vue-loader] Submit.vue: functional components are not supported with templates, they should use render functions.")}
-
-/* hot reload */
-if (false) {(function () {
-  var hotAPI = require("vue-hot-reload-api")
-  hotAPI.install(require("vue"), false)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-14f024b4", Component.options)
-  } else {
-    hotAPI.reload("data-v-14f024b4", Component.options)
-  }
-  module.hot.dispose(function (data) {
-    disposed = true
-  })
-})()}
-
-module.exports = Component.exports
-
-
-/***/ }),
-/* 34 */,
 /* 35 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -29339,7 +29339,7 @@ var Component = __webpack_require__(1)(
   /* script */
   __webpack_require__(86),
   /* template */
-  __webpack_require__(87),
+  __webpack_require__(89),
   /* styles */
   null,
   /* scopeId */
@@ -29494,7 +29494,7 @@ Vue.component('updateCard', __webpack_require__(91));
 Vue.component('cancel', __webpack_require__(96));
 Vue.component('join', __webpack_require__(99));
 Vue.component('login', __webpack_require__(104));
-Vue.component('notify', __webpack_require__(32));
+Vue.component('notify', __webpack_require__(34));
 Vue.component('resume', __webpack_require__(106));
 Vue.component('subscribe', __webpack_require__(109));
 
@@ -29696,7 +29696,7 @@ module.exports = Component.exports
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Notification_vue__ = __webpack_require__(32);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Notification_vue__ = __webpack_require__(34);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Notification_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__Notification_vue__);
 //
 //
@@ -30145,9 +30145,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Submit_vue__ = __webpack_require__(33);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Submit_vue__ = __webpack_require__(32);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Submit_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__Submit_vue__);
-//
 //
 //
 //
@@ -30172,55 +30171,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 	components: { submit: __WEBPACK_IMPORTED_MODULE_0__Submit_vue___default.a },
 	data: function data() {
 		return {
-			plans: [{ plan_id: 'Monthly', name: 'Month' }, { plan_id: 'Daily', name: 'Daily' }]
+			plans: [{ plan_id: 'Monthly', name: 'Month', price: '$15.00' }, { plan_id: 'Daily', name: 'Daily', price: '$1.00' }]
 		};
 	}
 });
 
 /***/ }),
 /* 87 */
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', {
-    staticClass: "field has-addons"
-  }, [_c('div', {
-    staticClass: "control"
-  }, [_c('div', {
-    staticClass: "select"
-  }, [_c('select', {
-    attrs: {
-      "name": "plan"
-    }
-  }, [_c('option', {
-    attrs: {
-      "value": ""
-    }
-  }, [_vm._v("Select a plan")]), _vm._v(" "), _vm._l((_vm.plans), function(plan) {
-    return _c('option', {
-      domProps: {
-        "value": plan.plan_id,
-        "selected": _vm.current == plan.plan_id
-      }
-    }, [_vm._v("\n\t\t\t    \t" + _vm._s(plan.name) + "\n\t\t\t    ")])
-  })], 2)])]), _vm._v(" "), _c('div', {
-    staticClass: "control"
-  }, [_c('submit', {
-    attrs: {
-      "text": "Change"
-    }
-  })], 1)])
-},staticRenderFns: []}
-module.exports.render._withStripped = true
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-     require("vue-hot-reload-api").rerender("data-v-40e7797e", module.exports)
-  }
-}
-
-/***/ }),
-/* 88 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -30253,7 +30210,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 89 */
+/* 88 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -30275,6 +30232,44 @@ if (false) {
   module.hot.accept()
   if (module.hot.data) {
      require("vue-hot-reload-api").rerender("data-v-14f024b4", module.exports)
+  }
+}
+
+/***/ }),
+/* 89 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    staticClass: "field has-addons"
+  }, [_c('div', {
+    staticClass: "control"
+  }, [_c('div', {
+    staticClass: "select"
+  }, [_c('select', {
+    attrs: {
+      "name": "plan"
+    }
+  }, _vm._l((_vm.plans), function(plan) {
+    return _c('option', {
+      domProps: {
+        "value": plan.plan_id,
+        "selected": _vm.current == plan.plan_id
+      }
+    }, [_vm._v("\n\t\t\t    \t" + _vm._s(plan.name + ' - ' + plan.price) + "\n\t\t\t    ")])
+  }))])]), _vm._v(" "), _c('div', {
+    staticClass: "control"
+  }, [_c('submit', {
+    attrs: {
+      "text": "Change"
+    }
+  })], 1)])
+},staticRenderFns: []}
+module.exports.render._withStripped = true
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+     require("vue-hot-reload-api").rerender("data-v-40e7797e", module.exports)
   }
 }
 
@@ -30356,7 +30351,7 @@ module.exports = Component.exports
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Card_vue__ = __webpack_require__(36);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Card_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__Card_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__Submit_vue__ = __webpack_require__(33);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__Submit_vue__ = __webpack_require__(32);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__Submit_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__Submit_vue__);
 //
 //
@@ -30718,10 +30713,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 			this.sending = true;
 
 			axios.post(api + 'cancel/' + this.user.id, { apiToken: this.user.api_token }).then(function (r) {
-				location.reload();
+				location.assign('/settings/subscription');
 			}).catch(function (r) {
 				_this.sending = false;
-				console.error(r.response.data);
+				//console.error(r.response.data);
 			});
 		}
 	}
@@ -30799,7 +30794,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Price_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__Price_vue__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__Card_vue__ = __webpack_require__(36);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__Card_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__Card_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__Submit_vue__ = __webpack_require__(33);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__Submit_vue__ = __webpack_require__(32);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__Submit_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__Submit_vue__);
 
 
@@ -31262,8 +31257,8 @@ module.exports = Component.exports
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Plans_vue__ = __webpack_require__(35);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Plans_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__Plans_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Submit_vue__ = __webpack_require__(32);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Submit_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__Submit_vue__);
 //
 //
 //
@@ -31272,40 +31267,54 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-	props: ['user'],
-	components: { plans: __WEBPACK_IMPORTED_MODULE_0__Plans_vue___default.a },
+	components: { submit: __WEBPACK_IMPORTED_MODULE_0__Submit_vue___default.a },
 	data: function data() {
 		return {
-			sending: false,
-			errors: ''
+			plans: [{ plan_id: 'Monthly', name: 'Month', price: '$15.00' }, { plan_id: 'Daily', name: 'Daily', price: '$1.00' }]
 		};
 	},
 
 	methods: {
-		subscribe: function subscribe(e) {
-			var _this = this;
-
-			this.sending = true;
+		onSubmit: function onSubmit(e) {
+			Bus.$emit('loading-start');
 			var formData = new FormData(e.target);
 
 			if (!formData.get('plan')) {
-				this.sending = false;
-				return this.errors = 'Choose a plan!';
+				Bus.$emit('notify', 'Select a plan.');
+				Bus.$emit('loading-end');
+				return;
 			}
 
-			formData.set('apiToken', this.user.api_token);
+			formData.append('apiToken', this.user.api_token);
+
 			axios.post(api + 'changePlan/' + this.user.id, formData).then(function (r) {
 				location.reload();
 			}).catch(function (r) {
-				_this.sending = false;
-				_this.errors = r.response.data;
+				Bus.$emit('loading-end');
+				Bus.$emit('notify', r.response.data);
 			});
 		}
 	}
+	// created() {
+	// 	axios.get('/plans')
+	// 	.then(({data}) => {
+	// 		this.plans = data;
+	// 	})
+	// }
 });
 
 /***/ }),
@@ -31317,23 +31326,32 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     on: {
       "submit": function($event) {
         $event.preventDefault();
-        _vm.subscribe($event)
+        _vm.onSubmit($event)
       }
     }
-  }, [(_vm.errors) ? _c('div', {
-    staticClass: "notification is-danger",
-    domProps: {
-      "textContent": _vm._s(_vm.errors)
-    }
-  }) : _vm._e(), _vm._v(" "), _c('plans'), _vm._v(" "), _c('button', {
-    staticClass: "button is-success",
-    class: {
-      'is-loading': _vm.sending
-    },
+  }, [_c('div', {
+    staticClass: "field has-addons"
+  }, [_c('div', {
+    staticClass: "control"
+  }, [_c('div', {
+    staticClass: "select"
+  }, [_c('select', {
     attrs: {
-      "type": "submit"
+      "name": "plan"
     }
-  }, [_vm._v("Subscribe")])], 1)
+  }, _vm._l((_vm.plans), function(plan) {
+    return _c('option', {
+      domProps: {
+        "value": plan.plan_id
+      }
+    }, [_vm._v("\n\t\t\t\t    \t" + _vm._s(plan.name + ' - ' + plan.price) + "\n\t\t\t\t    ")])
+  }))])]), _vm._v(" "), _c('div', {
+    staticClass: "control"
+  }, [_c('submit', {
+    attrs: {
+      "text": "Subscribe"
+    }
+  })], 1)])])
 },staticRenderFns: []}
 module.exports.render._withStripped = true
 if (false) {

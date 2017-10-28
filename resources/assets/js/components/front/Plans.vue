@@ -3,9 +3,8 @@
 		<div class="control">
 			<div class="select">
 			  	<select name="plan">
-			    	<option value="">Select a plan</option>
 			    	<option v-for="plan in plans" :value="plan.plan_id" :selected="current == plan.plan_id">
-				    	{{ plan.name }}
+				    	{{ plan.name + ' - ' + plan.price }}
 				    </option>
 			  	</select>
 			</div>
@@ -24,8 +23,8 @@
 		data() {
 			return {
 				plans: [
-					{plan_id: 'Monthly', name: 'Month'},
-					{plan_id: 'Daily', name: 'Daily'}
+					{plan_id: 'Monthly', name: 'Month', price: '$15.00'},
+					{plan_id: 'Daily', name: 'Daily', price: '$1.00'}
 				]
 			}
 		},

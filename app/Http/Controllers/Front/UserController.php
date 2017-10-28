@@ -26,6 +26,7 @@ class UserController extends Controller
 
     public function cancel()
     {
+        if(auth()->user()->subscription('main')->cancelled()) return redirect('/settings/subscription');
         return view('settings.cancel');
     }
 
