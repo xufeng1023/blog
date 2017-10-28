@@ -1,5 +1,5 @@
 <template>
-	<button type="submit" class="button is-success is-fullwidth" 
+	<button type="submit" class="button is-primary" 
 			:class="{'is-loading': loading}"
 			v-text="text"
 	></button>

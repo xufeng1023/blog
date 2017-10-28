@@ -1,32 +1,26 @@
 <template>
 	<form @submit.prevent="change">
-		<div class="notification is-danger" v-if="errors" v-text="errors"></div>
+		<notify color="is-danger"></notify>
 		<plans :current="this.user.plan"></plans>
-		<submit text="Change"></submit>
 	</form>
 </template>
 
 <script>
 	import plans from './Plans.vue';
-	import submit from './Submit.vue';
+	
 
 	export default {
 		props: ['user'],
-		data() {
-			return {
-				errors: ''
-			}
-		},
-		components: {plans, submit},
+		components: {plans},
 		methods: {
 			change(e) {
 				Bus.$emit('loading-start');
-				this.errors = '';
 				let formData = new FormData(e.target);
 
 				if(!formData.get('plan')) {
-					this.errors = 'Select a plan!';
+					Bus.$emit('notify', 'Select a plan.');
 					Bus.$emit('loading-end');
+					return;
 				}
 
 				formData.append('apiToken', this.user.api_token);
@@ -37,7 +31,7 @@
 				})
 				.catch(r => {
 					Bus.$emit('loading-end');
-					this.errors = r.response.data;
+					Bus.$emit('notify', r.response.data);
 				});
 			}
 		}

@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container is-fluid">
+<div class="container">
     <div class="columns">
         <div class="column is-3">
             @include('settings.sidebar')
@@ -12,7 +12,7 @@
             @if(session()->has('success'))
                 <notify msg="{{ session('success.msg') }}" color="{{ session('success.color') }}"></notify>
             @endif
-            <form method="POST" action="/settings/account">
+            <form method="POST" action="/settings/account" autocomplete="off">
                 {{ csrf_field() }}
 
                 <div class="field">

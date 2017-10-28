@@ -1,6 +1,6 @@
 <template>
 	<form @submit.prevent="update">
-		<div class="notification is-danger" v-if="errors" v-text="errors"></div>
+		<notify color="is-danger"></notify>
 		<card></card>
 		<submit text="Update"></submit>
 	</form>
@@ -12,16 +12,10 @@
 	
 	export default {
 		props: ['user'],
-		data() {
-			return {
-				errors: ''
-			}
-		},
 		components: {card, submit},
 		methods: {
 			update(e) {
 				Bus.$emit('loading-start');
-				this.errors = '';
 				let formData = new FormData(e.target);
 				formData.append('apiToken', this.user.api_token);
 
@@ -31,7 +25,7 @@
 				})
 				.catch(r => {
 					Bus.$emit('loading-end');
-					this.errors = r.response.data;
+					Bus.$emit('notify', r.response.data);
 				});
 			}
 		}

@@ -1,31 +1,32 @@
 @extends('layouts.app')
 
-@section('content')
+@section('banner')
 <div>
     <a href="/join">
         <img src="{{ asset('images/Banner3.jpg') }}" width="100%" alt="Join DollyIsland">
     </a>
 </div>
-<div class="hero-body">
-    <div class="container">
-        @foreach($posts->chunk(3) as $chunks)
-            <div class="columns">
-                @foreach($chunks as $post)
-                    @if($post->images->first())
-                        <div class="column is-4">
-                            <a href="/movie/{{ $post->slug }}">
-                                <figure class="image is-16by9">
-                                    <img src="{{ asset('/storage/'.$post->images->first()->slug) }}">
-                                </figure>
-                                <p>{{ $post->title }}</p>
-                            </a>
-                        </div>
-                    @endif
-                @endforeach
-            </div>
-        @endforeach
+@endsection
 
-        {{ $posts->links('vendor.pagination.bulma') }}
-    </div>
+@section('content')
+<div class="container">
+    @foreach($posts->chunk(3) as $chunks)
+        <div class="columns">
+            @foreach($chunks as $post)
+                @if($post->images->first())
+                    <div class="column is-4">
+                        <a href="/movie/{{ $post->slug }}">
+                            <figure class="image is-16by9">
+                                <img src="{{ asset('/storage/'.$post->images->first()->slug) }}">
+                            </figure>
+                            <p>{{ $post->title }}</p>
+                        </a>
+                    </div>
+                @endif
+            @endforeach
+        </div>
+    @endforeach
+
+    {{ $posts->links('vendor.pagination.bulma') }}
 </div>
 @endsection

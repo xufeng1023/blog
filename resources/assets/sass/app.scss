@@ -18,8 +18,10 @@ hr {
 .navbar.is-black a.navbar-item:hover {
 	background-color: transparent !important;
 }
-.navbar-dropdown a {
-	color: initial !important;
+@media screen and (max-width: 1023px) {
+	.navbar-menu {
+		background-color: inherit;
+	}
 }
 .hand {
 	cursor: pointer;

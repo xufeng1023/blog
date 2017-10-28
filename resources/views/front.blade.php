@@ -1,8 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="hero-body">
-  <div class="container">
+<div class="container">
       <div class="columns">
           <div class="column is-6 is-offset-3 has-text-centered">
             	<h1 class="title">
@@ -16,6 +15,5 @@
               </div>
           </div>
       </div>
-</div>
 </div>
 @endsection
