@@ -42,6 +42,7 @@ Vue.component('login', require('./components/front/Login.vue'));
 Vue.component('notify', require('./components/front/Notification.vue'));
 Vue.component('resume', require('./components/front/Resume.vue'));
 Vue.component('subscribe', require('./components/front/Subscribe.vue'));
+Vue.component('invoices', require('./components/front/Invoices.vue'));
 
 Vue.filter('FILE', (value) => { return '/storage/' + value; });
 

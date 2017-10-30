@@ -9,6 +9,9 @@
         <li>
             <a href="/settings/subscription" class="{{ $uri == 'settings/plan'? 'is-active':'' }}">Subscription</a>
         </li>
+        <li>
+            <a href="/settings/invoices" class="{{ $uri == 'settings/invoices'? 'is-active':'' }}">Invoices</a>
+        </li>
         @if(!auth()->user()->subscription('main')->cancelled())
             <li>
                 <a href="/settings/cancel" class="{{ $uri == 'settings/cancel'? 'is-active':'' }}">Cancel</a>

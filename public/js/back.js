@@ -60,18 +60,115 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 37);
+/******/ 	return __webpack_require__(__webpack_require__.s = 36);
 /******/ })
 /************************************************************************/
 /******/ ([
 /* 0 */
+/***/ (function(module, exports) {
+
+/* globals __VUE_SSR_CONTEXT__ */
+
+// this module is a runtime utility for cleaner component module output and will
+// be included in the final webpack user bundle
+
+module.exports = function normalizeComponent (
+  rawScriptExports,
+  compiledTemplate,
+  injectStyles,
+  scopeId,
+  moduleIdentifier /* server only */
+) {
+  var esModule
+  var scriptExports = rawScriptExports = rawScriptExports || {}
+
+  // ES6 modules interop
+  var type = typeof rawScriptExports.default
+  if (type === 'object' || type === 'function') {
+    esModule = rawScriptExports
+    scriptExports = rawScriptExports.default
+  }
+
+  // Vue.extend constructor export interop
+  var options = typeof scriptExports === 'function'
+    ? scriptExports.options
+    : scriptExports
+
+  // render functions
+  if (compiledTemplate) {
+    options.render = compiledTemplate.render
+    options.staticRenderFns = compiledTemplate.staticRenderFns
+  }
+
+  // scopedId
+  if (scopeId) {
+    options._scopeId = scopeId
+  }
+
+  var hook
+  if (moduleIdentifier) { // server build
+    hook = function (context) {
+      // 2.3 injection
+      context =
+        context || // cached call
+        (this.$vnode && this.$vnode.ssrContext) || // stateful
+        (this.parent && this.parent.$vnode && this.parent.$vnode.ssrContext) // functional
+      // 2.2 with runInNewContext: true
+      if (!context && typeof __VUE_SSR_CONTEXT__ !== 'undefined') {
+        context = __VUE_SSR_CONTEXT__
+      }
+      // inject component styles
+      if (injectStyles) {
+        injectStyles.call(this, context)
+      }
+      // register component module identifier for async chunk inferrence
+      if (context && context._registeredComponents) {
+        context._registeredComponents.add(moduleIdentifier)
+      }
+    }
+    // used by ssr in case component is cached and beforeCreate
+    // never gets called
+    options._ssrRegister = hook
+  } else if (injectStyles) {
+    hook = injectStyles
+  }
+
+  if (hook) {
+    var functional = options.functional
+    var existing = functional
+      ? options.render
+      : options.beforeCreate
+    if (!functional) {
+      // inject component registration as beforeCreate hook
+      options.beforeCreate = existing
+        ? [].concat(existing, hook)
+        : [hook]
+    } else {
+      // register for functioal component in vue file
+      options.render = function renderWithStyleInjection (h, context) {
+        hook.call(context)
+        return existing(h, context)
+      }
+    }
+  }
+
+  return {
+    esModule: esModule,
+    exports: scriptExports,
+    options: options
+  }
+}
+
+
+/***/ }),
+/* 1 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
 var bind = __webpack_require__(4);
-var isBuffer = __webpack_require__(13);
+var isBuffer = __webpack_require__(14);
 
 /*global toString:true*/
 
@@ -374,111 +471,14 @@ module.exports = {
 
 
 /***/ }),
-/* 1 */
-/***/ (function(module, exports) {
-
-/* globals __VUE_SSR_CONTEXT__ */
-
-// this module is a runtime utility for cleaner component module output and will
-// be included in the final webpack user bundle
-
-module.exports = function normalizeComponent (
-  rawScriptExports,
-  compiledTemplate,
-  injectStyles,
-  scopeId,
-  moduleIdentifier /* server only */
-) {
-  var esModule
-  var scriptExports = rawScriptExports = rawScriptExports || {}
-
-  // ES6 modules interop
-  var type = typeof rawScriptExports.default
-  if (type === 'object' || type === 'function') {
-    esModule = rawScriptExports
-    scriptExports = rawScriptExports.default
-  }
-
-  // Vue.extend constructor export interop
-  var options = typeof scriptExports === 'function'
-    ? scriptExports.options
-    : scriptExports
-
-  // render functions
-  if (compiledTemplate) {
-    options.render = compiledTemplate.render
-    options.staticRenderFns = compiledTemplate.staticRenderFns
-  }
-
-  // scopedId
-  if (scopeId) {
-    options._scopeId = scopeId
-  }
-
-  var hook
-  if (moduleIdentifier) { // server build
-    hook = function (context) {
-      // 2.3 injection
-      context =
-        context || // cached call
-        (this.$vnode && this.$vnode.ssrContext) || // stateful
-        (this.parent && this.parent.$vnode && this.parent.$vnode.ssrContext) // functional
-      // 2.2 with runInNewContext: true
-      if (!context && typeof __VUE_SSR_CONTEXT__ !== 'undefined') {
-        context = __VUE_SSR_CONTEXT__
-      }
-      // inject component styles
-      if (injectStyles) {
-        injectStyles.call(this, context)
-      }
-      // register component module identifier for async chunk inferrence
-      if (context && context._registeredComponents) {
-        context._registeredComponents.add(moduleIdentifier)
-      }
-    }
-    // used by ssr in case component is cached and beforeCreate
-    // never gets called
-    options._ssrRegister = hook
-  } else if (injectStyles) {
-    hook = injectStyles
-  }
-
-  if (hook) {
-    var functional = options.functional
-    var existing = functional
-      ? options.render
-      : options.beforeCreate
-    if (!functional) {
-      // inject component registration as beforeCreate hook
-      options.beforeCreate = existing
-        ? [].concat(existing, hook)
-        : [hook]
-    } else {
-      // register for functioal component in vue file
-      options.render = function renderWithStyleInjection (h, context) {
-        hook.call(context)
-        return existing(h, context)
-      }
-    }
-  }
-
-  return {
-    esModule: esModule,
-    exports: scriptExports,
-    options: options
-  }
-}
-
-
-/***/ }),
 /* 2 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 /* WEBPACK VAR INJECTION */(function(process) {
 
-var utils = __webpack_require__(0);
-var normalizeHeaderName = __webpack_require__(16);
+var utils = __webpack_require__(1);
+var normalizeHeaderName = __webpack_require__(17);
 
 var DEFAULT_CONTENT_TYPE = {
   'Content-Type': 'application/x-www-form-urlencoded'
@@ -568,7 +568,7 @@ utils.forEach(['post', 'put', 'patch'], function forEachMethodWithData(method) {
 
 module.exports = defaults;
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(15)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(16)))
 
 /***/ }),
 /* 3 */
@@ -622,13 +622,13 @@ module.exports = function bind(fn, thisArg) {
 "use strict";
 
 
-var utils = __webpack_require__(0);
-var settle = __webpack_require__(17);
-var buildURL = __webpack_require__(19);
-var parseHeaders = __webpack_require__(20);
-var isURLSameOrigin = __webpack_require__(21);
+var utils = __webpack_require__(1);
+var settle = __webpack_require__(18);
+var buildURL = __webpack_require__(20);
+var parseHeaders = __webpack_require__(21);
+var isURLSameOrigin = __webpack_require__(22);
 var createError = __webpack_require__(6);
-var btoa = (typeof window !== 'undefined' && window.btoa && window.btoa.bind(window)) || __webpack_require__(22);
+var btoa = (typeof window !== 'undefined' && window.btoa && window.btoa.bind(window)) || __webpack_require__(23);
 
 module.exports = function xhrAdapter(config) {
   return new Promise(function dispatchXhrRequest(resolve, reject) {
@@ -725,7 +725,7 @@ module.exports = function xhrAdapter(config) {
     // This is only done if running in a standard browser environment.
     // Specifically not if we're in a web worker, or react-native.
     if (utils.isStandardBrowserEnv()) {
-      var cookies = __webpack_require__(23);
+      var cookies = __webpack_require__(24);
 
       // Add xsrf header
       var xsrfValue = (config.withCredentials || isURLSameOrigin(config.url)) && config.xsrfCookieName ?
@@ -809,7 +809,7 @@ module.exports = function xhrAdapter(config) {
 "use strict";
 
 
-var enhanceError = __webpack_require__(18);
+var enhanceError = __webpack_require__(19);
 
 /**
  * Create an Error with the specified message, config, error code, request and response.
@@ -866,7 +866,8 @@ module.exports = Cancel;
 
 
 /***/ }),
-/* 9 */
+/* 9 */,
+/* 10 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(global, module) {var __WEBPACK_AMD_DEFINE_RESULT__;/**
@@ -17955,10 +17956,10 @@ module.exports = Cancel;
   }
 }.call(this));
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3), __webpack_require__(10)(module)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3), __webpack_require__(11)(module)))
 
 /***/ }),
-/* 10 */
+/* 11 */
 /***/ (function(module, exports) {
 
 module.exports = function(module) {
@@ -17986,21 +17987,21 @@ module.exports = function(module) {
 
 
 /***/ }),
-/* 11 */
+/* 12 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(12);
+module.exports = __webpack_require__(13);
 
 /***/ }),
-/* 12 */
+/* 13 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var utils = __webpack_require__(0);
+var utils = __webpack_require__(1);
 var bind = __webpack_require__(4);
-var Axios = __webpack_require__(14);
+var Axios = __webpack_require__(15);
 var defaults = __webpack_require__(2);
 
 /**
@@ -18035,14 +18036,14 @@ axios.create = function create(instanceConfig) {
 
 // Expose Cancel & CancelToken
 axios.Cancel = __webpack_require__(8);
-axios.CancelToken = __webpack_require__(29);
+axios.CancelToken = __webpack_require__(30);
 axios.isCancel = __webpack_require__(7);
 
 // Expose all/spread
 axios.all = function all(promises) {
   return Promise.all(promises);
 };
-axios.spread = __webpack_require__(30);
+axios.spread = __webpack_require__(31);
 
 module.exports = axios;
 
@@ -18051,7 +18052,7 @@ module.exports.default = axios;
 
 
 /***/ }),
-/* 13 */
+/* 14 */
 /***/ (function(module, exports) {
 
 /*!
@@ -18078,18 +18079,18 @@ function isSlowBuffer (obj) {
 
 
 /***/ }),
-/* 14 */
+/* 15 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
 var defaults = __webpack_require__(2);
-var utils = __webpack_require__(0);
-var InterceptorManager = __webpack_require__(24);
-var dispatchRequest = __webpack_require__(25);
-var isAbsoluteURL = __webpack_require__(27);
-var combineURLs = __webpack_require__(28);
+var utils = __webpack_require__(1);
+var InterceptorManager = __webpack_require__(25);
+var dispatchRequest = __webpack_require__(26);
+var isAbsoluteURL = __webpack_require__(28);
+var combineURLs = __webpack_require__(29);
 
 /**
  * Create a new instance of Axios
@@ -18171,7 +18172,7 @@ module.exports = Axios;
 
 
 /***/ }),
-/* 15 */
+/* 16 */
 /***/ (function(module, exports) {
 
 // shim for using process in browser
@@ -18361,13 +18362,13 @@ process.umask = function() { return 0; };
 
 
 /***/ }),
-/* 16 */
+/* 17 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var utils = __webpack_require__(0);
+var utils = __webpack_require__(1);
 
 module.exports = function normalizeHeaderName(headers, normalizedName) {
   utils.forEach(headers, function processHeader(value, name) {
@@ -18380,7 +18381,7 @@ module.exports = function normalizeHeaderName(headers, normalizedName) {
 
 
 /***/ }),
-/* 17 */
+/* 18 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -18413,7 +18414,7 @@ module.exports = function settle(resolve, reject, response) {
 
 
 /***/ }),
-/* 18 */
+/* 19 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -18441,13 +18442,13 @@ module.exports = function enhanceError(error, config, code, request, response) {
 
 
 /***/ }),
-/* 19 */
+/* 20 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var utils = __webpack_require__(0);
+var utils = __webpack_require__(1);
 
 function encode(val) {
   return encodeURIComponent(val).
@@ -18516,13 +18517,13 @@ module.exports = function buildURL(url, params, paramsSerializer) {
 
 
 /***/ }),
-/* 20 */
+/* 21 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var utils = __webpack_require__(0);
+var utils = __webpack_require__(1);
 
 /**
  * Parse headers into an object
@@ -18560,13 +18561,13 @@ module.exports = function parseHeaders(headers) {
 
 
 /***/ }),
-/* 21 */
+/* 22 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var utils = __webpack_require__(0);
+var utils = __webpack_require__(1);
 
 module.exports = (
   utils.isStandardBrowserEnv() ?
@@ -18635,7 +18636,7 @@ module.exports = (
 
 
 /***/ }),
-/* 22 */
+/* 23 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -18678,13 +18679,13 @@ module.exports = btoa;
 
 
 /***/ }),
-/* 23 */
+/* 24 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var utils = __webpack_require__(0);
+var utils = __webpack_require__(1);
 
 module.exports = (
   utils.isStandardBrowserEnv() ?
@@ -18738,13 +18739,13 @@ module.exports = (
 
 
 /***/ }),
-/* 24 */
+/* 25 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var utils = __webpack_require__(0);
+var utils = __webpack_require__(1);
 
 function InterceptorManager() {
   this.handlers = [];
@@ -18797,14 +18798,14 @@ module.exports = InterceptorManager;
 
 
 /***/ }),
-/* 25 */
+/* 26 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var utils = __webpack_require__(0);
-var transformData = __webpack_require__(26);
+var utils = __webpack_require__(1);
+var transformData = __webpack_require__(27);
 var isCancel = __webpack_require__(7);
 var defaults = __webpack_require__(2);
 
@@ -18883,13 +18884,13 @@ module.exports = function dispatchRequest(config) {
 
 
 /***/ }),
-/* 26 */
+/* 27 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var utils = __webpack_require__(0);
+var utils = __webpack_require__(1);
 
 /**
  * Transform the data for a request or a response
@@ -18910,7 +18911,7 @@ module.exports = function transformData(data, headers, fns) {
 
 
 /***/ }),
-/* 27 */
+/* 28 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -18931,7 +18932,7 @@ module.exports = function isAbsoluteURL(url) {
 
 
 /***/ }),
-/* 28 */
+/* 29 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -18952,7 +18953,7 @@ module.exports = function combineURLs(baseURL, relativeURL) {
 
 
 /***/ }),
-/* 29 */
+/* 30 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -19016,7 +19017,7 @@ module.exports = CancelToken;
 
 
 /***/ }),
-/* 30 */
+/* 31 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -19050,7 +19051,7 @@ module.exports = function spread(callback) {
 
 
 /***/ }),
-/* 31 */
+/* 32 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -29250,24 +29251,30 @@ module.exports = Vue$3;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
 
 /***/ }),
-/* 32 */,
-/* 33 */
+/* 33 */,
+/* 34 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
-var Component = __webpack_require__(1)(
-  /* script */
-  __webpack_require__(56),
-  /* template */
-  __webpack_require__(57),
-  /* styles */
-  null,
-  /* scopeId */
-  null,
-  /* moduleIdentifier (server only) */
-  null
+var normalizeComponent = __webpack_require__(0)
+/* script */
+var __vue_script__ = __webpack_require__(55)
+/* template */
+var __vue_template__ = __webpack_require__(56)
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
 )
-Component.options.__file = "C:\\Users\\xu feng\\Desktop\\blog\\resources\\assets\\js\\components\\PostTitleInput.vue"
+Component.options.__file = "resources\\assets\\js\\components\\PostTitleInput.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] PostTitleInput.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -29291,45 +29298,43 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 34 */,
 /* 35 */,
-/* 36 */,
+/* 36 */
+/***/ (function(module, exports, __webpack_require__) {
+
+__webpack_require__(37);
+__webpack_require__(66);
+module.exports = __webpack_require__(67);
+
+
+/***/ }),
 /* 37 */
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(38);
-__webpack_require__(67);
-module.exports = __webpack_require__(68);
 
-
-/***/ }),
-/* 38 */
-/***/ (function(module, exports, __webpack_require__) {
-
-__webpack_require__(39);
-
-window.Vue = __webpack_require__(31);
+window.Vue = __webpack_require__(32);
 
 window.Bus = new Vue();
 
-Vue.component('flash', __webpack_require__(42));
-Vue.component('videoInput', __webpack_require__(50));
-Vue.component('videoOne', __webpack_require__(53));
-Vue.component('postTitleInput', __webpack_require__(33));
-Vue.component('imageInput', __webpack_require__(58));
-Vue.component('updatePostForm', __webpack_require__(61));
-Vue.component('searchPostBar', __webpack_require__(64));
+Vue.component('flash', __webpack_require__(41));
+Vue.component('videoInput', __webpack_require__(49));
+Vue.component('videoOne', __webpack_require__(52));
+Vue.component('postTitleInput', __webpack_require__(34));
+Vue.component('imageInput', __webpack_require__(57));
+Vue.component('updatePostForm', __webpack_require__(60));
+Vue.component('searchPostBar', __webpack_require__(63));
 
 var app = new Vue({
     el: '#app'
 });
 
 /***/ }),
-/* 39 */
+/* 38 */
 /***/ (function(module, exports, __webpack_require__) {
 
 
-window._ = __webpack_require__(9);
+window._ = __webpack_require__(10);
 
 /**
  * We'll load jQuery and the Bootstrap jQuery plugin which provides support
@@ -29338,9 +29343,9 @@ window._ = __webpack_require__(9);
  */
 
 try {
-  window.$ = window.jQuery = __webpack_require__(40);
+  window.$ = window.jQuery = __webpack_require__(39);
 
-  __webpack_require__(41);
+  __webpack_require__(40);
 } catch (e) {}
 
 /**
@@ -29349,7 +29354,7 @@ try {
  * CSRF token as a header based on the value of the "XSRF" token cookie.
  */
 
-window.axios = __webpack_require__(11);
+window.axios = __webpack_require__(12);
 
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
@@ -29383,7 +29388,7 @@ if (token) {
 // });
 
 /***/ }),
-/* 40 */
+/* 39 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
@@ -39643,7 +39648,7 @@ return jQuery;
 
 
 /***/ }),
-/* 41 */
+/* 40 */
 /***/ (function(module, exports) {
 
 /*!
@@ -42026,27 +42031,33 @@ if (typeof jQuery === 'undefined') {
 
 
 /***/ }),
-/* 42 */
+/* 41 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(43)
+  __webpack_require__(42)
 }
-var Component = __webpack_require__(1)(
-  /* script */
-  __webpack_require__(48),
-  /* template */
-  __webpack_require__(49),
-  /* styles */
-  injectStyle,
-  /* scopeId */
-  null,
-  /* moduleIdentifier (server only) */
-  null
+var normalizeComponent = __webpack_require__(0)
+/* script */
+var __vue_script__ = __webpack_require__(47)
+/* template */
+var __vue_template__ = __webpack_require__(48)
+/* styles */
+var __vue_styles__ = injectStyle
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
 )
-Component.options.__file = "C:\\Users\\xu feng\\Desktop\\blog\\resources\\assets\\js\\components\\Flash.vue"
+Component.options.__file = "resources\\assets\\js\\components\\Flash.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] Flash.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -42070,17 +42081,17 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 43 */
+/* 42 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(44);
+var content = __webpack_require__(43);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(46)("2a57b8e4", content, false);
+var update = __webpack_require__(45)("2a57b8e4", content, false);
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -42096,10 +42107,10 @@ if(false) {
 }
 
 /***/ }),
-/* 44 */
+/* 43 */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(45)(undefined);
+exports = module.exports = __webpack_require__(44)(undefined);
 // imports
 
 
@@ -42110,7 +42121,7 @@ exports.push([module.i, "\n#flash {\n    position: fixed;\n    bottom: 1em;\n   
 
 
 /***/ }),
-/* 45 */
+/* 44 */
 /***/ (function(module, exports) {
 
 /*
@@ -42192,7 +42203,7 @@ function toComment(sourceMap) {
 
 
 /***/ }),
-/* 46 */
+/* 45 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /*
@@ -42211,7 +42222,7 @@ if (typeof DEBUG !== 'undefined' && DEBUG) {
   ) }
 }
 
-var listToStyles = __webpack_require__(47)
+var listToStyles = __webpack_require__(46)
 
 /*
 type StyleObject = {
@@ -42413,7 +42424,7 @@ function applyToTag (styleElement, obj) {
 
 
 /***/ }),
-/* 47 */
+/* 46 */
 /***/ (function(module, exports) {
 
 /**
@@ -42446,7 +42457,7 @@ module.exports = function listToStyles (parentId, list) {
 
 
 /***/ }),
-/* 48 */
+/* 47 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -42498,24 +42509,28 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 49 */
+/* 48 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', {
-    directives: [{
-      name: "show",
-      rawName: "v-show",
-      value: (_vm.show),
-      expression: "show"
-    }],
-    class: [_vm.alert, _vm.alertType],
-    attrs: {
-      "id": "flash"
-    }
-  }, [_c('strong', [_vm._v(_vm._s(_vm.message))])])
-},staticRenderFns: []}
-module.exports.render._withStripped = true
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    {
+      directives: [
+        { name: "show", rawName: "v-show", value: _vm.show, expression: "show" }
+      ],
+      class: [_vm.alert, _vm.alertType],
+      attrs: { id: "flash" }
+    },
+    [_c("strong", [_vm._v(_vm._s(_vm.message))])]
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
@@ -42524,23 +42539,29 @@ if (false) {
 }
 
 /***/ }),
-/* 50 */
+/* 49 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
-var Component = __webpack_require__(1)(
-  /* script */
-  __webpack_require__(51),
-  /* template */
-  __webpack_require__(52),
-  /* styles */
-  null,
-  /* scopeId */
-  null,
-  /* moduleIdentifier (server only) */
-  null
+var normalizeComponent = __webpack_require__(0)
+/* script */
+var __vue_script__ = __webpack_require__(50)
+/* template */
+var __vue_template__ = __webpack_require__(51)
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
 )
-Component.options.__file = "C:\\Users\\xu feng\\Desktop\\blog\\resources\\assets\\js\\components\\VideoInput.vue"
+Component.options.__file = "resources\\assets\\js\\components\\VideoInput.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] VideoInput.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -42564,7 +42585,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 51 */
+/* 50 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -42640,31 +42661,40 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 52 */
+/* 51 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', {
-    staticClass: "form-group"
-  }, [_c('label', [_vm._v("Video")]), _vm._v(" "), _c('input', {
-    attrs: {
-      "type": "file",
-      "name": "video",
-      "accept": "video/*"
-    },
-    on: {
-      "change": _vm.onChange
-    }
-  }), _vm._v(" "), _c('p', {
-    directives: [{
-      name: "show",
-      rawName: "v-show",
-      value: (_vm.progress),
-      expression: "progress"
-    }]
-  }, [_vm._v(_vm._s(_vm.progress))])])
-},staticRenderFns: []}
-module.exports.render._withStripped = true
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "form-group" }, [
+    _c("label", [_vm._v("Video")]),
+    _vm._v(" "),
+    _c("input", {
+      attrs: { type: "file", name: "video", accept: "video/*" },
+      on: { change: _vm.onChange }
+    }),
+    _vm._v(" "),
+    _c(
+      "p",
+      {
+        directives: [
+          {
+            name: "show",
+            rawName: "v-show",
+            value: _vm.progress,
+            expression: "progress"
+          }
+        ]
+      },
+      [_vm._v(_vm._s(_vm.progress))]
+    )
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
@@ -42673,23 +42703,29 @@ if (false) {
 }
 
 /***/ }),
-/* 53 */
+/* 52 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
-var Component = __webpack_require__(1)(
-  /* script */
-  __webpack_require__(54),
-  /* template */
-  __webpack_require__(55),
-  /* styles */
-  null,
-  /* scopeId */
-  null,
-  /* moduleIdentifier (server only) */
-  null
+var normalizeComponent = __webpack_require__(0)
+/* script */
+var __vue_script__ = __webpack_require__(53)
+/* template */
+var __vue_template__ = __webpack_require__(54)
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
 )
-Component.options.__file = "C:\\Users\\xu feng\\Desktop\\blog\\resources\\assets\\js\\components\\VideoOne.vue"
+Component.options.__file = "resources\\assets\\js\\components\\VideoOne.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] VideoOne.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -42713,7 +42749,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 54 */
+/* 53 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -42812,89 +42848,101 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 55 */
+/* 54 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', {
-    staticClass: "thumbnail",
-    class: {
-      'is-thumbnail': _vm.active
-    }
-  }, [(_vm.src) ? _c('a', {
-    attrs: {
-      "href": _vm._f("VID")(_vm.video.slug),
-      "target": "_blank"
-    }
-  }, [_c('img', {
-    attrs: {
-      "src": _vm._f("IMG")(_vm.src)
-    }
-  })]) : _vm._e(), _vm._v(" "), _c('div', {
-    staticClass: "caption"
-  }, [_c('h6', {
-    domProps: {
-      "textContent": _vm._s(_vm.video.slug)
-    }
-  }), _vm._v(" "), _c('p', [_c('input', {
-    attrs: {
-      "type": "file",
-      "accept": "image/*"
-    },
-    on: {
-      "change": _vm.onChange
-    }
-  })]), _vm._v(" "), _c('button', {
-    staticClass: "btn btn-danger btn-xs",
-    attrs: {
-      "type": "button"
-    },
-    on: {
-      "click": function($event) {
-        _vm.remove(_vm.video.slug)
-      }
-    }
-  }, [_c('span', {
-    staticClass: "glyphicon glyphicon-trash"
-  })]), _vm._v(" "), _c('button', {
-    directives: [{
-      name: "show",
-      rawName: "v-show",
-      value: (!_vm.active),
-      expression: "!active"
-    }],
-    staticClass: "btn btn-success btn-xs",
-    attrs: {
-      "type": "button"
-    },
-    on: {
-      "click": function($event) {
-        _vm.preview(_vm.video.slug)
-      }
-    }
-  }, [_c('span', {
-    staticClass: "glyphicon glyphicon-thumbs-up"
-  })]), _vm._v(" "), _c('button', {
-    directives: [{
-      name: "show",
-      rawName: "v-show",
-      value: (_vm.active),
-      expression: "active"
-    }],
-    staticClass: "btn btn-warning btn-xs",
-    attrs: {
-      "type": "button"
-    },
-    on: {
-      "click": function($event) {
-        _vm.clearPreview(_vm.video.slug)
-      }
-    }
-  }, [_c('span', {
-    staticClass: "glyphicon glyphicon-thumbs-down"
-  })])])])
-},staticRenderFns: []}
-module.exports.render._withStripped = true
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    { staticClass: "thumbnail", class: { "is-thumbnail": _vm.active } },
+    [
+      _vm.src
+        ? _c(
+            "a",
+            {
+              attrs: { href: _vm._f("VID")(_vm.video.slug), target: "_blank" }
+            },
+            [_c("img", { attrs: { src: _vm._f("IMG")(_vm.src) } })]
+          )
+        : _vm._e(),
+      _vm._v(" "),
+      _c("div", { staticClass: "caption" }, [
+        _c("h6", { domProps: { textContent: _vm._s(_vm.video.slug) } }),
+        _vm._v(" "),
+        _c("p", [
+          _c("input", {
+            attrs: { type: "file", accept: "image/*" },
+            on: { change: _vm.onChange }
+          })
+        ]),
+        _vm._v(" "),
+        _c(
+          "button",
+          {
+            staticClass: "btn btn-danger btn-xs",
+            attrs: { type: "button" },
+            on: {
+              click: function($event) {
+                _vm.remove(_vm.video.slug)
+              }
+            }
+          },
+          [_c("span", { staticClass: "glyphicon glyphicon-trash" })]
+        ),
+        _vm._v(" "),
+        _c(
+          "button",
+          {
+            directives: [
+              {
+                name: "show",
+                rawName: "v-show",
+                value: !_vm.active,
+                expression: "!active"
+              }
+            ],
+            staticClass: "btn btn-success btn-xs",
+            attrs: { type: "button" },
+            on: {
+              click: function($event) {
+                _vm.preview(_vm.video.slug)
+              }
+            }
+          },
+          [_c("span", { staticClass: "glyphicon glyphicon-thumbs-up" })]
+        ),
+        _vm._v(" "),
+        _c(
+          "button",
+          {
+            directives: [
+              {
+                name: "show",
+                rawName: "v-show",
+                value: _vm.active,
+                expression: "active"
+              }
+            ],
+            staticClass: "btn btn-warning btn-xs",
+            attrs: { type: "button" },
+            on: {
+              click: function($event) {
+                _vm.clearPreview(_vm.video.slug)
+              }
+            }
+          },
+          [_c("span", { staticClass: "glyphicon glyphicon-thumbs-down" })]
+        )
+      ])
+    ]
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
@@ -42903,7 +42951,7 @@ if (false) {
 }
 
 /***/ }),
-/* 56 */
+/* 55 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -42940,34 +42988,38 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 57 */
+/* 56 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('input', {
-    directives: [{
-      name: "model",
-      rawName: "v-model",
-      value: (_vm.computedTitle),
-      expression: "computedTitle"
-    }],
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("input", {
+    directives: [
+      {
+        name: "model",
+        rawName: "v-model",
+        value: _vm.computedTitle,
+        expression: "computedTitle"
+      }
+    ],
     staticClass: "form-control",
-    attrs: {
-      "type": "text",
-      "name": "title"
-    },
-    domProps: {
-      "value": (_vm.computedTitle)
-    },
+    attrs: { type: "text", name: "title" },
+    domProps: { value: _vm.computedTitle },
     on: {
-      "input": function($event) {
-        if ($event.target.composing) { return; }
+      input: function($event) {
+        if ($event.target.composing) {
+          return
+        }
         _vm.computedTitle = $event.target.value
       }
     }
   })
-},staticRenderFns: []}
-module.exports.render._withStripped = true
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
@@ -42976,23 +43028,29 @@ if (false) {
 }
 
 /***/ }),
-/* 58 */
+/* 57 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
-var Component = __webpack_require__(1)(
-  /* script */
-  __webpack_require__(59),
-  /* template */
-  __webpack_require__(60),
-  /* styles */
-  null,
-  /* scopeId */
-  null,
-  /* moduleIdentifier (server only) */
-  null
+var normalizeComponent = __webpack_require__(0)
+/* script */
+var __vue_script__ = __webpack_require__(58)
+/* template */
+var __vue_template__ = __webpack_require__(59)
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
 )
-Component.options.__file = "C:\\Users\\xu feng\\Desktop\\blog\\resources\\assets\\js\\components\\ImageInput.vue"
+Component.options.__file = "resources\\assets\\js\\components\\ImageInput.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] ImageInput.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -43016,7 +43074,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 59 */
+/* 58 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -43138,72 +43196,102 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 60 */
+/* 59 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', [_c('div', {
-    staticClass: "form-group"
-  }, [_c('label', [_vm._v("Images")]), _vm._v(" "), _c('input', {
-    attrs: {
-      "type": "file",
-      "name": "screenshots[]",
-      "accept": "image/*",
-      "multiple": ""
-    },
-    on: {
-      "change": _vm.onChange
-    }
-  })]), _vm._v(" "), _vm._l((_vm.computedImages), function(pic) {
-    return _c('div', {
-      staticClass: "row"
-    }, _vm._l((pic), function(slug) {
-      return _c('div', {
-        staticClass: "col-xs-3"
-      }, [_c('div', {
-        staticClass: "thumbnail",
-        class: {
-          'is-thumbnail': slug.is_thumbnail
-        }
-      }, [_c('a', {
-        attrs: {
-          "href": _vm._f("LINK")(slug.slug),
-          "target": "_blank"
-        }
-      }, [_c('img', {
-        attrs: {
-          "src": _vm._f("SRC")(slug.slug),
-          "width": "100%"
-        }
-      })]), _vm._v(" "), _c('button', {
-        staticClass: "btn btn-success btn-xs",
-        attrs: {
-          "type": "button"
-        },
-        on: {
-          "click": function($event) {
-            _vm.thumb(slug.slug)
-          }
-        }
-      }, [_c('span', {
-        staticClass: "glyphicon glyphicon-thumbs-up"
-      })]), _vm._v(" "), _c('button', {
-        staticClass: "btn btn-danger btn-xs",
-        attrs: {
-          "type": "button"
-        },
-        on: {
-          "click": function($event) {
-            _vm.remove(slug.slug)
-          }
-        }
-      }, [_c('span', {
-        staticClass: "glyphicon glyphicon-trash"
-      })])])])
-    }))
-  })], 2)
-},staticRenderFns: []}
-module.exports.render._withStripped = true
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    [
+      _c("div", { staticClass: "form-group" }, [
+        _c("label", [_vm._v("Images")]),
+        _vm._v(" "),
+        _c("input", {
+          attrs: {
+            type: "file",
+            name: "screenshots[]",
+            accept: "image/*",
+            multiple: ""
+          },
+          on: { change: _vm.onChange }
+        })
+      ]),
+      _vm._v(" "),
+      _vm._l(_vm.computedImages, function(pic) {
+        return _c(
+          "div",
+          { staticClass: "row" },
+          _vm._l(pic, function(slug) {
+            return _c("div", { staticClass: "col-xs-3" }, [
+              _c(
+                "div",
+                {
+                  staticClass: "thumbnail",
+                  class: { "is-thumbnail": slug.is_thumbnail }
+                },
+                [
+                  _c(
+                    "a",
+                    {
+                      attrs: {
+                        href: _vm._f("LINK")(slug.slug),
+                        target: "_blank"
+                      }
+                    },
+                    [
+                      _c("img", {
+                        attrs: { src: _vm._f("SRC")(slug.slug), width: "100%" }
+                      })
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-success btn-xs",
+                      attrs: { type: "button" },
+                      on: {
+                        click: function($event) {
+                          _vm.thumb(slug.slug)
+                        }
+                      }
+                    },
+                    [
+                      _c("span", {
+                        staticClass: "glyphicon glyphicon-thumbs-up"
+                      })
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-danger btn-xs",
+                      attrs: { type: "button" },
+                      on: {
+                        click: function($event) {
+                          _vm.remove(slug.slug)
+                        }
+                      }
+                    },
+                    [_c("span", { staticClass: "glyphicon glyphicon-trash" })]
+                  )
+                ]
+              )
+            ])
+          })
+        )
+      })
+    ],
+    2
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
@@ -43212,23 +43300,29 @@ if (false) {
 }
 
 /***/ }),
-/* 61 */
+/* 60 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
-var Component = __webpack_require__(1)(
-  /* script */
-  __webpack_require__(62),
-  /* template */
-  __webpack_require__(63),
-  /* styles */
-  null,
-  /* scopeId */
-  null,
-  /* moduleIdentifier (server only) */
-  null
+var normalizeComponent = __webpack_require__(0)
+/* script */
+var __vue_script__ = __webpack_require__(61)
+/* template */
+var __vue_template__ = __webpack_require__(62)
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
 )
-Component.options.__file = "C:\\Users\\xu feng\\Desktop\\blog\\resources\\assets\\js\\components\\UpdatePostForm.vue"
+Component.options.__file = "resources\\assets\\js\\components\\UpdatePostForm.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] UpdatePostForm.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -43252,12 +43346,12 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 62 */
+/* 61 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__PostTitleInput_vue__ = __webpack_require__(33);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__PostTitleInput_vue__ = __webpack_require__(34);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__PostTitleInput_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__PostTitleInput_vue__);
 //
 //
@@ -43297,45 +43391,59 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 63 */
+/* 62 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('form', {
-    attrs: {
-      "action": _vm._f("action")(_vm.post.slug),
-      "method": "POST"
-    }
-  }, [_c('input', {
-    attrs: {
-      "type": "hidden",
-      "name": "_method",
-      "value": "PUT"
-    }
-  }), _vm._v(" "), _c('div', {
-    staticClass: "form-group"
-  }, [_c('label', [_vm._v("Title")]), _vm._v(" "), _c('div', {
-    staticClass: "input-group"
-  }, [_c('title-input', {
-    attrs: {
-      "title": _vm.post.title
-    }
-  }), _vm._v(" "), _vm._m(0)], 1)]), _vm._v(" "), _c('div', {
-    staticClass: "form-group"
-  }, [_c('label', [_vm._v("Views: "), _c('span', {
-    staticClass: "badge"
-  }, [_vm._v(_vm._s(_vm.post.views))])])])])
-},staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('span', {
-    staticClass: "input-group-btn"
-  }, [_c('button', {
-    staticClass: "btn btn-success",
-    attrs: {
-      "type": "submit"
-    }
-  }, [_vm._v("update")])])
-}]}
-module.exports.render._withStripped = true
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "form",
+    { attrs: { action: _vm._f("action")(_vm.post.slug), method: "POST" } },
+    [
+      _c("input", { attrs: { type: "hidden", name: "_method", value: "PUT" } }),
+      _vm._v(" "),
+      _c("div", { staticClass: "form-group" }, [
+        _c("label", [_vm._v("Title")]),
+        _vm._v(" "),
+        _c(
+          "div",
+          { staticClass: "input-group" },
+          [
+            _c("title-input", { attrs: { title: _vm.post.title } }),
+            _vm._v(" "),
+            _vm._m(0)
+          ],
+          1
+        )
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "form-group" }, [
+        _c("label", [
+          _vm._v("Views: "),
+          _c("span", { staticClass: "badge" }, [_vm._v(_vm._s(_vm.post.views))])
+        ])
+      ])
+    ]
+  )
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("span", { staticClass: "input-group-btn" }, [
+      _c(
+        "button",
+        { staticClass: "btn btn-success", attrs: { type: "submit" } },
+        [_vm._v("update")]
+      )
+    ])
+  }
+]
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
@@ -43344,23 +43452,29 @@ if (false) {
 }
 
 /***/ }),
-/* 64 */
+/* 63 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
-var Component = __webpack_require__(1)(
-  /* script */
-  __webpack_require__(65),
-  /* template */
-  __webpack_require__(66),
-  /* styles */
-  null,
-  /* scopeId */
-  null,
-  /* moduleIdentifier (server only) */
-  null
+var normalizeComponent = __webpack_require__(0)
+/* script */
+var __vue_script__ = __webpack_require__(64)
+/* template */
+var __vue_template__ = __webpack_require__(65)
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
 )
-Component.options.__file = "C:\\Users\\xu feng\\Desktop\\blog\\resources\\assets\\js\\components\\SearchPostBar.vue"
+Component.options.__file = "resources\\assets\\js\\components\\SearchPostBar.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] SearchPostBar.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -43384,7 +43498,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 65 */
+/* 64 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -43436,43 +43550,61 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 66 */
+/* 65 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('form', {
-    staticClass: "navbar-form navbar-right",
-    attrs: {
-      "id": "post-search-bar"
-    }
-  }, [_c('div', {
-    staticClass: "input-group"
-  }, [_c('input', {
-    staticClass: "form-control",
-    attrs: {
-      "type": "text"
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "form",
+    {
+      staticClass: "navbar-form navbar-right",
+      attrs: { id: "post-search-bar" }
     },
-    on: {
-      "keyup": _vm.search
-    }
-  }), _vm._v(" "), _vm._m(0)]), _vm._v(" "), (_vm.posts) ? _c('div', {
-    staticClass: "list-group"
-  }, _vm._l((_vm.posts), function(post) {
-    return _c('a', {
-      staticClass: "list-group-item",
-      attrs: {
-        "href": _vm._f("LINK")(post.slug)
-      }
-    }, [_vm._v("\n\t\t\t" + _vm._s(post.title) + "\n\t\t")])
-  })) : _vm._e()])
-},staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('span', {
-    staticClass: "input-group-addon"
-  }, [_c('span', {
-    staticClass: "glyphicon glyphicon-search"
-  })])
-}]}
-module.exports.render._withStripped = true
+    [
+      _c("div", { staticClass: "input-group" }, [
+        _c("input", {
+          staticClass: "form-control",
+          attrs: { type: "text" },
+          on: { keyup: _vm.search }
+        }),
+        _vm._v(" "),
+        _vm._m(0)
+      ]),
+      _vm._v(" "),
+      _vm.posts
+        ? _c(
+            "div",
+            { staticClass: "list-group" },
+            _vm._l(_vm.posts, function(post) {
+              return _c(
+                "a",
+                {
+                  staticClass: "list-group-item",
+                  attrs: { href: _vm._f("LINK")(post.slug) }
+                },
+                [_vm._v("\n\t\t\t" + _vm._s(post.title) + "\n\t\t")]
+              )
+            })
+          )
+        : _vm._e()
+    ]
+  )
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("span", { staticClass: "input-group-addon" }, [
+      _c("span", { staticClass: "glyphicon glyphicon-search" })
+    ])
+  }
+]
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
@@ -43481,13 +43613,13 @@ if (false) {
 }
 
 /***/ }),
-/* 67 */
+/* 66 */
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
 
 /***/ }),
-/* 68 */
+/* 67 */
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin

@@ -24,6 +24,11 @@ class UserController extends Controller
         return view('settings.card');
     }
 
+    public function invoices()
+    {
+        return view('settings.invoices');
+    }
+
     public function cancel()
     {
         if(auth()->user()->subscription('main')->cancelled()) return redirect('/settings/subscription');
