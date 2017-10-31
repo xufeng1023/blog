@@ -1,5 +1,6 @@
 <template>
 	<form @submit.prevent="onSubmit">
+		<notify :color="color"></notify>
 		<div class="field has-addons">
 			<div class="control">
 				<div class="select">
@@ -19,10 +20,13 @@
 
 <script>
 	import submit from './Submit.vue';
+
 	export default {
+		props: ['user'],
 		components: {submit},
 		data() {
 			return {
+				color: '',
 				plans: [
 					{plan_id: 'Monthly', name: 'Month', price: '$15.00'},
 					{plan_id: 'Daily', name: 'Daily', price: '$1.00'}
@@ -42,11 +46,18 @@
 
 				formData.append('apiToken', this.user.api_token);
 
-				axios.post(api + 'changePlan/' + this.user.id, formData)
+				axios.post(api + 'resubscribe/' + this.user.id, formData)
 				.then(r => {
-					location.reload();
+					this.color = 'is-success';
+					Bus.$emit('loading-end');
+					Bus.$emit('notify', r.data);
+					setTimeout(() => {
+						location.reload();
+					}, 3000);
+					
 				})
 				.catch(r => {
+					this.color = 'is-danger';
 					Bus.$emit('loading-end');
 					Bus.$emit('notify', r.response.data);
 				});

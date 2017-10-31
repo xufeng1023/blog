@@ -23,7 +23,7 @@
                         Your subscription ended on 
                         {{ auth()->user()->ends_at->format('Y-m-d') }}
                     </h3>
-                    <change-plan :user="{{ auth()->user() }}"></change-plan>
+                    <subscribe :user="{{ auth()->user() }}"></subscribe>
                 @endif
             @else
                 <change-plan :user="{{ auth()->user() }}"></change-plan>
