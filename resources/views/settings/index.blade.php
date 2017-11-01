@@ -7,7 +7,7 @@
             @include('settings.sidebar')
         </div>
         <div class="column is-8 is-offset-1">
-            <h1 class="title is-3">Update Your Account</h1>
+            <h1 class="title is-3">@lang('index.update account')</h1>
             
             @if(session()->has('success'))
                 <notify msg="{{ session('success.msg') }}" color="{{ session('success.color') }}"></notify>
@@ -16,7 +16,7 @@
                 {{ csrf_field() }}
 
                 <div class="field">
-                    <label for="email">E-Mail Address</label>
+                    <label for="email">@lang('index.email')</label>
 
                     <div class="control">
                         <input id="email" type="email" class="input{{ $errors->has('email') ? ' is-danger' : '' }}" name="email" value="{{ old('email')?: auth()->user()->email }}" required>
@@ -29,7 +29,7 @@
                 </div>
 
                 <div class="field">
-                    <label for="password">Password</label>
+                    <label for="password">@lang('index.password')</label>
 
                     <div class="control">
                         <input id="password" type="password" class="input{{ $errors->has('password') ? ' is-danger' : '' }}" name="password">
@@ -42,7 +42,7 @@
                 </div>
 
                 <div class="field">
-                    <label for="password-confirm">Confirm Password</label>
+                    <label for="password-confirm">@lang('index.password2')</label>
 
                     <div class="control">
                         <input id="password-confirm" type="password" class="input" name="password_confirmation">
@@ -51,9 +51,7 @@
 
                 <div class="field">
                     <div class="control">
-                        <button type="submit" class="button is-primary">
-                            Update
-                        </button>
+                        <button type="submit" class="button is-primary">@lang('index.update')</button>
                     </div>
                 </div>
             </form>

@@ -12,7 +12,7 @@
 				</div>
 			</div>
 			<div class="control">
-				<submit text="Subscribe"></submit>
+				<submit :text="btnText"></submit>
 			</div>
 		</div>
 	</form>
@@ -26,6 +26,7 @@
 		components: {submit},
 		data() {
 			return {
+				btnText: window.lan.subscribe,
 				color: '',
 				plans: [
 					{plan_id: 'Monthly', name: 'Month', price: '$15.00'},

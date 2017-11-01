@@ -5,6 +5,8 @@ window.language = {
 		expPlaceholder: '月/年',
 		cvc: '卡后三位数',
 		choose: '选择',
+		update: '更新',
+		subscribe: '订阅',
 		ppv: {
 			id: 'ppv',
 			price: '1.49',

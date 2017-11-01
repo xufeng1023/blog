@@ -7,9 +7,7 @@
             @include('settings.sidebar')
         </div>
         <div class="column is-8 is-offset-1">
-            <h1 class="title is-3">
-                My Invoices 
-            </h1>
+            <h1 class="title is-3">@lang('index.invoices')</h1>
             <invoices :user="{{ auth()->user() }}"></invoices>
         </div>
     </div>

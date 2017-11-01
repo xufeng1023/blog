@@ -2,7 +2,7 @@
 	<form @submit.prevent="update">
 		<notify color="is-danger"></notify>
 		<card></card>
-		<submit text="Update"></submit>
+		<submit :text="btnText"></submit>
 	</form>
 </template>
 
@@ -13,6 +13,11 @@
 	export default {
 		props: ['user'],
 		components: {card, submit},
+		data() {
+			return {
+				btnText: window.lan.update
+			}
+		},
 		methods: {
 			update(e) {
 				Bus.$emit('loading-start');
