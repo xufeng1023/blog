@@ -1,7 +1,7 @@
 <template>
 	<div class="field">
 		<div class="field">
-	    	<label for="card-number">Card Number</label>
+	    	<label for="card-number" v-text="cardNumber"></label>
 	    	<div class="control">
                 <input id="card-number" type="text" class="input" v-model="number" @keyup="formatNumber" @keypress="onKeypress" name="number" required>
             </div>
@@ -9,9 +9,9 @@
 	  	<div class="columns">
 		    <div class="column">
 		      	<div class="field">
-			    	<label for="expiration">Expiration</label>
+			    	<label for="expiration" v-text="cardExp"></label>
 			    	<div class="control">
-				    	<input type="text" class="input" id="expiration" v-model="exp" @keyup="formatExp" @keypress="onKeypress" placeholder="MM/YY" name="expiration" required>
+				    	<input type="text" class="input" id="expiration" v-model="exp" @keyup="formatExp" @keypress="onKeypress" :placeholder="cardExpPlaceholder" name="expiration" required>
 				    	<input type="hidden" name="month" v-model="month">
 				    	<input type="hidden" name="year" v-model="year">
 				    </div>
@@ -19,7 +19,7 @@
 		    </div>
 		    <div class="column">
 		      	<div class="field">
-			    	<label for="cvc">CVC</label>
+			    	<label for="cvc" v-text="cardCvc"></label>
 			    	<div class="control">
 				    	<input type="text" class="input" id="cvc" name="cvc" v-model="cvc" @keyup="formatCvc" @keypress="onKeypress" required>
 				    </div>
@@ -33,6 +33,10 @@
 	export default {
 		data() {
 			return  {
+				cardNumber: window.lan.card,
+				cardExp: window.lan.exp,
+				cardExpPlaceholder: window.lan.expPlaceholder,
+				cardCvc: window.lan.cvc,
 				number: '',
 				exp: '',
 				month: '',

@@ -1,3 +1,4 @@
+require('./lan.js');
 
 window._ = require('lodash');
 
@@ -26,6 +27,9 @@ if (api) {
     api.remove();
 }
 
+let lang = document.querySelector('html').lang;
+window.lan = window.language[lang];
+
 window.Vue = require('vue');
 
 window.Bus = new Vue();
@@ -38,7 +42,6 @@ Vue.component('changePlan', require('./components/front/ChangePlan.vue'));
 Vue.component('updateCard', require('./components/front/UpdateCard.vue'));
 Vue.component('cancel', require('./components/front/Cancel.vue'));
 Vue.component('join', require('./components/front/Join.vue'));
-Vue.component('login', require('./components/front/Login.vue'));
 Vue.component('notify', require('./components/front/Notification.vue'));
 Vue.component('resume', require('./components/front/Resume.vue'));
 Vue.component('subscribe', require('./components/front/Subscribe.vue'));

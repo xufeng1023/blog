@@ -29413,6 +29413,7 @@ module.exports = __webpack_require__(69);
 /* 69 */
 /***/ (function(module, exports, __webpack_require__) {
 
+__webpack_require__(120);
 
 window._ = __webpack_require__(10);
 
@@ -29441,6 +29442,9 @@ if (api) {
 	api.remove();
 }
 
+var lang = document.querySelector('html').lang;
+window.lan = window.language[lang];
+
 window.Vue = __webpack_require__(32);
 
 window.Bus = new Vue();
@@ -29453,7 +29457,6 @@ Vue.component('changePlan', __webpack_require__(83));
 Vue.component('updateCard', __webpack_require__(91));
 Vue.component('cancel', __webpack_require__(96));
 Vue.component('join', __webpack_require__(99));
-Vue.component('login', __webpack_require__(104));
 Vue.component('notify', __webpack_require__(34));
 Vue.component('resume', __webpack_require__(106));
 Vue.component('subscribe', __webpack_require__(109));
@@ -30426,6 +30429,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony default export */ __webpack_exports__["default"] = ({
 	data: function data() {
 		return {
+			cardNumber: window.lan.card,
+			cardExp: window.lan.exp,
+			cardExpPlaceholder: window.lan.expPlaceholder,
+			cardCvc: window.lan.cvc,
 			number: '',
 			exp: '',
 			month: '',
@@ -30467,8 +30474,11 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }, [_c('label', {
     attrs: {
       "for": "card-number"
+    },
+    domProps: {
+      "textContent": _vm._s(_vm.cardNumber)
     }
-  }, [_vm._v("Card Number")]), _vm._v(" "), _c('div', {
+  }), _vm._v(" "), _c('div', {
     staticClass: "control"
   }, [_c('input', {
     directives: [{
@@ -30504,8 +30514,11 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }, [_c('label', {
     attrs: {
       "for": "expiration"
+    },
+    domProps: {
+      "textContent": _vm._s(_vm.cardExp)
     }
-  }, [_vm._v("Expiration")]), _vm._v(" "), _c('div', {
+  }), _vm._v(" "), _c('div', {
     staticClass: "control"
   }, [_c('input', {
     directives: [{
@@ -30518,7 +30531,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     attrs: {
       "type": "text",
       "id": "expiration",
-      "placeholder": "MM/YY",
+      "placeholder": _vm.cardExpPlaceholder,
       "name": "expiration",
       "required": ""
     },
@@ -30580,8 +30593,11 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }, [_c('label', {
     attrs: {
       "for": "cvc"
+    },
+    domProps: {
+      "textContent": _vm._s(_vm.cardCvc)
     }
-  }, [_vm._v("CVC")]), _vm._v(" "), _c('div', {
+  }), _vm._v(" "), _c('div', {
     staticClass: "control"
   }, [_c('input', {
     directives: [{
@@ -30940,20 +30956,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-	props: ['price', 'color', 'plan'],
+	props: ['color', 'plan'],
 	data: function data() {
 		return {
-			chozen: false,
+			chooseText: window.lan.choose,
+			planText: window.lan[this.plan],
+			chozen: '',
 			show: true
 		};
 	},
@@ -30962,15 +30972,23 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 	},
 
 	methods: {
+		onEnter: function onEnter() {
+			this.chozen = this.color;
+		},
+		onLeave: function onLeave() {
+			if (this.show) {
+				this.chozen = '';
+			}
+		},
 		choose: function choose() {
-			this.chozen = true;
+			this.chozen = this.color;
 			this.show = false;
 			this.$refs.radio.checked = true;
 			Bus.$emit('switch', this.plan);
 		},
 		change: function change(plan) {
 			if (plan != this.plan) {
-				this.chozen = false;
+				this.chozen = '';
 				this.show = true;
 				this.$refs.radio.checked = false;
 			}
@@ -30984,38 +31002,24 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('article', {
-    staticClass: "message plan",
-    class: [_vm.color]
+    staticClass: "message hand",
+    class: [_vm.chozen],
+    on: {
+      "click": _vm.choose,
+      "mouseenter": _vm.onEnter,
+      "mouseleave": _vm.onLeave
+    }
   }, [_c('div', {
     staticClass: "message-header fd-v"
-  }, [_c('p', [_vm._v(_vm._s(_vm.plan))]), _vm._v(" "), _c('div', {
+  }, [_c('div', {
     staticClass: "flex"
   }, [_c('sup', {
     staticClass: "is-size-5"
   }, [_vm._v("$")]), _vm._v(" "), _c('span', {
     staticClass: "is-size-1"
-  }, [_vm._v(_vm._s(_vm.price))])])]), _vm._v(" "), _c('div', {
-    staticClass: "message-body"
-  }, [_c('div', {
-    staticClass: "fc fd-v"
-  }, [_c('p', {
-    staticClass: "is-size-6 has-text-grey has-text-weight-semibold"
-  }, [_vm._v("watch all videos")]), _vm._v(" "), _c('p', {
-    staticClass: "is-size-6 has-text-grey has-text-weight-semibold field"
-  }, [_vm._v("billed until cancel")]), _vm._v(" "), _c('button', {
-    staticClass: "button",
-    class: [_vm.color],
-    attrs: {
-      "type": "button"
-    },
-    on: {
-      "click": _vm.choose
-    }
-  }, [(_vm.chozen) ? _c('span', {
-    staticClass: "icon is-small"
-  }, [_c('i', {
-    staticClass: "fa fa-check fa-lg"
-  })]) : _vm._e(), _vm._v(" "), (_vm.show) ? _c('span', [_vm._v("choose")]) : _vm._e()]), _vm._v(" "), _c('input', {
+  }, [_vm._v(_vm._s(_vm.planText.price))])])]), _vm._v(" "), _c('div', {
+    staticClass: "message-body has-text-centered has-text-grey is-size-6"
+  }, [_c('p', [_vm._v(_vm._s(_vm.planText.desc))]), _vm._v(" "), _c('p', [_vm._v(_vm._s(_vm.planText.time))]), _vm._v(" "), _c('p', [_vm._v(_vm._s(_vm.planText.cancel))]), _vm._v(" "), _c('input', {
     ref: "radio",
     staticClass: "is-hidden",
     attrs: {
@@ -31023,9 +31027,9 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "name": "plan"
     },
     domProps: {
-      "value": _vm.plan
+      "value": _vm.planText.id
     }
-  })])])])
+  })])])
 },staticRenderFns: []}
 module.exports.render._withStripped = true
 if (false) {
@@ -31036,85 +31040,8 @@ if (false) {
 }
 
 /***/ }),
-/* 104 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var disposed = false
-var Component = __webpack_require__(1)(
-  /* script */
-  __webpack_require__(105),
-  /* template */
-  null,
-  /* styles */
-  null,
-  /* scopeId */
-  null,
-  /* moduleIdentifier (server only) */
-  null
-)
-Component.options.__file = "C:\\Users\\xu feng\\Desktop\\blog\\resources\\assets\\js\\components\\front\\Login.vue"
-if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
-
-/* hot reload */
-if (false) {(function () {
-  var hotAPI = require("vue-hot-reload-api")
-  hotAPI.install(require("vue"), false)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-5c0ff6fd", Component.options)
-  } else {
-    hotAPI.reload("data-v-5c0ff6fd", Component.options)
-  }
-  module.hot.dispose(function (data) {
-    disposed = true
-  })
-})()}
-
-module.exports = Component.exports
-
-
-/***/ }),
-/* 105 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-//
-
-/* harmony default export */ __webpack_exports__["default"] = ({
-	data: function data() {
-		return {
-			isActive: false,
-			errors: []
-		};
-	},
-
-	methods: {
-		onSubmit: function onSubmit(e) {
-			var _this = this;
-
-			var fm = new FormData(e.target);
-
-			axios.post('/login', fm).then(function (_ref) {
-				var data = _ref.data;
-
-				location.reload();
-			}).catch(function (_ref2) {
-				var response = _ref2.response;
-
-				_this.errors = response.data.errors;
-			});
-		},
-		open: function open() {
-			this.errors = [];
-			this.$refs.form.reset();
-			this.isActive = true;
-		}
-	}
-});
-
-/***/ }),
+/* 104 */,
+/* 105 */,
 /* 106 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -31502,6 +31429,39 @@ if (false) {
      require("vue-hot-reload-api").rerender("data-v-52d47f82", module.exports)
   }
 }
+
+/***/ }),
+/* 115 */,
+/* 116 */,
+/* 117 */,
+/* 118 */,
+/* 119 */,
+/* 120 */
+/***/ (function(module, exports) {
+
+window.language = {
+	zh: {
+		card: '信用卡号',
+		exp: '有效日期',
+		expPlaceholder: '月/年',
+		cvc: '卡后三位数',
+		choose: '选择',
+		ppv: {
+			id: 'ppv',
+			price: '1.49',
+			time: '影片有效期24小时',
+			desc: '只需为观看影片付费',
+			cancel: '无需订阅'
+		},
+		monthly: {
+			id: 'monthly',
+			price: '15',
+			time: '每月自动付款一次',
+			desc: '30天内观看所有影片',
+			cancel: '可以随时取消订阅'
+		}
+	}
+};
 
 /***/ })
 /******/ ]);

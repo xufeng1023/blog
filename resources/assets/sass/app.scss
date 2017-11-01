@@ -17,6 +17,12 @@ hr {
 .navbar.is-black a.navbar-item:hover {
 	background-color: transparent !important;
 }
+a.navbar-item:hover {
+	background-color: inherit;
+}
+a.navbar-item.is-active {
+	background-color: inherit;
+}
 @media screen and (max-width: 1023px) {
 	.navbar-menu {
 		background-color: inherit;
