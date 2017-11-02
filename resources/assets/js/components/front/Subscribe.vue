@@ -30,7 +30,6 @@
 				color: '',
 				plans: [
 					{plan_id: 'Monthly', name: 'Month', price: '$15.00'},
-					{plan_id: 'Daily', name: 'Daily', price: '$1.00'}
 				]
 			}
 		},
@@ -47,7 +46,7 @@
 
 				formData.append('apiToken', this.user.api_token);
 
-				axios.post(api + 'resubscribe/' + this.user.id, formData)
+				axios.post(api + 'subscribe/' + this.user.id, formData)
 				.then(r => {
 					this.color = 'is-success';
 					Bus.$emit('loading-end');

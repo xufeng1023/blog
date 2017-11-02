@@ -2,7 +2,7 @@
 
 Route::get('/', function() {
 	return view('front');
-});
+})->middleware('guest');
 
 Route::get('/movies', 'Front\PostController@index');
 Route::get('/movie/{post}', 'Front\PostController@show');

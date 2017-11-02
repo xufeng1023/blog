@@ -8,7 +8,7 @@
             </td>
 		</tr>
 		<tr v-if="!invoices.length">
-			<td colspan="3">loading...</td>
+			<td colspan="3">{{ status }}</td>
 		</tr>
 	</table>
 </template>
@@ -18,6 +18,7 @@
 		props: ['user'],
 		data() {
 			return {
+				status: 'loading...',
 				invoices: []
 			}
 		},
@@ -29,10 +30,10 @@
 				axios.get(api + 'invoices/' + this.user.id + '?apiToken=' + this.user.api_token)
 				.then(r => {
 					this.invoices = r.data
+					if(!r.data) {
+						this.status = window.lan.noInvoice;
+					}
 				})
-				.catch(r => {
-					
-				});
 			},
 			download(invoiceId) {
 				axios.get(api + 'invoice/' + this.user.id + '?invoiceId=' + invoiceId,

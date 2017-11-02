@@ -4,18 +4,12 @@
 <div class="container">
     <div class="columns">
         <div class="column is-4 is-offset-4">
-            @if (session('status'))
-                <div class="notification is-danger">
-                    <button class="delete"></button>
-                    {{ session('status') }}
-                </div>
-            @endif
-
+            <notify msg="{{ session('status') }}" color="is-success"></notify>
             <form method="POST" action="{{ route('password.email') }}">
                 {{ csrf_field() }}
 
                 <div class="field">
-                    <label for="email" class="has-text-white">E-Mail Address</label>
+                    <label for="email" class="has-text-white">@lang('index.email')</label>
 
                     <div class="control">
                         <input id="email" type="email" class="input{{ $errors->has('email') ? ' is-danger' : '' }}" name="email" value="{{ old('email') }}" required>
@@ -30,9 +24,7 @@
 
                 <div class="field">
                     <div class="control">
-                        <button type="submit" class="button is-primary">
-                            Send Password Reset Link
-                        </button>
+                        <button type="submit" class="button is-primary">@lang('index.send pass link')</button>
                     </div>
                 </div>
             </form>

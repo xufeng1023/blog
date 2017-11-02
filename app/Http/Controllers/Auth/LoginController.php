@@ -44,4 +44,13 @@ class LoginController extends Controller
 
         return redirect($this->redirectTo);
     }
+
+    public function logout(Request $request)
+    {
+        $this->guard()->logout();
+
+        $request->session()->invalidate();
+
+        return redirect($this->redirectTo);
+    }
 }

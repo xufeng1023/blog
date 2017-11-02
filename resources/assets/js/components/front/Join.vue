@@ -6,13 +6,24 @@
 	export default {
 		data() {
 			return {
+				subtotal: '',
 				errors: []
 			}
 		},
 		components: {price, card, submit},
+		created() {
+			Bus.$on('total', price => {
+				this.subtotal = window.lan.total + '$' + price
+			});
+		},
 		methods: {
 			onTop() {
 				window.scrollTo(0, -50000);
+			},
+			endInError(msg) {
+				this.onTop();
+				Bus.$emit('loading-end');
+				Bus.$emit('notify', msg);
 			},
 			onSubmit(e) {
 				Bus.$emit('loading-start');
@@ -22,14 +33,13 @@
 				let formData = new FormData(e.target);
 
 				if(formData.has('plan') === false) {
-					this.onTop();
-					Bus.$emit('loading-end');
-					return this.errors = {plan: 'Choose a plan!'};
+					this.endInError(window.lan.chooseAPlan);
+					return false;
 				}
-
+				
 				if(!formData.get('expiration').includes('/')) {
-					Bus.$emit('loading-end');
-					return this.errors = {card: 'Invalid expiration date!'};
+					this.endInError(window.lan.badCardInfo);
+					return false;
 				}
 
 				axios.post(api + 'token', formData)
@@ -46,25 +56,26 @@
 						})
 						.catch(({response}) => {
 							axios.delete('/user/delete')
-							this.onTop();
-							this.errors = {plan: 'Sorry! Payment failed, please refresh the page and try again.'};
-							Bus.$emit('loading-end');
+							this.endInError(window.lan.payFailed);
 						})
 					})
 					.catch(({response}) => {
 						axios.delete('/user/delete')
 						if(response.data.errors) {
-							this.errors = response.data.errors;
-						} else {
-							this.onTop();
-							this.errors = {plan: 'Sorry! Payment failed, please refresh the page and try again.'};
+							var msg = window.lan.passWrong;
+							if(response.data.errors.email) {
+								msg = window.lan.emailWrong;
+							}
+							this.endInError(msg);
 						}
-						Bus.$emit('loading-end');
 					})
 				})
 				.catch(({response}) => {
-					this.errors = response.data
-					Bus.$emit('loading-end');
+					var msg = window.lan.badCardInfo;
+					if(response.data.plan) {
+						msg = window.lan.chooseAPlan;
+					}
+					this.endInError(msg);
 				})
 			}
 		}

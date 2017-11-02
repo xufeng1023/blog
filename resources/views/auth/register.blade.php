@@ -4,10 +4,10 @@
 <div class="container">
     <div class="columns is-centered">
         <div class="column is-narrow">
-            <h1 class="title is-4 has-text-centered">@lang('index.selectplan')</h1>
+            <h1 class="title is-5 has-text-centered">@lang('index.selectplan')</h1>
             <join inline-template>
-                <form method="POST" @submit.prevent="onSubmit">
-                    <div class="notification is-danger" v-if="errors.plan" v-text="errors.plan"></div>
+                <form method="POST" autocomplete="off" @submit.prevent="onSubmit">
+                    <notify color="is-danger"></notify>
                     <div class="columns is-mobile">
                         <div class="column">
                             <price color="is-primary" plan="ppv"></price>
@@ -40,8 +40,13 @@
                     </div>
                     <hr>
                     <div class="notification is-danger" v-if="errors.card" v-text="errors.card"></div>
+                    <div class="field">
+                        <label v-text="subtotal"></label>
+                    </div>
                     <card></card>
-
+                    <div class="field">
+                        <small class="has-text-grey">*@lang('index.cc safe desc')</small>
+                    </div>
                     <div class="field">
                         <div class="control">
                             <submit text="{{ __('index.join') }}" class="is-fullwidth"></submit>

@@ -46,7 +46,7 @@
 		},
 		methods: {
 			formatNumber() {
-				this.number = this.number.replace(/\D/g, '').replace(/(\d{4})/g, '$1 ').substr(0, 19);
+				this.number = this.number.replace(/\D/g, '').substr(0, 16);
 			},
 			formatExp() {
 				this.exp = this.exp.replace(/\D/g, '').replace(/(\d{1,2})(\d{2})/, '$1/$2').substr(0, 5);

@@ -6,13 +6,15 @@
         <li>
             <a href="/settings/card" class="{{ $uri == 'settings/card'? 'is-active':'' }}">@lang('index.update cc')</a>
         </li>
-        <li>
-            <a href="/settings/subscription" class="{{ $uri == 'settings/subscription'? 'is-active':'' }}">@lang('index.subscription')</a>
-        </li>
+        @if(auth()->user()->subscription('main'))
+            <li>
+                <a href="/settings/subscription" class="{{ $uri == 'settings/subscription'? 'is-active':'' }}">@lang('index.subscription')</a>
+            </li>
+        @endif
         <li>
             <a href="/settings/invoices" class="{{ $uri == 'settings/invoices'? 'is-active':'' }}">@lang('index.invoices')</a>
         </li>
-        @if(!auth()->user()->subscription('main')->cancelled())
+        @if(auth()->user()->subscription('main') && !auth()->user()->subscription('main')->cancelled())
             <li>
                 <a href="/settings/cancel" class="{{ $uri == 'settings/cancel'? 'is-active':'' }}">@lang('index.cancel sub')</a>
             </li>

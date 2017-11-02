@@ -3,7 +3,7 @@
         <div class="message-header fd-v">
             <div class="flex">
                 <sup class="is-size-5">$</sup>
-                <span class="is-size-1">{{ planText.price }}</span>
+                <span class="is-size-1">{{ planText.price }}<sub class="is-size-5">/{{ planText.unit }}</sub></span>
             </div>
         </div>
         <div class="message-body has-text-centered has-text-grey is-size-6">
@@ -42,6 +42,7 @@
 				this.show = false;
 				this.$refs.radio.checked = true;
 				Bus.$emit('switch', this.plan);
+				Bus.$emit('total', this.planText.label);
 			},
 			change(plan) {
 				if(plan != this.plan) {
