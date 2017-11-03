@@ -8,22 +8,18 @@
 			autoplay 
 		>
 	    </video>
-	    <notification :msg="msg" color="is-danger"></notification>
+	    <notify color="is-danger"></notify>
 	</div>
 	
 </template>
 
 <script>
-	import notification from './Notification.vue';
-
 	export default {
 		props: ['preview', 'post'],
-		components: {notification},
 		data() {
 			return {
 				now: null,
 				video: null,
-				msg: ''
 			}
 		},
 		watch: {
@@ -51,10 +47,6 @@
 				});
 			});
 
-			this.video.on('ended', () => {
-				this.next();
-			});
-
 			Bus.$on('play', video => {
 				this.now = video;
 			})
@@ -67,13 +59,11 @@
 						type: "video/mp4",
 						src: '/video/' + this.now.slug + '?' + Math.random().toString(36).substring(2)
 					});
-
-					this.msg = '';
 				})
 				.catch( (e) => {
 					if(e.response.status === 404) return;
 
-					this.msg = e.response.data;
+					Bus.$emit('notify', e.response.data);
 					this.video.reset();
 
 					if(this.now.thumbnail) {
@@ -82,10 +72,6 @@
 				})
 				
 				Bus.$emit('nowPlaying', this.now.slug);
-			},
-			next() {
-				this.now.slug = this.now.slug.replace(/\d+$/, num => { return ++num });
-				this.load();
 			},
 			updatePostViews() {
 				axios.post('/post/'+this.post+'/updateViews');

@@ -14,6 +14,8 @@ window.language = {
 		emailWrong: '邮箱已经被使用或无效',
 		payFailed: '付款失败, 可以尝试重试并且确保信用卡有效',
 		noInvoice: '目前无任何付款记录',
+		preview: '可预览',
+		notFree: '会员观看',
 		ppv: {
 			id: 'ppv',
 			price: '1.49',

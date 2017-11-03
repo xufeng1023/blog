@@ -29511,6 +29511,8 @@ window.language = {
 		emailWrong: '邮箱已经被使用或无效',
 		payFailed: '付款失败, 可以尝试重试并且确保信用卡有效',
 		noInvoice: '目前无任何付款记录',
+		preview: '可预览',
+		notFree: '会员观看',
 		ppv: {
 			id: 'ppv',
 			price: '1.49',
@@ -29589,11 +29591,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
 	props: ['video'],
 	data: function data() {
 		return {
+			previewText: window.lan.notFree,
 			playing: false,
 			mouseLeft: true
 		};
@@ -29639,7 +29643,9 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       expression: "mouseLeft"
     }],
     staticClass: "playing fc is-overlay"
-  }, [_vm._m(0)]) : _vm._e()])
+  }, [_vm._m(0)]) : _vm._e(), _vm._v(" "), (!_vm.video.is_free) ? _c('span', {
+    staticClass: "tag preview is-danger"
+  }, [_vm._v(_vm._s(_vm.previewText))]) : _vm._e()])
 },staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('span', {
     staticClass: "icon has-text-danger"
@@ -29701,8 +29707,6 @@ module.exports = Component.exports
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Notification_vue__ = __webpack_require__(34);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Notification_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__Notification_vue__);
 //
 //
 //
@@ -29718,17 +29722,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-
-
 
 /* harmony default export */ __webpack_exports__["default"] = ({
 	props: ['preview', 'post'],
-	components: { notification: __WEBPACK_IMPORTED_MODULE_0__Notification_vue___default.a },
 	data: function data() {
 		return {
 			now: null,
-			video: null,
-			msg: ''
+			video: null
 		};
 	},
 
@@ -29759,10 +29759,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 			});
 		});
 
-		this.video.on('ended', function () {
-			_this.next();
-		});
-
 		Bus.$on('play', function (video) {
 			_this.now = video;
 		});
@@ -29777,12 +29773,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 					type: "video/mp4",
 					src: '/video/' + _this2.now.slug + '?' + Math.random().toString(36).substring(2)
 				});
-
-				_this2.msg = '';
 			}).catch(function (e) {
 				if (e.response.status === 404) return;
 
-				_this2.msg = e.response.data;
+				Bus.$emit('notify', e.response.data);
 				_this2.video.reset();
 
 				if (_this2.now.thumbnail) {
@@ -29791,12 +29785,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 			});
 
 			Bus.$emit('nowPlaying', this.now.slug);
-		},
-		next: function next() {
-			this.now.slug = this.now.slug.replace(/\d+$/, function (num) {
-				return ++num;
-			});
-			this.load();
 		},
 		updatePostViews: function updatePostViews() {
 			axios.post('/post/' + this.post + '/updateViews');
@@ -29889,9 +29877,8 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "controls": "",
       "autoplay": ""
     }
-  }), _vm._v(" "), _c('notification', {
+  }), _vm._v(" "), _c('notify', {
     attrs: {
-      "msg": _vm.msg,
       "color": "is-danger"
     }
   })], 1)

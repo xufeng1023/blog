@@ -8,6 +8,8 @@ class Post extends Model
 {
     protected $fillable = ['title', 'slug', 'views'];
 
+    protected $with = ['images', 'videos'];
+
     public function getRouteKeyName()
     {
         return 'slug';
@@ -41,11 +43,6 @@ class Post extends Model
         return $this;
     }
 
-    public function videoSlug()
-    {
-        return $this->slug.'-'.($this->videos()->count() + 1);
-    }
-
     public function getPreview()
     {
         $video = $this->videos()->orderBy('is_free', 'desc')->first();
@@ -57,5 +54,20 @@ class Post extends Model
     {
         $this->increment('views');
         $this->save();
+    }
+
+    public function getPreviewAttribute()
+    {
+        $video = $this->videos->where('is_free', 1)->first();
+
+        if(!$video) $video = $this->videos->first();
+
+        return $video? $video : null;
+    }
+
+    public function getThumbnailAttribute()
+    {
+        $image = $this->images->where('is_thumbnail', 1)->first();
+        return $image? $image->slug : null;
     }
 }

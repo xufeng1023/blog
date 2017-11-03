@@ -22,9 +22,9 @@ class VideoController extends Controller
     {
         if($video->is_free) return $video->slug;
         
-        if(!auth()->user()) return response('Please login to your account to watch paid videos.', 401);
+        if(!auth()->user()) return response(__('index.need to login'), 401);
 
-        if(!auth()->user()->subscribed('main')) return response('Please renew your membership before watching paid videos.', 402);
+        if(!auth()->user()->subscribed('main')) return response(__('index.expired'), 402);
 
         return $video->slug;
     }

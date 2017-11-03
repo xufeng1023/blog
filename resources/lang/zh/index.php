@@ -7,6 +7,8 @@ return [
 	'Iswear' => '本人承诺是以所在地区的合法年龄进入本网站并且自愿浏览网站的内容.',
 	'desc' => '成人色情电影A片',
 	'movies' => '全部影片',
+	'clips' => '影片',
+	'shots' => '图片',
 	'login' => '登入',
 	'join' => '加入',
 	'logout' => '退出',
@@ -31,6 +33,8 @@ return [
 	'cancel sub' => '取消订阅',
 	'update' => '更新',
 	'cc safe desc' => '本网站在数据处理, 认证和支付过程中使用安全协议和SSL加密.',
-
+	'preview' => '可预览',
+	'need to login' => '请登入账号观看本影片',
+	'expired' => '请续费会员或购买本影片',
 
 ];

@@ -10850,6 +10850,13 @@ hr {
   border-bottom: 1px solid #504f4f;
 }
 
+.tag.preview {
+  position: absolute;
+  border-radius: inherit;
+  bottom: 0;
+  right: 0;
+}
+
 .button.is-link {
   text-decoration: none;
 }

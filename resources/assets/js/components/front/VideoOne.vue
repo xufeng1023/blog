@@ -6,6 +6,7 @@
 				<i class="fa fa-youtube-play fa-3x"></i>
 			</span>
 		</div>
+		<span class="tag preview is-danger" v-if="!video.is_free">{{ previewText }}</span>
 	</figure>
 </template>
 
@@ -14,6 +15,7 @@
 		props: ['video'],
 		data() {
 			return {
+				previewText: window.lan.notFree,
 				playing: false,
 				mouseLeft: true 
 			}

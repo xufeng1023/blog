@@ -10,23 +10,18 @@ class PostController extends Controller
 {
     public function index()
     {
-    	$posts = Post::with(['images' => function($query) {
-    		$query->where('is_thumbnail', 1);
-    	}])->latest()->paginate(16);
+    	$posts = Post::latest()->paginate(16);
 
     	return view('movies', compact('posts'));
     }
 
     public function show(Post $post)
     {
-    	$post->load(['images', 'videos.thumbnail']);
-
-        $preview = $post->getPreview();
-
         if(app()->environment() === 'testing') {
-            return [$post, $preview];
+            return [$post, $post->preview];
         }
-    	return view('movie', compact('post', 'preview'));
+
+    	return view('movie', compact('post'));
     }
 
     public function updateViews(Post $post)

@@ -9,6 +9,8 @@ class Video extends Model
 {
     protected $fillable = ['post_id', 'slug', 'link'];
 
+    protected $with = ['thumbnail'];
+
     public function getRouteKeyName()
     {
         return 'slug';
@@ -62,13 +64,6 @@ class Video extends Model
     {
         $this->is_free = 0;
         $this->save();
-    }
-
-    public function nextVideoSlug()
-    {
-        return preg_replace_callback('/(\d+)$/', function($matches) {
-            return ++$matches[1];
-        }, $this->slug);
     }
 
     public function play()
