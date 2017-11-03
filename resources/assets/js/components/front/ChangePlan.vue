@@ -1,7 +1,7 @@
 <template>
 	<form @submit.prevent="change">
 		<notify color="is-danger"></notify>
-		<plans :current="this.user.plan"></plans>
+		<plans current="monthly"></plans>
 	</form>
 </template>
 
@@ -10,7 +10,6 @@
 	
 
 	export default {
-		props: ['user'],
 		components: {plans},
 		methods: {
 			change(e) {
@@ -23,9 +22,9 @@
 					return;
 				}
 
-				formData.append('apiToken', this.user.api_token);
+				formData.append('apiToken', auth.api_token);
 
-				axios.post(api + 'changePlan/' + this.user.id, formData)
+				axios.post(api + 'changePlan/' + auth.id, formData)
 				.then(r => {
 					location.reload();
 				})

@@ -19,7 +19,7 @@
                     <label for="email">@lang('index.email')</label>
 
                     <div class="control">
-                        <input id="email" type="email" class="input{{ $errors->has('email') ? ' is-danger' : '' }}" name="email" value="{{ old('email')?: auth()->user()->email }}" required>
+                        <input id="email" type="email" class="input{{ $errors->has('email') ? ' is-danger' : '' }}" name="email" value="{{ old('email')?: $auth->email }}" required>
                     </div>
                     @if ($errors->has('email'))
                         <p class="help is-danger">

@@ -23,8 +23,7 @@
 		data() {
 			return {
 				plans: [
-					{plan_id: 'Monthly', name: 'Month', price: '$15.00'},
-					{plan_id: 'Daily', name: 'Daily', price: '$1.00'}
+					{plan_id: 'monthly', name: 'Month', price: '$15.00'},
 				]
 			}
 		},

@@ -11,7 +11,6 @@
 	import submit from './Submit.vue';
 	
 	export default {
-		props: ['user'],
 		components: {card, submit},
 		data() {
 			return {
@@ -22,15 +21,15 @@
 			update(e) {
 				Bus.$emit('loading-start');
 				let formData = new FormData(e.target);
-				formData.append('apiToken', this.user.api_token);
+				formData.append('apiToken', auth.api_token);
 
-				axios.post(api + 'updateCard/' + this.user.id, formData)
+				axios.post(api + 'updateCard/' + auth.id, formData)
 				.then(r => {
 					location.reload();
 				})
 				.catch(r => {
 					Bus.$emit('loading-end');
-					Bus.$emit('notify', r.response.data);
+					Bus.$emit('notify', window.lan.badCardInfo);
 				});
 			}
 		}

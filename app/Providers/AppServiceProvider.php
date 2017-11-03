@@ -20,6 +20,8 @@ class AppServiceProvider extends ServiceProvider
             ['*'],
             function($view) {
                 $view->with('uri', \Route::current()->uri);
+
+                $view->with('auth', auth()->user() ?: null);
             }
         );
     }

@@ -56,7 +56,6 @@ class PostController extends Controller
      */
     public function edit(Post $post)
     {   
-        $post->load('videos.thumbnail')->get();
         return view('admin.post', compact('post'));
     }
 

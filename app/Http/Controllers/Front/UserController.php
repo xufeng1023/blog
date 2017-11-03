@@ -57,7 +57,7 @@ class UserController extends Controller
     		$user->save();
     	});
 
-        return back()->with('success.msg', 'Your account has been updated!')
+        return back()->with('success.msg', __('index.account updated'))
                     ->with('success.color', 'is-success');
     }
 

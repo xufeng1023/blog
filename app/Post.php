@@ -70,4 +70,9 @@ class Post extends Model
         $image = $this->images->where('is_thumbnail', 1)->first();
         return $image? $image->slug : null;
     }
+    // admin
+    public function videoSlug()
+    {
+        return $this->slug . '-' .($this->videos->count() + 1);
+    } 
 }

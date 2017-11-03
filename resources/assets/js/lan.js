@@ -16,6 +16,9 @@ window.language = {
 		noInvoice: '目前无任何付款记录',
 		preview: '可预览',
 		notFree: '会员观看',
+		playing: '播放中...',
+		memberOnly: '请先登入账号或续费',
+		cancel: '取消订阅',
 		ppv: {
 			id: 'ppv',
 			price: '1.49',

@@ -15,7 +15,6 @@
 
 <script>
 	export default {
-		props: ['user'],
 		data() {
 			return {
 				status: 'loading...',
@@ -27,16 +26,19 @@
 		},
 		methods: {
 			fetch() {
-				axios.get(api + 'invoices/' + this.user.id + '?apiToken=' + this.user.api_token)
+				axios.get(api + 'invoices/' + auth.id + '?apiToken=' + auth.api_token)
 				.then(r => {
 					this.invoices = r.data
 					if(!r.data) {
 						this.status = window.lan.noInvoice;
 					}
 				})
+				.catch(r => {
+					this.status = window.lan.noInvoice;
+				})
 			},
 			download(invoiceId) {
-				axios.get(api + 'invoice/' + this.user.id + '?invoiceId=' + invoiceId,
+				axios.get(api + 'invoice/' + auth.id + '?invoiceId=' + invoiceId,
 				{
 				    responseType: 'blob'
 				})

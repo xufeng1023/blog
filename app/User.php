@@ -12,13 +12,9 @@ class User extends Authenticatable
 {
     use Notifiable, Billable, HasApiTokens;
 
-    protected $fillable = [
-        'name', 'email', 'password',
-    ];
+    protected $fillable = ['email', 'password'];
 
-    protected $appends = ['plan', 'ends_at'];
-
-    protected $visible = ['api_token', 'email', 'id', 'name', 'plan'];
+    protected $visible = ['api_token', 'email', 'id', 'plan'];
 
     public function saveApiToken()
     {

@@ -31,10 +31,12 @@ return [
 	'sub ended' => '您的订阅已经在:date过期',
 	'invoices' => '付费历史',
 	'cancel sub' => '取消订阅',
+	'cancel desc' => '感谢您对本网站的支持, 希望能够再次为您服务.',
 	'update' => '更新',
 	'cc safe desc' => '本网站在数据处理, 认证和支付过程中使用安全协议和SSL加密.',
 	'preview' => '可预览',
 	'need to login' => '请登入账号观看本影片',
 	'expired' => '请续费会员或购买本影片',
+	'account updated' => '账号更新完成',
 
 ];

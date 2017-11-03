@@ -2,11 +2,9 @@
 	<figure class="image is-16by9 border-3 hand sd" @click="play" @mouseleave="mouseLeft = true" @mouseover="mouseLeft = false">
 		<img :src="video.thumbnail.slug | FILE">
 		<div class="playing fc is-overlay" v-if="playing" v-show="mouseLeft">
-			<span class="icon has-text-danger">
-				<i class="fa fa-youtube-play fa-3x"></i>
-			</span>
+			<span class="has-text-danger" v-text="playingText"></span>
 		</div>
-		<span class="tag preview is-danger" v-if="!video.is_free">{{ previewText }}</span>
+		<span class="tag preview is-danger" v-if="memberOnly">{{ previewText }}</span>
 	</figure>
 </template>
 
@@ -16,17 +14,24 @@
 		data() {
 			return {
 				previewText: window.lan.notFree,
+				memberOnly: !this.video.is_free && !window.member,
+				playingText: window.lan.playing,
 				playing: false,
 				mouseLeft: true 
 			}
 		},
 		created() {
-			Bus.$on('nowPlaying', function(data) {
-				this.playing = this.video.slug != data ? true : false
-			}.bind(this));
+			Bus.$on('nowPlaying', slug => {
+				this.playing = this.video.slug == slug ? true : false
+			});
 		},
 		methods: {
 			play() {
+				if(this.memberOnly) {
+					Bus.$emit('notify', window.lan.memberOnly);
+					return;
+				}
+
 				Bus.$emit('play', this.video)
 			}
 		}

@@ -5,8 +5,10 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <meta name="api-token" content="{{ env('API_TOKEN') }}">
-    <meta name="api" content="{{ env('API') }}">
+    <meta name="api-token" content="{{ config('app.api_token') }}">
+    <meta name="api" content="{{ config('app.api') }}">
+    <meta name="auth" content="{{ $auth }}">
+    <meta name="member" content="{{ $auth? $auth->subscribed('main') : false }}">
     <title>{{ config('app.name', 'Laravel') }}-@lang('index.desc')</title>
     @yield('style')
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
@@ -26,12 +28,11 @@
                             <span></span>
                         </div>
                     </div>
-                    @if (Route::has('login'))
                     <div id="navMenu" class="navbar-menu">
                         <div class="navbar-end">
                             <a class="navbar-item {{ $uri == 'movies'? 'is-active':'' }}" href="/movies">@lang('index.movies')</a>
                             @auth
-                                <a class="navbar-item" href="/settings">@lang('index.settings')</a>
+                                <a class="navbar-item {{ $uri == 'settings'? 'is-active':'' }}" href="/settings">@lang('index.settings')</a>
                                 <a class="navbar-item" href="/logout" onclick="event.preventDefault();
                                          document.getElementById('logout-form').submit();">
                                     @lang('index.logout')
@@ -39,7 +40,7 @@
                                 <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                     {{ csrf_field() }}
                                 </form>
-                                @if(auth()->user()->is_admin)
+                                @if($auth->is_admin)
                                     <a class="navbar-item" href="/admin">admin</a>
                                 @endif
                             @else
@@ -50,7 +51,6 @@
                             @endauth
                         </div>
                     </div>
-                    @endif
                 </nav>
             </div>
         @endif
