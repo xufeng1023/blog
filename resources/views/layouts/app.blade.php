@@ -32,7 +32,7 @@
                         <div class="navbar-end">
                             <a class="navbar-item {{ $uri == 'movies'? 'is-active':'' }}" href="/movies">@lang('index.movies')</a>
                             @auth
-                                <a class="navbar-item {{ $uri == 'settings'? 'is-active':'' }}" href="/settings">@lang('index.settings')</a>
+                                <a class="navbar-item {{ starts_with($uri, 'settings')? 'is-active':'' }}" href="/settings">@lang('index.settings')</a>
                                 <a class="navbar-item" href="/logout" onclick="event.preventDefault();
                                          document.getElementById('logout-form').submit();">
                                     @lang('index.logout')

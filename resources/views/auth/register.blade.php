@@ -19,17 +19,15 @@
                     <div class="field">
                         <label for="email">@lang('index.email')</label>
                         <div class="control">
-                            <input id="email" type="email" class="input" :class="{'is-danger': errors.email}" name="email" required>
+                            <input id="email" type="email" class="input" name="email" required>
                         </div>
-                        <p class="help is-danger" v-if="errors.email" v-text="errors.email[0]"></p>
                     </div>
 
                     <div class="field">
                         <label for="password">@lang('index.password')</label>
                         <div class="control">
-                            <input id="password" type="password" class="input" :class="{'is-danger': errors.password}" name="password" required>
+                            <input id="password" type="password" class="input" name="password" required>
                         </div>
-                        <p class="help is-danger" v-if="errors.password" v-text="errors.password[0]"></p>
                     </div>
 
                     <div class="field">
@@ -39,9 +37,8 @@
                         </div>
                     </div>
                     <hr>
-                    <div class="notification is-danger" v-if="errors.card" v-text="errors.card"></div>
                     <div class="field">
-                        <label v-text="subtotal"></label>
+                        <label v-html="subtotal"></label>
                     </div>
                     <card></card>
                     <div class="field">

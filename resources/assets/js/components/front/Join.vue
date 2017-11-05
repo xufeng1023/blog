@@ -7,13 +7,12 @@
 		data() {
 			return {
 				subtotal: '',
-				errors: []
 			}
 		},
 		components: {price, card, submit},
 		created() {
 			Bus.$on('total', price => {
-				this.subtotal = window.lan.total + '$' + price
+				this.subtotal = window.lan.total + '<span class="tag is-info">$' + price + '</span>';
 			});
 		},
 		methods: {
@@ -27,8 +26,6 @@
 			},
 			onSubmit(e) {
 				Bus.$emit('loading-start');
-
-				this.errors = [];
 
 				let formData = new FormData(e.target);
 

@@ -54,6 +54,7 @@ Vue.component('notify', require('./components/front/Notification.vue'));
 Vue.component('resume', require('./components/front/Resume.vue'));
 Vue.component('subscribe', require('./components/front/Subscribe.vue'));
 Vue.component('invoices', require('./components/front/Invoices.vue'));
+Vue.component('ppv', require('./components/front/Ppv.vue'));
 
 Vue.filter('FILE', (value) => { return '/storage/' + value; });
 

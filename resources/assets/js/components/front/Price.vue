@@ -7,9 +7,12 @@
             </div>
         </div>
         <div class="message-body has-text-centered has-text-grey is-size-6">
-            <p>{{ planText.desc }}</p>
-            <p>{{ planText.time }}</p>
-            <p>{{ planText.cancel }}</p>
+        	<div class="field">
+	            <p>{{ planText.desc }}</p>
+	            <p>{{ planText.time }}</p>
+	            <p>{{ planText.cancel }}</p>
+			</div>
+            <button type="button" class="button btn-default" v-text="chooseText"></button>
             <input type="radio" name="plan" class="is-hidden" :value="planText.id" ref="radio">
         </div>
     </article>

@@ -10,11 +10,11 @@
 
 <script>
 	export default {
-		props: ['video'],
+		props: ['video', 'can'],
 		data() {
 			return {
 				previewText: window.lan.notFree,
-				memberOnly: !this.video.is_free && !window.member,
+				memberOnly: !this.video.is_free && !window.member && !this.can,
 				playingText: window.lan.playing,
 				playing: false,
 				mouseLeft: true 

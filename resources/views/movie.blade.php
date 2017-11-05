@@ -6,45 +6,58 @@
 
 @section('content')
 <div class="container">
-        <div class="columns">
-            <div class="column is-two-thirds">
-                @if($post->preview) 
-                    <video-frame post="{{ $post->slug }}" :preview="{{ $post->preview }}"></video-frame>
+    <div class="columns">
+        <div class="column is-two-thirds">
+            @if($post->preview) 
+                <video-frame post="{{ $post->slug }}" :preview="{{ $post->preview }}"></video-frame>
+            @endif
+            <div class="columns">
+                @if(!$auth || $canWatch)
+                    <div class="column">
+                @else
+                    <div class="column is-10">
                 @endif
-                <h1 class="title is-3">{{ $post->title }}</h1>
-                <h2 class="has-text-7">@lang('index.clips')</h2><hr>
-                <div class="columns">
-                    @foreach($post->videos as $video)
-                        @if($video->thumbnail)
-                            <div class="column is-one-quarter">
-                                <video-one :video="{{ $video }}"></video-one>
-                            </div>
-                        @endif
-                    @endforeach
-                </div><br>
-                <h2 class="has-text-7">@lang('index.shots')</h2><hr>
-                @foreach($post->images->chunk(4) as $chunks)
-                    <div class="columns">
-                        @foreach($chunks as $image)
-                            <div class="column is-one-quarter">
-                                <image-one :image="{{ $image }}"></image-one>
-                            </div>
-                        @endforeach
-                    </div>
-                @endforeach
-            </div>
-        </div>
-        <image-modal inline-template>
-            <div class="modal" :class="{'is-active': isActive}" id="viewImageModal">
-                <div class="modal-background" @click="isActive = false"></div>
-                <div class="modal-content">
-                    <p class="image">
-                        <img :src="src | FILE" width="100%" v-if="src">
-                    </p>
+                    <h1 class="title is-4">{{ $post->title }}</h1>
                 </div>
-                <button class="modal-close is-large" aria-label="close" @click="isActive = false"></button>
+                @if($auth && !$canWatch)
+                    <div class="column is-2">
+                        <ppv post="{{ $post->slug }}"></ppv>
+                    </div>
+                @endif
             </div>
-        </image-modal>
+            <h2 class="has-text-7">@lang('index.clips')</h2><hr>
+            <div class="columns">
+                @foreach($post->videos as $video)
+                    @if($video->thumbnail)
+                        <div class="column is-one-quarter">
+                            <video-one :video="{{ $video }}" can="{{ $canWatch }}"></video-one>
+                        </div>
+                    @endif
+                @endforeach
+            </div><br>
+            <h2 class="has-text-7">@lang('index.shots')</h2><hr>
+            @foreach($post->images->chunk(4) as $chunks)
+                <div class="columns">
+                    @foreach($chunks as $image)
+                        <div class="column is-one-quarter">
+                            <image-one :image="{{ $image }}"></image-one>
+                        </div>
+                    @endforeach
+                </div>
+            @endforeach
+        </div>
+    </div>
+    <image-modal inline-template>
+        <div class="modal" :class="{'is-active': isActive}" id="viewImageModal">
+            <div class="modal-background" @click="isActive = false"></div>
+            <div class="modal-content">
+                <p class="image">
+                    <img :src="src | FILE" width="100%" v-if="src">
+                </p>
+            </div>
+            <button class="modal-close is-large" aria-label="close" @click="isActive = false"></button>
+        </div>
+    </image-modal>
 </div>
 @endsection
 

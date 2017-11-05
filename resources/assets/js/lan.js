@@ -19,6 +19,8 @@ window.language = {
 		playing: '播放中...',
 		memberOnly: '请先登入账号或续费',
 		cancel: '取消订阅',
+		ppvBtn: '购买影片',
+		paid: '感谢您的消费, 马上为您刷新页面...',
 		ppv: {
 			id: 'ppv',
 			price: '1.49',

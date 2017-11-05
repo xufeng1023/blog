@@ -14,12 +14,19 @@ class User extends Authenticatable
 
     protected $fillable = ['email', 'password'];
 
-    protected $visible = ['api_token', 'email', 'id', 'plan'];
+    protected $appends = ['plan'];
+
+    protected $visible = ['api_token', 'email', 'id', 'plan', 'card_last_four'];
 
     public function saveApiToken()
     {
         $this->api_token = str_random(60);
         $this->save();
+    }
+
+    public function ppvs()
+    {
+        return $this->hasMany(Ppv::class);
     }
 
     public function getPlanAttribute()

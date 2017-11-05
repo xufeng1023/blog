@@ -21,7 +21,9 @@ class PostController extends Controller
             return [$post, $post->preview];
         }
 
-    	return view('movie', compact('post'));
+        $canWatch = auth()->user()? auth()->user()->can('watch', $post) : false;
+
+    	return view('movie', compact('post', 'canWatch'));
     }
 
     public function updateViews(Post $post)

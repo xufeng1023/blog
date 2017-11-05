@@ -29429,6 +29429,7 @@ Vue.component('notify', __webpack_require__(102));
 Vue.component('resume', __webpack_require__(105));
 Vue.component('subscribe', __webpack_require__(108));
 Vue.component('invoices', __webpack_require__(111));
+Vue.component('ppv', __webpack_require__(118));
 
 Vue.filter('FILE', function (value) {
 	return '/storage/' + value;
@@ -29484,6 +29485,8 @@ window.language = {
 		playing: '播放中...',
 		memberOnly: '请先登入账号或续费',
 		cancel: '取消订阅',
+		ppvBtn: '购买影片',
+		paid: '感谢您的消费, 马上为您刷新页面...',
 		ppv: {
 			id: 'ppv',
 			price: '1.49',
@@ -29563,11 +29566,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-	props: ['video'],
+	props: ['video', 'can'],
 	data: function data() {
 		return {
 			previewText: window.lan.notFree,
-			memberOnly: !this.video.is_free && !window.member,
+			memberOnly: !this.video.is_free && !window.member && !this.can,
 			playingText: window.lan.playing,
 			playing: false,
 			mouseLeft: true
@@ -30759,8 +30762,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony default export */ __webpack_exports__["default"] = ({
 	data: function data() {
 		return {
-			subtotal: '',
-			errors: []
+			subtotal: ''
 		};
 	},
 
@@ -30769,7 +30771,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 		var _this = this;
 
 		Bus.$on('total', function (price) {
-			_this.subtotal = window.lan.total + '$' + price;
+			_this.subtotal = window.lan.total + '<span class="tag is-info">$' + price + '</span>';
 		});
 	},
 
@@ -30786,8 +30788,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 			var _this2 = this;
 
 			Bus.$emit('loading-start');
-
-			this.errors = [];
 
 			var formData = new FormData(e.target);
 
@@ -30908,6 +30908,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
 	props: ['color', 'plan'],
@@ -30974,7 +30977,17 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "is-size-5"
   }, [_vm._v("/" + _vm._s(_vm.planText.unit))])])])]), _vm._v(" "), _c('div', {
     staticClass: "message-body has-text-centered has-text-grey is-size-6"
-  }, [_c('p', [_vm._v(_vm._s(_vm.planText.desc))]), _vm._v(" "), _c('p', [_vm._v(_vm._s(_vm.planText.time))]), _vm._v(" "), _c('p', [_vm._v(_vm._s(_vm.planText.cancel))]), _vm._v(" "), _c('input', {
+  }, [_c('div', {
+    staticClass: "field"
+  }, [_c('p', [_vm._v(_vm._s(_vm.planText.desc))]), _vm._v(" "), _c('p', [_vm._v(_vm._s(_vm.planText.time))]), _vm._v(" "), _c('p', [_vm._v(_vm._s(_vm.planText.cancel))])]), _vm._v(" "), _c('button', {
+    staticClass: "button btn-default",
+    attrs: {
+      "type": "button"
+    },
+    domProps: {
+      "textContent": _vm._s(_vm.chooseText)
+    }
+  }), _vm._v(" "), _c('input', {
     ref: "radio",
     staticClass: "is-hidden",
     attrs: {
@@ -31496,6 +31509,182 @@ if (false) {
   module.hot.accept()
   if (module.hot.data) {
      require("vue-hot-reload-api").rerender("data-v-52d47f82", module.exports)
+  }
+}
+
+/***/ }),
+/* 114 */,
+/* 115 */,
+/* 116 */,
+/* 117 */,
+/* 118 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var Component = __webpack_require__(1)(
+  /* script */
+  __webpack_require__(119),
+  /* template */
+  __webpack_require__(120),
+  /* styles */
+  null,
+  /* scopeId */
+  null,
+  /* moduleIdentifier (server only) */
+  null
+)
+Component.options.__file = "C:\\Users\\xu feng\\Desktop\\blog\\resources\\assets\\js\\components\\front\\Ppv.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
+if (Component.options.functional) {console.error("[vue-loader] Ppv.vue: functional components are not supported with templates, they should use render functions.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-43df9a8a", Component.options)
+  } else {
+    hotAPI.reload("data-v-43df9a8a", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 119 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Submit_vue__ = __webpack_require__(9);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Submit_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__Submit_vue__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+	props: ['post'],
+	components: { submit: __WEBPACK_IMPORTED_MODULE_0__Submit_vue___default.a },
+	data: function data() {
+		return {
+			btnText: window.lan.ppvBtn,
+			last4: auth ? auth.card_last_four : '',
+			isActive: false,
+			color: ''
+		};
+	},
+
+	methods: {
+		onSubmit: function onSubmit() {
+			var _this = this;
+
+			Bus.$emit('loading-start');
+			axios.post(api + 'ppv/' + auth.id, { 'apiToken': auth.api_token }).then(function (r) {
+				_this.color = 'is-success';
+				Bus.$emit('notify', window.lan.paid);
+				axios.post('/ppv/' + auth.id + '/' + _this.post).then(function (r) {
+					setTimeout(function () {
+						location.reload();
+					}, 3000);
+				});
+			}).catch(function (r) {
+				_this.color = 'is-danger';
+				Bus.$emit('notify', window.lan.payFailed);
+			}).then(function (r) {
+				Bus.$emit('loading-end');
+			});
+		}
+	}
+});
+
+/***/ }),
+/* 120 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    staticClass: "is-pulled-right"
+  }, [_c('button', {
+    staticClass: "button is-danger",
+    attrs: {
+      "type": "button"
+    },
+    on: {
+      "click": function($event) {
+        _vm.isActive = true
+      }
+    }
+  }, [_vm._v(_vm._s(_vm.btnText))]), _vm._v(" "), _c('div', {
+    staticClass: "modal",
+    class: {
+      'is-active': _vm.isActive
+    }
+  }, [_c('div', {
+    staticClass: "modal-background",
+    on: {
+      "click": function($event) {
+        _vm.isActive = false
+      }
+    }
+  }), _vm._v(" "), _c('div', {
+    staticClass: "modal-card"
+  }, [_c('section', {
+    staticClass: "modal-card-body"
+  }, [_c('notify', {
+    attrs: {
+      "color": _vm.color
+    }
+  }), _vm._v(" "), _c('form', {
+    on: {
+      "submit": function($event) {
+        $event.preventDefault();
+        _vm.onSubmit($event)
+      }
+    }
+  }, [_c('table', {
+    staticClass: "table is-fullwidth"
+  }, [_vm._m(0), _vm._v(" "), _c('tr', [_c('th', [_vm._v("卡号四位数")]), _c('td', [_vm._v(_vm._s(_vm.last4))])])]), _vm._v(" "), _c('div', {
+    staticClass: "has-text-centered"
+  }, [_c('submit', {
+    attrs: {
+      "text": "确认付款"
+    }
+  })], 1)])], 1)])])])
+},staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('tr', [_c('th', [_vm._v("本次需付费")]), _c('td', [_vm._v("$1.49")])])
+}]}
+module.exports.render._withStripped = true
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+     require("vue-hot-reload-api").rerender("data-v-43df9a8a", module.exports)
   }
 }
 

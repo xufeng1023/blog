@@ -82,3 +82,8 @@ sup {
 .message.plan .message-header{
     justify-content: center;
 }
+@media screen and (min-width: 769px), print {
+	.modal-content, .modal-card {
+	    width: 320px;
+    }
+}
