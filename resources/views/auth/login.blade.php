@@ -46,6 +46,9 @@
                         @lang('index.forget password')?
                     </a>
                 </div>
+                <div class="has-text-centered">
+                    <a class="button is-link" href="/join">@lang('index.new user')</a>
+                </div>
             </form>
         </div>
     </div>

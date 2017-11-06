@@ -29,6 +29,7 @@
 			play() {
 				if(this.memberOnly) {
 					Bus.$emit('notify', window.lan.memberOnly);
+					window.scrollTo(0, -50000);
 					return;
 				}
 

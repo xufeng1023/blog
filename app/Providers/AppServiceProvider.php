@@ -2,7 +2,7 @@
 
 namespace App\Providers;
 
-use Illuminate\Support\Facades\View;
+use Illuminate\Support\Facades\{View, Schema, Route};
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -14,12 +14,10 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        \Schema::defaultStringLength(191);
+        Schema::defaultStringLength(191);
 
-        View::composer(
-            ['*'],
-            function($view) {
-                $view->with('uri', \Route::current()->uri);
+        View::composer('*', function($view) {
+                $view->with('uri', Route::current()? Route::current()->uri : '');
 
                 $view->with('auth', auth()->user() ?: null);
             }

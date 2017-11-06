@@ -4,7 +4,7 @@
 			<td>{{ invoice.date }}</td>
             <td>{{ invoice.total }}</td>
             <td>
-            	<button class="button is-default is-small" @click="download(invoice.id)">Download</button>
+            	<button class="button is-default is-small" :class="{'is-loading': loading}" @click="download(invoice.id)">Download</button>
             </td>
 		</tr>
 		<tr v-if="!invoices.length">
@@ -18,6 +18,7 @@
 		data() {
 			return {
 				status: 'loading...',
+				loading: false,
 				invoices: []
 			}
 		},
@@ -38,6 +39,7 @@
 				})
 			},
 			download(invoiceId) {
+				this.loading = true;
 				axios.get(api + 'invoice/' + auth.id + '?invoiceId=' + invoiceId,
 				{
 				    responseType: 'blob'
@@ -49,8 +51,8 @@
 				    link.click();
 				    link.remove();
 				})
-				.catch(r => {
-					
+				.then(r => {
+					this.loading = false;
 				});
 			}
 		}

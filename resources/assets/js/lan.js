@@ -18,9 +18,11 @@ window.language = {
 		notFree: '会员观看',
 		playing: '播放中...',
 		memberOnly: '请先登入账号或续费',
+		resume: '重新激活订阅',
+		resumeDesc: '您当前剩下的有效天数将会被保留, 不会浪费',
 		cancel: '取消订阅',
 		ppvBtn: '购买影片',
-		paid: '感谢您的消费, 马上为您刷新页面...',
+		paid: '感谢您的支持, 马上为您刷新页面...',
 		ppv: {
 			id: 'ppv',
 			price: '1.49',

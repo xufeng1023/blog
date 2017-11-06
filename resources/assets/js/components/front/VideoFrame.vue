@@ -4,8 +4,7 @@
 			id="video-player" 
 			class="video-js vjs-big-play-centered sd"
 			data-setup="{}" 
-			controls 
-			autoplay 
+			controls  
 		>
 	    </video>
 	    <notify color="is-danger"></notify>

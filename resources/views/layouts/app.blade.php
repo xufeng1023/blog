@@ -9,13 +9,13 @@
     <meta name="api" content="{{ config('app.api') }}">
     <meta name="auth" content="{{ $auth }}">
     <meta name="member" content="{{ $auth? $auth->subscribed('main') : false }}">
-    <title>{{ config('app.name', 'Laravel') }}-@lang('index.desc')</title>
+    <title>@yield('title'){{ config('app.name', 'Laravel') }} - @lang('index.desc')</title>
     @yield('style')
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
 <body>
     <section id="app" class="hero is-black is-fullheight">
-        @if($uri != '/')
+        @if($uri && $uri != '/')
             <div class="hero-head">
                 <nav class="navbar is-dark">
                     <div class="navbar-brand">

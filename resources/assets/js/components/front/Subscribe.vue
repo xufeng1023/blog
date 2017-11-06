@@ -5,8 +5,8 @@
 			<div class="control">
 				<div class="select">
 				  	<select name="plan">
-				    	<option v-for="plan in plans" :value="plan.plan_id">
-					    	{{ plan.name + ' - ' + plan.price }}
+				    	<option v-for="plan in plans" :value="plan.id">
+					    	{{ plan.unit + ' - ' + plan.label }}
 					    </option>
 				  	</select>
 				</div>
@@ -22,15 +22,12 @@
 	import submit from './Submit.vue';
 
 	export default {
-		props: ['user'],
 		components: {submit},
 		data() {
 			return {
 				btnText: window.lan.subscribe,
+				plans: [window.lan.monthly],
 				color: '',
-				plans: [
-					{plan_id: 'Monthly', name: 'Month', price: '$15.00'},
-				]
 			}
 		},
 		methods: {
@@ -44,22 +41,22 @@
 					return;
 				}
 
-				formData.append('apiToken', this.user.api_token);
+				formData.append('apiToken', auth.api_token);
 
-				axios.post(api + 'subscribe/' + this.user.id, formData)
-				.then(r => {
+				axios.post(api + 'subscribe/' + auth.id, formData)
+				.then(({data}) => {
 					this.color = 'is-success';
 					Bus.$emit('loading-end');
-					Bus.$emit('notify', r.data);
+					Bus.$emit('notify', window.lan.paid);
 					setTimeout(() => {
-						location.reload();
+						location.assign(data);
 					}, 3000);
 					
 				})
 				.catch(r => {
 					this.color = 'is-danger';
 					Bus.$emit('loading-end');
-					Bus.$emit('notify', r.response.data);
+					Bus.$emit('notify', window.lan.payFailed);
 				});
 			}
 		}

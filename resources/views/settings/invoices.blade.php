@@ -8,6 +8,23 @@
         </div>
         <div class="column is-8 is-offset-1">
             <h1 class="title is-3">@lang('index.invoices')</h1>
+            @if($auth->subscribed('main'))
+	        	@if($auth->ends_at)
+	            	<h3 class="subtitle is-6 has-text-danger">
+	                	@lang('index.sub will end', ['date' => $auth->ends_at->format('Y-m-d')]) 
+	                </h3>
+	        	@else
+	            	<h3 class="subtitle is-6">
+	            		@lang('index.next bill', ['date' => $auth->subscription('main')->created_at->addMonth()->format('Y-m-d')]) 
+	            	</h3>
+	            @endif
+            @else
+            	@if($auth->ends_at)
+            		<h3 class="subtitle is-6 has-text-danger">
+	                	@lang('index.sub ended', ['date' => $auth->ends_at->format('Y-m-d')]) 
+	                </h3>
+            	@endif
+            @endif
             <invoices></invoices>
         </div>
     </div>

@@ -1,12 +1,13 @@
 <template>
-	<button class="button is-success" :class="{'is-loading': sending}" @click="resume">Resume My Subscription</button>
+	<button class="button is-success" :class="{'is-loading': sending}" @click="resume" v-text="btnText"></button>
 </template>
 
 <script>
 	export default {
-		props: ['user'],
 		data() {
 			return {
+				btnText: window.lan.resume,
+				resumeDesc: window.lan.resumeDesc,
 				sending: false
 			}
 		},
@@ -14,13 +15,12 @@
 			resume() {
 				this.sending = true;
 
-				axios.post(api + 'resume/' + this.user.id, {apiToken: this.user.api_token})
-				.then(r => {
-					location.reload();
+				axios.post(api + 'resume/' + auth.id, {apiToken: auth.api_token})
+				.then(({data}) => {
+					location.assign(data);
 				})
 				.catch(r => {
 					this.sending = false;
-					console.error(r.response.data);
 				})
 			}
 		}

@@ -25,7 +25,13 @@
                     </div>
                 @endif
             </div>
-            <h2 class="has-text-7">@lang('index.clips')</h2><hr>
+
+            <article class="message">
+                <div class="message-header">
+                    <p>@lang('index.clips')</p>
+                </div>
+            </article>
+            
             <div class="columns">
                 @foreach($post->videos as $video)
                     @if($video->thumbnail)
@@ -34,8 +40,12 @@
                         </div>
                     @endif
                 @endforeach
-            </div><br>
-            <h2 class="has-text-7">@lang('index.shots')</h2><hr>
+            </div>
+            <article class="message">
+                <div class="message-header">
+                    <p>@lang('index.shots')</p>
+                </div>
+            </article>
             @foreach($post->images->chunk(4) as $chunks)
                 <div class="columns">
                     @foreach($chunks as $image)

@@ -6,6 +6,7 @@
 	export default {
 		data() {
 			return {
+				color: 'is-danger',
 				subtotal: '',
 			}
 		},
@@ -39,6 +40,16 @@
 					return false;
 				}
 
+				if(formData.get('cvc').length !== 3) {
+					this.endInError(window.lan.badCardInfo);
+					return false;
+				}
+
+				if(formData.get('password') != formData.get('password_confirmation')) {
+					this.endInError(window.lan.passWrong);
+					return false;
+				}
+
 				axios.post(api + 'token', formData)
 				.then(({data}) => {
 					formData.set('payKey', data);
@@ -49,7 +60,11 @@
 
 						axios.post(api + 'subscribe/' + data.id, formData)
 						.then(({data}) => {
-							location.reload();
+							this.color = 'is-success';
+							this.endInError(window.lan.paid);
+							setTimeout(() => {
+								location.reload();
+							},2000);
 						})
 						.catch(({response}) => {
 							axios.delete('/user/delete')

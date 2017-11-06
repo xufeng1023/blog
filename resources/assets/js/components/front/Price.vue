@@ -12,7 +12,8 @@
 	            <p>{{ planText.time }}</p>
 	            <p>{{ planText.cancel }}</p>
 			</div>
-            <button type="button" class="button btn-default" v-text="chooseText"></button>
+            <button type="button" class="button btn-default" @click="choose" v-text="chooseText"></button>
+            <span v-if="checked">&#10004;</span>
             <input type="radio" name="plan" class="is-hidden" :value="planText.id" ref="radio">
         </div>
     </article>
@@ -25,6 +26,7 @@
 				chooseText: window.lan.choose,
 				planText: window.lan[this.plan],
 				chozen: '',
+				checked: false,
 				show: true
 			}
 		},
@@ -43,6 +45,7 @@
 			choose() {
 				this.chozen = this.color;
 				this.show = false;
+				this.checked = true;
 				this.$refs.radio.checked = true;
 				Bus.$emit('switch', this.plan);
 				Bus.$emit('total', this.planText.label);
@@ -51,6 +54,7 @@
 				if(plan != this.plan) {
 					this.chozen = '';
 					this.show = true;
+					this.checked = false;
 					this.$refs.radio.checked = false;
 				}
 			}

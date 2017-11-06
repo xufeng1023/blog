@@ -10,20 +10,23 @@
             <h1 class="title is-3">
             	<span>@lang('index.subscription')</span>
         	</h1>
-            @if($auth->subscription('main')->cancelled())
-                @if($auth->subscription('main')->onGracePeriod())
-                    <h3 class="subtitle is-5 has-text-danger">
-                        @lang('index.sub will end', ['date' => $auth->ends_at->format('Y-m-d')]) 
-                    </h3>
-                    <resume :user="{{ auth()->user() }}"></resume>
-                @else
-                    <h3 class="subtitle is-5 has-text-danger">
-                        @lang('index.sub ended', ['date' => auth()->user()->ends_at->format('Y-m-d')])
-                    </h3>
-                    <subscribe :user="{{ auth()->user() }}"></subscribe>
+            @if($auth->subscribed('main'))
+                @if($auth->subscription('main')->cancelled())
+                    @if($auth->subscription('main')->onGracePeriod())
+                        <h3 class="subtitle is-6 has-text-danger">
+                            @lang('index.sub will end', ['date' => $auth->ends_at->format('Y-m-d')]) 
+                        </h3>
+                        <resume :user="{{ auth()->user() }}"></resume>
+                        <div class="is-text-5">*@lang('index.resume desc')</div>
+                    @endif
                 @endif
             @else
-                <change-plan></change-plan>
+                @if($auth->ends_at)
+                    <h3 class="subtitle is-6 has-text-danger">
+                        @lang('index.sub ended', ['date' => $auth->ends_at->format('Y-m-d')]) 
+                    </h3>
+                @endif
+                <subscribe></subscribe>
             @endif
         </div>
     </div>
