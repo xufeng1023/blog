@@ -20,7 +20,7 @@ class User extends Authenticatable
 
     public function saveApiToken()
     {
-        $this->api_token = str_random(60);
+        $this->api_token = $this->createToken('video')->accessToken;
         $this->save();
     }
 

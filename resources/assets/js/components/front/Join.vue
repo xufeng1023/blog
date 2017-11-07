@@ -56,23 +56,24 @@
 
 					axios.post('/join', formData)
 					.then(({data}) => {
-						formData.set('apiToken', data.api_token);
+						axios.defaults.headers.common['Authorization'] = 'Bearer ' + data.api_token
 
-						axios.post(api + 'subscribe/' + data.id, formData)
-						.then(({data}) => {
+						axios.post(api + 'subscribe', formData)
+						.then(({data}) => { console.log(data);
 							this.color = 'is-success';
 							this.endInError(window.lan.paid);
 							setTimeout(() => {
-								location.reload();
-							},2000);
+								//location.reload();
+							}, 2000);
 						})
 						.catch(({response}) => {
+							axios.delete('/oauth/personal-access-tokens/' + response.data);
 							axios.delete('/user/delete')
 							this.endInError(window.lan.payFailed);
 						})
 					})
 					.catch(({response}) => {
-						axios.delete('/user/delete')
+						//axios.delete('/user/delete')
 						if(response.data.errors) {
 							var msg = window.lan.passWrong;
 							if(response.data.errors.email) {
@@ -83,6 +84,10 @@
 					})
 				})
 				.catch(({response}) => {
+					if(!response) {
+						this.endInError(window.lan.badApi);
+						return;
+					}
 					var msg = window.lan.badCardInfo;
 					if(response.data.plan) {
 						msg = window.lan.chooseAPlan;

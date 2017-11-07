@@ -23,6 +23,7 @@ window.language = {
 		cancel: '取消订阅',
 		ppvBtn: '购买影片',
 		paid: '感谢您的支持, 马上为您刷新页面...',
+		badApi: '您的请求暂时无法执行, 请稍后再试',
 		ppv: {
 			id: 'ppv',
 			price: '1.49',

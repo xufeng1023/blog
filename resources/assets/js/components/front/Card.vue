@@ -57,7 +57,7 @@
 				}
 			},
 			formatCvc() {
-				this.cvc = this.cvc.replace(/\D/g, '').substr(0, 3);
+				this.cvc = this.cvc.replace(/\D/g, '').substr(0, 4);
 			},
 			onKeypress() {
 				if( (event.keyCode < 48 || event.keyCode > 57) ) event.preventDefault(); 

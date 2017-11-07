@@ -13,13 +13,6 @@ if (token) {
     token.remove();
 }
 
-let apiToken = document.head.querySelector('meta[name="api-token"]');
-
-if (apiToken) {
-    window.axios.defaults.headers.common['Authorization'] = 'Bearer ' + apiToken.content;
-    apiToken.remove();
-}
-
 let api = document.head.querySelector('meta[name="api"]');
 
 if (api) {
@@ -29,6 +22,9 @@ if (api) {
 
 let auth = document.head.querySelector('meta[name="auth"]');
 window.auth = auth.content? JSON.parse(auth.content) : null;
+if(window.auth) {
+	window.axios.defaults.headers.common['Authorization'] = 'Bearer ' + window.auth.api_token
+}
 auth.remove();
 
 let member = document.head.querySelector('meta[name="member"]');
