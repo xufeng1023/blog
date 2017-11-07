@@ -17,11 +17,8 @@
 			});
 		},
 		methods: {
-			onTop() {
-				window.scrollTo(0, -50000);
-			},
 			endInError(msg) {
-				this.onTop();
+				window.scrollTo(0, -50000);
 				Bus.$emit('loading-end');
 				Bus.$emit('notify', msg);
 			},
@@ -34,14 +31,25 @@
 					this.endInError(window.lan.chooseAPlan);
 					return false;
 				}
+
+				if(!formData.get('email').includes('@')) {
+					this.endInError(window.lan.badEmail);
+					return false;
+				}
 				
 				if(!formData.get('expiration').includes('/')) {
 					this.endInError(window.lan.badCardInfo);
 					return false;
 				}
 
-				if(formData.get('cvc').length !== 3) {
+				let cvcLength = formData.get('cvc').length;
+				if(cvcLength !== 3 && cvcLength !== 4) {
 					this.endInError(window.lan.badCardInfo);
+					return false;
+				}
+
+				if(formData.get('password').length < 6) {
+					this.endInError(window.lan.passWrong);
 					return false;
 				}
 
@@ -50,48 +58,39 @@
 					return false;
 				}
 
-				axios.post(api + 'token', formData)
-				.then(({data}) => {
-					formData.set('payKey', data);
-
-					axios.post('/join', formData)
+				axios.post('/join', formData)
+				.then(({data}) => {					
+					axios.defaults.headers.common['Authorization'] = 'Bearer '+data.api_token;
+					axios.post(api + 'subscribe', formData)
 					.then(({data}) => {
-						axios.defaults.headers.common['Authorization'] = 'Bearer ' + data.api_token
-
-						axios.post(api + 'subscribe', formData)
-						.then(({data}) => { console.log(data);
-							this.color = 'is-success';
-							this.endInError(window.lan.paid);
-							setTimeout(() => {
-								//location.reload();
-							}, 2000);
-						})
-						.catch(({response}) => {
-							axios.delete('/oauth/personal-access-tokens/' + response.data);
-							axios.delete('/user/delete')
-							this.endInError(window.lan.payFailed);
-						})
+						this.color = 'is-success';
+						this.endInError(window.lan.paid);
+						setTimeout(() => {
+							//location.reload();
+						}, 2000);
 					})
 					.catch(({response}) => {
-						//axios.delete('/user/delete')
-						if(response.data.errors) {
-							var msg = window.lan.passWrong;
-							if(response.data.errors.email) {
-								msg = window.lan.emailWrong;
+						if(!response) {
+							var msg = window.lan.badApi;
+						} else {
+							if(response.data == 'card') {
+								var msg = window.lan.badCardInfo;
 							}
-							this.endInError(msg);
+							if(response.data == 'plan') {
+								var msg = window.lan.chooseAPlan;
+							}
+							if(response.data == 'pay') {
+								var msg = window.lan.payFailed;
+							}
 						}
+						
+						this.endInError(msg);
+						axios.delete('/user/delete');
 					})
 				})
 				.catch(({response}) => {
-					if(!response) {
-						this.endInError(window.lan.badApi);
-						return;
-					}
-					var msg = window.lan.badCardInfo;
-					if(response.data.plan) {
-						msg = window.lan.chooseAPlan;
-					}
+					var msg = window.lan.passWrong;
+					if(response.data.errors.email) msg = window.lan.emailWrong;
 					this.endInError(msg);
 				})
 			}

@@ -64,6 +64,8 @@ class UserController extends Controller
     public function delete()
     {
         $user = auth()->user();
+
+        $user->tokens()->first()->delete();
         
         Auth::logout();
 

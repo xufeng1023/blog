@@ -12,6 +12,7 @@ window.language = {
 		badCardInfo: '无效的信用卡信息',
 		passWrong: '密码至少6位, 两次输入要相符',
 		emailWrong: '邮箱已经被使用或无效',
+		badEmail: '无效的邮箱',
 		payFailed: '付款失败, 可以尝试重试并且确保信用卡有效',
 		noInvoice: '目前无任何付款记录',
 		preview: '可预览',
