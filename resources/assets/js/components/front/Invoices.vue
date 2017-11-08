@@ -4,7 +4,7 @@
 			<td>{{ invoice.date }}</td>
             <td>{{ invoice.total }}</td>
             <td>
-            	<button class="button is-default is-small" :class="{'is-loading': loading}" @click="download(invoice.id)">Download</button>
+            	<btn :invoice="invoice.id"></btn>
             </td>
 		</tr>
 		<tr v-if="!invoices.length">
@@ -14,11 +14,12 @@
 </template>
 
 <script>
+	import btn from './InvoiceBtn.vue';
 	export default {
+		components: {btn},
 		data() {
 			return {
 				status: 'loading...',
-				loading: false,
 				invoices: []
 			}
 		},
@@ -37,23 +38,6 @@
 				.catch(r => {
 					this.status = window.lan.noInvoice;
 				})
-			},
-			download(invoiceId) {
-				this.loading = true;
-				axios.get(api + 'invoice?invoiceId=' + invoiceId,
-				{
-				    responseType: 'blob'
-				})
-				.then( r => { 
-					var link = document.createElement('a');
-				    link.href = window.URL.createObjectURL(r.data);
-				    link.download = invoiceId + ".pdf";
-				    link.click();
-				    link.remove();
-				})
-				.then(r => {
-					this.loading = false;
-				});
 			}
 		}
 	}

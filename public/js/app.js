@@ -870,19 +870,25 @@ module.exports = Cancel;
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
-var Component = __webpack_require__(1)(
-  /* script */
-  __webpack_require__(85),
-  /* template */
-  __webpack_require__(86),
-  /* styles */
-  null,
-  /* scopeId */
-  null,
-  /* moduleIdentifier (server only) */
-  null
+var normalizeComponent = __webpack_require__(1)
+/* script */
+var __vue_script__ = __webpack_require__(85)
+/* template */
+var __vue_template__ = __webpack_require__(86)
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
 )
-Component.options.__file = "C:\\Users\\xu feng\\Desktop\\blog\\resources\\assets\\js\\components\\front\\Submit.vue"
+Component.options.__file = "resources\\assets\\js\\components\\front\\Submit.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] Submit.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -29295,19 +29301,25 @@ module.exports = Vue$3;
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
-var Component = __webpack_require__(1)(
-  /* script */
-  __webpack_require__(91),
-  /* template */
-  __webpack_require__(92),
-  /* styles */
-  null,
-  /* scopeId */
-  null,
-  /* moduleIdentifier (server only) */
-  null
+var normalizeComponent = __webpack_require__(1)
+/* script */
+var __vue_script__ = __webpack_require__(91)
+/* template */
+var __vue_template__ = __webpack_require__(92)
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
 )
-Component.options.__file = "C:\\Users\\xu feng\\Desktop\\blog\\resources\\assets\\js\\components\\front\\Card.vue"
+Component.options.__file = "resources\\assets\\js\\components\\front\\Card.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] Card.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -29478,7 +29490,7 @@ window.language = {
 		preview: '可预览',
 		notFree: '会员观看',
 		playing: '播放中...',
-		memberOnly: '请先登入账号或续费观看影片',
+		memberOnly: '请订阅会员或购买影片观看',
 		resume: '重新激活订阅',
 		resumeDesc: '您当前剩下的有效天数将会被保留, 不会浪费',
 		cancel: '取消订阅',
@@ -29512,19 +29524,25 @@ window.language = {
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
-var Component = __webpack_require__(1)(
-  /* script */
-  __webpack_require__(71),
-  /* template */
-  __webpack_require__(72),
-  /* styles */
-  null,
-  /* scopeId */
-  null,
-  /* moduleIdentifier (server only) */
-  null
+var normalizeComponent = __webpack_require__(1)
+/* script */
+var __vue_script__ = __webpack_require__(71)
+/* template */
+var __vue_template__ = __webpack_require__(72)
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
 )
-Component.options.__file = "C:\\Users\\xu feng\\Desktop\\blog\\resources\\assets\\js\\components\\front\\VideoOne.vue"
+Component.options.__file = "resources\\assets\\js\\components\\front\\VideoOne.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] VideoOne.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -29600,40 +29618,61 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* 72 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('figure', {
-    staticClass: "image is-16by9 border-3 hand sd",
-    on: {
-      "click": _vm.play,
-      "mouseleave": function($event) {
-        _vm.mouseLeft = true
-      },
-      "mouseover": function($event) {
-        _vm.mouseLeft = false
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "figure",
+    {
+      staticClass: "image is-16by9 border-3 hand sd",
+      on: {
+        click: _vm.play,
+        mouseleave: function($event) {
+          _vm.mouseLeft = true
+        },
+        mouseover: function($event) {
+          _vm.mouseLeft = false
+        }
       }
-    }
-  }, [_c('img', {
-    attrs: {
-      "src": _vm._f("FILE")(_vm.video.thumbnail.slug)
-    }
-  }), _vm._v(" "), (_vm.playing) ? _c('div', {
-    directives: [{
-      name: "show",
-      rawName: "v-show",
-      value: (_vm.mouseLeft),
-      expression: "mouseLeft"
-    }],
-    staticClass: "playing fc is-overlay"
-  }, [_c('span', {
-    staticClass: "has-text-danger",
-    domProps: {
-      "textContent": _vm._s(_vm.playingText)
-    }
-  })]) : _vm._e(), _vm._v(" "), (_vm.memberOnly) ? _c('span', {
-    staticClass: "tag preview is-danger"
-  }, [_vm._v(_vm._s(_vm.previewText))]) : _vm._e()])
-},staticRenderFns: []}
-module.exports.render._withStripped = true
+    },
+    [
+      _c("img", { attrs: { src: _vm._f("FILE")(_vm.video.thumbnail.slug) } }),
+      _vm._v(" "),
+      _vm.playing
+        ? _c(
+            "div",
+            {
+              directives: [
+                {
+                  name: "show",
+                  rawName: "v-show",
+                  value: _vm.mouseLeft,
+                  expression: "mouseLeft"
+                }
+              ],
+              staticClass: "playing fc is-overlay"
+            },
+            [
+              _c("span", {
+                staticClass: "has-text-danger",
+                domProps: { textContent: _vm._s(_vm.playingText) }
+              })
+            ]
+          )
+        : _vm._e(),
+      _vm._v(" "),
+      _vm.memberOnly
+        ? _c("span", { staticClass: "tag preview is-danger" }, [
+            _vm._v(_vm._s(_vm.previewText))
+          ])
+        : _vm._e()
+    ]
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
@@ -29646,19 +29685,25 @@ if (false) {
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
-var Component = __webpack_require__(1)(
-  /* script */
-  __webpack_require__(74),
-  /* template */
-  __webpack_require__(75),
-  /* styles */
-  null,
-  /* scopeId */
-  null,
-  /* moduleIdentifier (server only) */
-  null
+var normalizeComponent = __webpack_require__(1)
+/* script */
+var __vue_script__ = __webpack_require__(74)
+/* template */
+var __vue_template__ = __webpack_require__(75)
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
 )
-Component.options.__file = "C:\\Users\\xu feng\\Desktop\\blog\\resources\\assets\\js\\components\\front\\VideoFrame.vue"
+Component.options.__file = "resources\\assets\\js\\components\\front\\VideoFrame.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] VideoFrame.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -29776,24 +29821,32 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* 75 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', {
-    staticClass: "field"
-  }, [_c('video', {
-    staticClass: "video-js vjs-big-play-centered sd",
-    attrs: {
-      "id": "video-player",
-      "data-setup": "{}",
-      "controls": "",
-      "autoplay": ""
-    }
-  }), _vm._v(" "), _c('notify', {
-    attrs: {
-      "color": "is-danger"
-    }
-  })], 1)
-},staticRenderFns: []}
-module.exports.render._withStripped = true
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    { staticClass: "field" },
+    [
+      _c("video", {
+        staticClass: "video-js vjs-big-play-centered sd",
+        attrs: {
+          id: "video-player",
+          "data-setup": "{}",
+          controls: "",
+          autoplay: ""
+        }
+      }),
+      _vm._v(" "),
+      _c("notify", { attrs: { color: "is-danger" } })
+    ],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
@@ -29806,19 +29859,25 @@ if (false) {
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
-var Component = __webpack_require__(1)(
-  /* script */
-  __webpack_require__(77),
-  /* template */
-  __webpack_require__(78),
-  /* styles */
-  null,
-  /* scopeId */
-  null,
-  /* moduleIdentifier (server only) */
-  null
+var normalizeComponent = __webpack_require__(1)
+/* script */
+var __vue_script__ = __webpack_require__(77)
+/* template */
+var __vue_template__ = __webpack_require__(78)
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
 )
-Component.options.__file = "C:\\Users\\xu feng\\Desktop\\blog\\resources\\assets\\js\\components\\front\\ImageOne.vue"
+Component.options.__file = "resources\\assets\\js\\components\\front\\ImageOne.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] ImageOne.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -29869,25 +29928,30 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* 78 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('a', {
-    attrs: {
-      "href": "javascript:;",
-      "data-toggle": "modal",
-      "data-target": "#viewImageModal"
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "a",
+    {
+      attrs: {
+        href: "javascript:;",
+        "data-toggle": "modal",
+        "data-target": "#viewImageModal"
+      },
+      on: { click: _vm.show }
     },
-    on: {
-      "click": _vm.show
-    }
-  }, [_c('figure', {
-    staticClass: "image is-16by9 sd"
-  }, [_c('img', {
-    attrs: {
-      "src": _vm._f("FILE")(this.image.slug)
-    }
-  })])])
-},staticRenderFns: []}
-module.exports.render._withStripped = true
+    [
+      _c("figure", { staticClass: "image is-16by9 sd" }, [
+        _c("img", { attrs: { src: _vm._f("FILE")(this.image.slug) } })
+      ])
+    ]
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
@@ -29900,19 +29964,25 @@ if (false) {
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
-var Component = __webpack_require__(1)(
-  /* script */
-  __webpack_require__(80),
-  /* template */
-  null,
-  /* styles */
-  null,
-  /* scopeId */
-  null,
-  /* moduleIdentifier (server only) */
-  null
+var normalizeComponent = __webpack_require__(1)
+/* script */
+var __vue_script__ = __webpack_require__(80)
+/* template */
+var __vue_template__ = null
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
 )
-Component.options.__file = "C:\\Users\\xu feng\\Desktop\\blog\\resources\\assets\\js\\components\\front\\ImageModal.vue"
+Component.options.__file = "resources\\assets\\js\\components\\front\\ImageModal.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
 
 /* hot reload */
@@ -29962,19 +30032,25 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
-var Component = __webpack_require__(1)(
-  /* script */
-  __webpack_require__(82),
-  /* template */
-  __webpack_require__(88),
-  /* styles */
-  null,
-  /* scopeId */
-  null,
-  /* moduleIdentifier (server only) */
-  null
+var normalizeComponent = __webpack_require__(1)
+/* script */
+var __vue_script__ = __webpack_require__(82)
+/* template */
+var __vue_template__ = __webpack_require__(88)
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
 )
-Component.options.__file = "C:\\Users\\xu feng\\Desktop\\blog\\resources\\assets\\js\\components\\front\\ChangePlan.vue"
+Component.options.__file = "resources\\assets\\js\\components\\front\\ChangePlan.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] ChangePlan.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -30045,19 +30121,25 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
-var Component = __webpack_require__(1)(
-  /* script */
-  __webpack_require__(84),
-  /* template */
-  __webpack_require__(87),
-  /* styles */
-  null,
-  /* scopeId */
-  null,
-  /* moduleIdentifier (server only) */
-  null
+var normalizeComponent = __webpack_require__(1)
+/* script */
+var __vue_script__ = __webpack_require__(84)
+/* template */
+var __vue_template__ = __webpack_require__(87)
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
 )
-Component.options.__file = "C:\\Users\\xu feng\\Desktop\\blog\\resources\\assets\\js\\components\\front\\Plans.vue"
+Component.options.__file = "resources\\assets\\js\\components\\front\\Plans.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] Plans.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -30154,21 +30236,20 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* 86 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('button', {
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("button", {
     staticClass: "button is-primary",
-    class: {
-      'is-loading': _vm.loading
-    },
-    attrs: {
-      "type": "submit"
-    },
-    domProps: {
-      "textContent": _vm._s(_vm.text)
-    }
+    class: { "is-loading": _vm.loading },
+    attrs: { type: "submit" },
+    domProps: { textContent: _vm._s(_vm.text) }
   })
-},staticRenderFns: []}
-module.exports.render._withStripped = true
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
@@ -30180,33 +30261,49 @@ if (false) {
 /* 87 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', {
-    staticClass: "field has-addons"
-  }, [_c('div', {
-    staticClass: "control"
-  }, [_c('div', {
-    staticClass: "select"
-  }, [_c('select', {
-    attrs: {
-      "name": "plan"
-    }
-  }, _vm._l((_vm.plans), function(plan) {
-    return _c('option', {
-      domProps: {
-        "value": plan.plan_id,
-        "selected": _vm.current == plan.plan_id
-      }
-    }, [_vm._v("\n\t\t\t    \t" + _vm._s(plan.name + ' - ' + plan.price) + "\n\t\t\t    ")])
-  }))])]), _vm._v(" "), _c('div', {
-    staticClass: "control"
-  }, [_c('submit', {
-    attrs: {
-      "text": "Change"
-    }
-  })], 1)])
-},staticRenderFns: []}
-module.exports.render._withStripped = true
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "field has-addons" }, [
+    _c("div", { staticClass: "control" }, [
+      _c("div", { staticClass: "select" }, [
+        _c(
+          "select",
+          { attrs: { name: "plan" } },
+          _vm._l(_vm.plans, function(plan) {
+            return _c(
+              "option",
+              {
+                domProps: {
+                  value: plan.plan_id,
+                  selected: _vm.current == plan.plan_id
+                }
+              },
+              [
+                _vm._v(
+                  "\n\t\t\t    \t" +
+                    _vm._s(plan.name + " - " + plan.price) +
+                    "\n\t\t\t    "
+                )
+              ]
+            )
+          })
+        )
+      ])
+    ]),
+    _vm._v(" "),
+    _c(
+      "div",
+      { staticClass: "control" },
+      [_c("submit", { attrs: { text: "Change" } })],
+      1
+    )
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
@@ -30218,25 +30315,31 @@ if (false) {
 /* 88 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('form', {
-    on: {
-      "submit": function($event) {
-        $event.preventDefault();
-        _vm.change($event)
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "form",
+    {
+      on: {
+        submit: function($event) {
+          $event.preventDefault()
+          _vm.change($event)
+        }
       }
-    }
-  }, [_c('notify', {
-    attrs: {
-      "color": "is-danger"
-    }
-  }), _vm._v(" "), _c('plans', {
-    attrs: {
-      "current": "monthly"
-    }
-  })], 1)
-},staticRenderFns: []}
-module.exports.render._withStripped = true
+    },
+    [
+      _c("notify", { attrs: { color: "is-danger" } }),
+      _vm._v(" "),
+      _c("plans", { attrs: { current: "monthly" } })
+    ],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
@@ -30249,19 +30352,25 @@ if (false) {
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
-var Component = __webpack_require__(1)(
-  /* script */
-  __webpack_require__(90),
-  /* template */
-  __webpack_require__(93),
-  /* styles */
-  null,
-  /* scopeId */
-  null,
-  /* moduleIdentifier (server only) */
-  null
+var normalizeComponent = __webpack_require__(1)
+/* script */
+var __vue_script__ = __webpack_require__(90)
+/* template */
+var __vue_template__ = __webpack_require__(93)
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
 )
-Component.options.__file = "C:\\Users\\xu feng\\Desktop\\blog\\resources\\assets\\js\\components\\front\\UpdateCard.vue"
+Component.options.__file = "resources\\assets\\js\\components\\front\\UpdateCard.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] UpdateCard.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -30407,167 +30516,173 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* 92 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', {
-    staticClass: "field"
-  }, [_c('div', {
-    staticClass: "field"
-  }, [_c('label', {
-    attrs: {
-      "for": "card-number"
-    },
-    domProps: {
-      "textContent": _vm._s(_vm.cardNumber)
-    }
-  }), _vm._v(" "), _c('div', {
-    staticClass: "control"
-  }, [_c('input', {
-    directives: [{
-      name: "model",
-      rawName: "v-model",
-      value: (_vm.number),
-      expression: "number"
-    }],
-    staticClass: "input",
-    attrs: {
-      "id": "card-number",
-      "type": "text",
-      "name": "number",
-      "required": ""
-    },
-    domProps: {
-      "value": (_vm.number)
-    },
-    on: {
-      "keyup": _vm.formatNumber,
-      "keypress": _vm.onKeypress,
-      "input": function($event) {
-        if ($event.target.composing) { return; }
-        _vm.number = $event.target.value
-      }
-    }
-  })])]), _vm._v(" "), _c('div', {
-    staticClass: "columns"
-  }, [_c('div', {
-    staticClass: "column"
-  }, [_c('div', {
-    staticClass: "field"
-  }, [_c('label', {
-    attrs: {
-      "for": "expiration"
-    },
-    domProps: {
-      "textContent": _vm._s(_vm.cardExp)
-    }
-  }), _vm._v(" "), _c('div', {
-    staticClass: "control"
-  }, [_c('input', {
-    directives: [{
-      name: "model",
-      rawName: "v-model",
-      value: (_vm.exp),
-      expression: "exp"
-    }],
-    staticClass: "input",
-    attrs: {
-      "type": "text",
-      "id": "expiration",
-      "placeholder": _vm.cardExpPlaceholder,
-      "name": "expiration",
-      "required": ""
-    },
-    domProps: {
-      "value": (_vm.exp)
-    },
-    on: {
-      "keyup": _vm.formatExp,
-      "keypress": _vm.onKeypress,
-      "input": function($event) {
-        if ($event.target.composing) { return; }
-        _vm.exp = $event.target.value
-      }
-    }
-  }), _vm._v(" "), _c('input', {
-    directives: [{
-      name: "model",
-      rawName: "v-model",
-      value: (_vm.month),
-      expression: "month"
-    }],
-    attrs: {
-      "type": "hidden",
-      "name": "month"
-    },
-    domProps: {
-      "value": (_vm.month)
-    },
-    on: {
-      "input": function($event) {
-        if ($event.target.composing) { return; }
-        _vm.month = $event.target.value
-      }
-    }
-  }), _vm._v(" "), _c('input', {
-    directives: [{
-      name: "model",
-      rawName: "v-model",
-      value: (_vm.year),
-      expression: "year"
-    }],
-    attrs: {
-      "type": "hidden",
-      "name": "year"
-    },
-    domProps: {
-      "value": (_vm.year)
-    },
-    on: {
-      "input": function($event) {
-        if ($event.target.composing) { return; }
-        _vm.year = $event.target.value
-      }
-    }
-  })])])]), _vm._v(" "), _c('div', {
-    staticClass: "column"
-  }, [_c('div', {
-    staticClass: "field"
-  }, [_c('label', {
-    attrs: {
-      "for": "cvc"
-    },
-    domProps: {
-      "textContent": _vm._s(_vm.cardCvc)
-    }
-  }), _vm._v(" "), _c('div', {
-    staticClass: "control"
-  }, [_c('input', {
-    directives: [{
-      name: "model",
-      rawName: "v-model",
-      value: (_vm.cvc),
-      expression: "cvc"
-    }],
-    staticClass: "input",
-    attrs: {
-      "type": "text",
-      "id": "cvc",
-      "name": "cvc",
-      "required": ""
-    },
-    domProps: {
-      "value": (_vm.cvc)
-    },
-    on: {
-      "keyup": _vm.formatCvc,
-      "keypress": _vm.onKeypress,
-      "input": function($event) {
-        if ($event.target.composing) { return; }
-        _vm.cvc = $event.target.value
-      }
-    }
-  })])])])])])
-},staticRenderFns: []}
-module.exports.render._withStripped = true
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "field" }, [
+    _c("div", { staticClass: "field" }, [
+      _c("label", {
+        attrs: { for: "card-number" },
+        domProps: { textContent: _vm._s(_vm.cardNumber) }
+      }),
+      _vm._v(" "),
+      _c("div", { staticClass: "control" }, [
+        _c("input", {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.number,
+              expression: "number"
+            }
+          ],
+          staticClass: "input",
+          attrs: {
+            id: "card-number",
+            type: "text",
+            name: "number",
+            required: ""
+          },
+          domProps: { value: _vm.number },
+          on: {
+            keyup: _vm.formatNumber,
+            keypress: _vm.onKeypress,
+            input: function($event) {
+              if ($event.target.composing) {
+                return
+              }
+              _vm.number = $event.target.value
+            }
+          }
+        })
+      ])
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "columns" }, [
+      _c("div", { staticClass: "column" }, [
+        _c("div", { staticClass: "field" }, [
+          _c("label", {
+            attrs: { for: "expiration" },
+            domProps: { textContent: _vm._s(_vm.cardExp) }
+          }),
+          _vm._v(" "),
+          _c("div", { staticClass: "control" }, [
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.exp,
+                  expression: "exp"
+                }
+              ],
+              staticClass: "input",
+              attrs: {
+                type: "text",
+                id: "expiration",
+                placeholder: _vm.cardExpPlaceholder,
+                name: "expiration",
+                required: ""
+              },
+              domProps: { value: _vm.exp },
+              on: {
+                keyup: _vm.formatExp,
+                keypress: _vm.onKeypress,
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.exp = $event.target.value
+                }
+              }
+            }),
+            _vm._v(" "),
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.month,
+                  expression: "month"
+                }
+              ],
+              attrs: { type: "hidden", name: "month" },
+              domProps: { value: _vm.month },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.month = $event.target.value
+                }
+              }
+            }),
+            _vm._v(" "),
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.year,
+                  expression: "year"
+                }
+              ],
+              attrs: { type: "hidden", name: "year" },
+              domProps: { value: _vm.year },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.year = $event.target.value
+                }
+              }
+            })
+          ])
+        ])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "column" }, [
+        _c("div", { staticClass: "field" }, [
+          _c("label", {
+            attrs: { for: "cvc" },
+            domProps: { textContent: _vm._s(_vm.cardCvc) }
+          }),
+          _vm._v(" "),
+          _c("div", { staticClass: "control" }, [
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.cvc,
+                  expression: "cvc"
+                }
+              ],
+              staticClass: "input",
+              attrs: { type: "text", id: "cvc", name: "cvc", required: "" },
+              domProps: { value: _vm.cvc },
+              on: {
+                keyup: _vm.formatCvc,
+                keypress: _vm.onKeypress,
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.cvc = $event.target.value
+                }
+              }
+            })
+          ])
+        ])
+      ])
+    ])
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
@@ -30579,25 +30694,33 @@ if (false) {
 /* 93 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('form', {
-    on: {
-      "submit": function($event) {
-        $event.preventDefault();
-        _vm.update($event)
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "form",
+    {
+      on: {
+        submit: function($event) {
+          $event.preventDefault()
+          _vm.update($event)
+        }
       }
-    }
-  }, [_c('notify', {
-    attrs: {
-      "color": "is-danger"
-    }
-  }), _vm._v(" "), _c('card'), _vm._v(" "), _c('submit', {
-    attrs: {
-      "text": _vm.btnText
-    }
-  })], 1)
-},staticRenderFns: []}
-module.exports.render._withStripped = true
+    },
+    [
+      _c("notify", { attrs: { color: "is-danger" } }),
+      _vm._v(" "),
+      _c("card"),
+      _vm._v(" "),
+      _c("submit", { attrs: { text: _vm.btnText } })
+    ],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
@@ -30610,19 +30733,25 @@ if (false) {
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
-var Component = __webpack_require__(1)(
-  /* script */
-  __webpack_require__(95),
-  /* template */
-  __webpack_require__(96),
-  /* styles */
-  null,
-  /* scopeId */
-  null,
-  /* moduleIdentifier (server only) */
-  null
+var normalizeComponent = __webpack_require__(1)
+/* script */
+var __vue_script__ = __webpack_require__(95)
+/* template */
+var __vue_template__ = __webpack_require__(96)
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
 )
-Component.options.__file = "C:\\Users\\xu feng\\Desktop\\blog\\resources\\assets\\js\\components\\front\\Cancel.vue"
+Component.options.__file = "resources\\assets\\js\\components\\front\\Cancel.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] Cancel.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -30683,18 +30812,23 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* 96 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('button', {
-    staticClass: "button is-danger is-outlined",
-    class: {
-      'is-loading': _vm.sending
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "button",
+    {
+      staticClass: "button is-danger is-outlined",
+      class: { "is-loading": _vm.sending },
+      on: { click: _vm.cancel }
     },
-    on: {
-      "click": _vm.cancel
-    }
-  }, [_vm._v(_vm._s(_vm.btnText))])
-},staticRenderFns: []}
-module.exports.render._withStripped = true
+    [_vm._v(_vm._s(_vm.btnText))]
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
@@ -30707,19 +30841,25 @@ if (false) {
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
-var Component = __webpack_require__(1)(
-  /* script */
-  __webpack_require__(98),
-  /* template */
-  null,
-  /* styles */
-  null,
-  /* scopeId */
-  null,
-  /* moduleIdentifier (server only) */
-  null
+var normalizeComponent = __webpack_require__(1)
+/* script */
+var __vue_script__ = __webpack_require__(98)
+/* template */
+var __vue_template__ = null
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
 )
-Component.options.__file = "C:\\Users\\xu feng\\Desktop\\blog\\resources\\assets\\js\\components\\front\\Join.vue"
+Component.options.__file = "resources\\assets\\js\\components\\front\\Join.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
 
 /* hot reload */
@@ -30867,19 +31007,25 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
-var Component = __webpack_require__(1)(
-  /* script */
-  __webpack_require__(100),
-  /* template */
-  __webpack_require__(101),
-  /* styles */
-  null,
-  /* scopeId */
-  null,
-  /* moduleIdentifier (server only) */
-  null
+var normalizeComponent = __webpack_require__(1)
+/* script */
+var __vue_script__ = __webpack_require__(100)
+/* template */
+var __vue_template__ = __webpack_require__(101)
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
 )
-Component.options.__file = "C:\\Users\\xu feng\\Desktop\\blog\\resources\\assets\\js\\components\\front\\Price.vue"
+Component.options.__file = "resources\\assets\\js\\components\\front\\Price.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] Price.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -30976,53 +31122,72 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* 101 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('article', {
-    staticClass: "message hand",
-    class: [_vm.chozen],
-    on: {
-      "click": _vm.choose,
-      "mouseenter": _vm.onEnter,
-      "mouseleave": _vm.onLeave
-    }
-  }, [_c('div', {
-    staticClass: "message-header fd-v"
-  }, [_c('div', {
-    staticClass: "flex"
-  }, [_c('sup', {
-    staticClass: "is-size-5"
-  }, [_vm._v("$")]), _vm._v(" "), _c('span', {
-    staticClass: "is-size-1"
-  }, [_vm._v(_vm._s(_vm.planText.price)), _c('sub', {
-    staticClass: "is-size-5"
-  }, [_vm._v("/" + _vm._s(_vm.planText.unit))])])])]), _vm._v(" "), _c('div', {
-    staticClass: "message-body has-text-centered has-text-grey is-size-6"
-  }, [_c('div', {
-    staticClass: "field"
-  }, [_c('p', [_vm._v(_vm._s(_vm.planText.desc))]), _vm._v(" "), _c('p', [_vm._v(_vm._s(_vm.planText.time))]), _vm._v(" "), _c('p', [_vm._v(_vm._s(_vm.planText.cancel))])]), _vm._v(" "), _c('button', {
-    staticClass: "button btn-default",
-    attrs: {
-      "type": "button"
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "article",
+    {
+      staticClass: "message hand",
+      class: [_vm.chozen],
+      on: {
+        click: _vm.choose,
+        mouseenter: _vm.onEnter,
+        mouseleave: _vm.onLeave
+      }
     },
-    domProps: {
-      "textContent": _vm._s(_vm.chooseText)
-    },
-    on: {
-      "click": _vm.choose
-    }
-  }), _vm._v(" "), (_vm.checked) ? _c('span', [_vm._v("✔")]) : _vm._e(), _vm._v(" "), _c('input', {
-    ref: "radio",
-    staticClass: "is-hidden",
-    attrs: {
-      "type": "radio",
-      "name": "plan"
-    },
-    domProps: {
-      "value": _vm.planText.id
-    }
-  })])])
-},staticRenderFns: []}
-module.exports.render._withStripped = true
+    [
+      _c("div", { staticClass: "message-header fd-v" }, [
+        _c("div", { staticClass: "flex" }, [
+          _c("sup", { staticClass: "is-size-5" }, [_vm._v("$")]),
+          _vm._v(" "),
+          _c("span", { staticClass: "is-size-1" }, [
+            _vm._v(_vm._s(_vm.planText.price)),
+            _c("sub", { staticClass: "is-size-5" }, [
+              _vm._v("/" + _vm._s(_vm.planText.unit))
+            ])
+          ])
+        ])
+      ]),
+      _vm._v(" "),
+      _c(
+        "div",
+        {
+          staticClass: "message-body has-text-centered has-text-grey is-size-6"
+        },
+        [
+          _c("div", { staticClass: "field" }, [
+            _c("p", [_vm._v(_vm._s(_vm.planText.desc))]),
+            _vm._v(" "),
+            _c("p", [_vm._v(_vm._s(_vm.planText.time))]),
+            _vm._v(" "),
+            _c("p", [_vm._v(_vm._s(_vm.planText.cancel))])
+          ]),
+          _vm._v(" "),
+          _c("button", {
+            staticClass: "button btn-default",
+            attrs: { type: "button" },
+            domProps: { textContent: _vm._s(_vm.chooseText) },
+            on: { click: _vm.choose }
+          }),
+          _vm._v(" "),
+          _vm.checked ? _c("span", [_vm._v("✔")]) : _vm._e(),
+          _vm._v(" "),
+          _c("input", {
+            ref: "radio",
+            staticClass: "is-hidden",
+            attrs: { type: "radio", name: "plan" },
+            domProps: { value: _vm.planText.id }
+          })
+        ]
+      )
+    ]
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
@@ -31035,19 +31200,25 @@ if (false) {
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
-var Component = __webpack_require__(1)(
-  /* script */
-  __webpack_require__(103),
-  /* template */
-  __webpack_require__(104),
-  /* styles */
-  null,
-  /* scopeId */
-  null,
-  /* moduleIdentifier (server only) */
-  null
+var normalizeComponent = __webpack_require__(1)
+/* script */
+var __vue_script__ = __webpack_require__(103)
+/* template */
+var __vue_template__ = __webpack_require__(104)
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
 )
-Component.options.__file = "C:\\Users\\xu feng\\Desktop\\blog\\resources\\assets\\js\\components\\front\\Notification.vue"
+Component.options.__file = "resources\\assets\\js\\components\\front\\Notification.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] Notification.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -31126,13 +31297,19 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* 104 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return (_vm.show) ? _c('div', {
-    staticClass: "notification",
-    class: [_vm.color]
-  }, [_vm._v("\n \t \t" + _vm._s(_vm.body) + "\n\t")]) : _vm._e()
-},staticRenderFns: []}
-module.exports.render._withStripped = true
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _vm.show
+    ? _c("div", { staticClass: "notification", class: [_vm.color] }, [
+        _vm._v("\n \t \t" + _vm._s(_vm.body) + "\n\t")
+      ])
+    : _vm._e()
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
@@ -31145,19 +31322,25 @@ if (false) {
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
-var Component = __webpack_require__(1)(
-  /* script */
-  __webpack_require__(106),
-  /* template */
-  __webpack_require__(107),
-  /* styles */
-  null,
-  /* scopeId */
-  null,
-  /* moduleIdentifier (server only) */
-  null
+var normalizeComponent = __webpack_require__(1)
+/* script */
+var __vue_script__ = __webpack_require__(106)
+/* template */
+var __vue_template__ = __webpack_require__(107)
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
 )
-Component.options.__file = "C:\\Users\\xu feng\\Desktop\\blog\\resources\\assets\\js\\components\\front\\Resume.vue"
+Component.options.__file = "resources\\assets\\js\\components\\front\\Resume.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] Resume.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -31228,25 +31411,28 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* 107 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', [_c('notify', {
-    attrs: {
-      "color": _vm.color
-    }
-  }), _vm._v(" "), _c('button', {
-    staticClass: "button is-success",
-    class: {
-      'is-loading': _vm.sending
-    },
-    domProps: {
-      "textContent": _vm._s(_vm.btnText)
-    },
-    on: {
-      "click": _vm.resume
-    }
-  })], 1)
-},staticRenderFns: []}
-module.exports.render._withStripped = true
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    [
+      _c("notify", { attrs: { color: _vm.color } }),
+      _vm._v(" "),
+      _c("button", {
+        staticClass: "button is-success",
+        class: { "is-loading": _vm.sending },
+        domProps: { textContent: _vm._s(_vm.btnText) },
+        on: { click: _vm.resume }
+      })
+    ],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
@@ -31259,19 +31445,25 @@ if (false) {
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
-var Component = __webpack_require__(1)(
-  /* script */
-  __webpack_require__(109),
-  /* template */
-  __webpack_require__(110),
-  /* styles */
-  null,
-  /* scopeId */
-  null,
-  /* moduleIdentifier (server only) */
-  null
+var normalizeComponent = __webpack_require__(1)
+/* script */
+var __vue_script__ = __webpack_require__(109)
+/* template */
+var __vue_template__ = __webpack_require__(110)
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
 )
-Component.options.__file = "C:\\Users\\xu feng\\Desktop\\blog\\resources\\assets\\js\\components\\front\\Subscribe.vue"
+Component.options.__file = "resources\\assets\\js\\components\\front\\Subscribe.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] Subscribe.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -31370,43 +31562,56 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* 110 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('form', {
-    on: {
-      "submit": function($event) {
-        $event.preventDefault();
-        _vm.onSubmit($event)
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "form",
+    {
+      on: {
+        submit: function($event) {
+          $event.preventDefault()
+          _vm.onSubmit($event)
+        }
       }
-    }
-  }, [_c('notify', {
-    attrs: {
-      "color": _vm.color
-    }
-  }), _vm._v(" "), _c('div', {
-    staticClass: "field has-addons"
-  }, [_c('div', {
-    staticClass: "control"
-  }, [_c('div', {
-    staticClass: "select"
-  }, [_c('select', {
-    attrs: {
-      "name": "plan"
-    }
-  }, _vm._l((_vm.plans), function(plan) {
-    return _c('option', {
-      domProps: {
-        "value": plan.id
-      }
-    }, [_vm._v("\n\t\t\t\t    \t" + _vm._s(plan.unit + ' - ' + plan.label) + "\n\t\t\t\t    ")])
-  }))])]), _vm._v(" "), _c('div', {
-    staticClass: "control"
-  }, [_c('submit', {
-    attrs: {
-      "text": _vm.btnText
-    }
-  })], 1)])], 1)
-},staticRenderFns: []}
-module.exports.render._withStripped = true
+    },
+    [
+      _c("notify", { attrs: { color: _vm.color } }),
+      _vm._v(" "),
+      _c("div", { staticClass: "field has-addons" }, [
+        _c("div", { staticClass: "control" }, [
+          _c("div", { staticClass: "select" }, [
+            _c(
+              "select",
+              { attrs: { name: "plan" } },
+              _vm._l(_vm.plans, function(plan) {
+                return _c("option", { domProps: { value: plan.id } }, [
+                  _vm._v(
+                    "\n\t\t\t\t    \t" +
+                      _vm._s(plan.unit + " - " + plan.label) +
+                      "\n\t\t\t\t    "
+                  )
+                ])
+              })
+            )
+          ])
+        ]),
+        _vm._v(" "),
+        _c(
+          "div",
+          { staticClass: "control" },
+          [_c("submit", { attrs: { text: _vm.btnText } })],
+          1
+        )
+      ])
+    ],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
@@ -31419,19 +31624,25 @@ if (false) {
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
-var Component = __webpack_require__(1)(
-  /* script */
-  __webpack_require__(112),
-  /* template */
-  __webpack_require__(113),
-  /* styles */
-  null,
-  /* scopeId */
-  null,
-  /* moduleIdentifier (server only) */
-  null
+var normalizeComponent = __webpack_require__(1)
+/* script */
+var __vue_script__ = __webpack_require__(112)
+/* template */
+var __vue_template__ = __webpack_require__(113)
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
 )
-Component.options.__file = "C:\\Users\\xu feng\\Desktop\\blog\\resources\\assets\\js\\components\\front\\Invoices.vue"
+Component.options.__file = "resources\\assets\\js\\components\\front\\Invoices.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] Invoices.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -31460,6 +31671,8 @@ module.exports = Component.exports
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__InvoiceBtn_vue__ = __webpack_require__(121);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__InvoiceBtn_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__InvoiceBtn_vue__);
 //
 //
 //
@@ -31476,11 +31689,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 
+
 /* harmony default export */ __webpack_exports__["default"] = ({
+	components: { btn: __WEBPACK_IMPORTED_MODULE_0__InvoiceBtn_vue___default.a },
 	data: function data() {
 		return {
 			status: 'loading...',
-			loading: false,
 			invoices: []
 		};
 	},
@@ -31500,22 +31714,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 			}).catch(function (r) {
 				_this.status = window.lan.noInvoice;
 			});
-		},
-		download: function download(invoiceId) {
-			var _this2 = this;
-
-			this.loading = true;
-			axios.get(api + 'invoice?invoiceId=' + invoiceId, {
-				responseType: 'blob'
-			}).then(function (r) {
-				var link = document.createElement('a');
-				link.href = window.URL.createObjectURL(r.data);
-				link.download = invoiceId + ".pdf";
-				link.click();
-				link.remove();
-			}).then(function (r) {
-				_this2.loading = false;
-			});
 		}
 	}
 });
@@ -31524,28 +31722,36 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* 113 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('table', {
-    staticClass: "table is-bordered is-striped is-narrow is-fullwidth"
-  }, [_vm._l((_vm.invoices), function(invoice) {
-    return _c('tr', [_c('td', [_vm._v(_vm._s(invoice.date))]), _vm._v(" "), _c('td', [_vm._v(_vm._s(invoice.total))]), _vm._v(" "), _c('td', [_c('button', {
-      staticClass: "button is-default is-small",
-      class: {
-        'is-loading': _vm.loading
-      },
-      on: {
-        "click": function($event) {
-          _vm.download(invoice.id)
-        }
-      }
-    }, [_vm._v("Download")])])])
-  }), _vm._v(" "), (!_vm.invoices.length) ? _c('tr', [_c('td', {
-    attrs: {
-      "colspan": "3"
-    }
-  }, [_vm._v(_vm._s(_vm.status))])]) : _vm._e()], 2)
-},staticRenderFns: []}
-module.exports.render._withStripped = true
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "table",
+    { staticClass: "table is-bordered is-striped is-narrow is-fullwidth" },
+    [
+      _vm._l(_vm.invoices, function(invoice) {
+        return _c("tr", [
+          _c("td", [_vm._v(_vm._s(invoice.date))]),
+          _vm._v(" "),
+          _c("td", [_vm._v(_vm._s(invoice.total))]),
+          _vm._v(" "),
+          _c("td", [_c("btn", { attrs: { invoice: invoice.id } })], 1)
+        ])
+      }),
+      _vm._v(" "),
+      !_vm.invoices.length
+        ? _c("tr", [
+            _c("td", { attrs: { colspan: "3" } }, [_vm._v(_vm._s(_vm.status))])
+          ])
+        : _vm._e()
+    ],
+    2
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
@@ -31558,19 +31764,25 @@ if (false) {
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
-var Component = __webpack_require__(1)(
-  /* script */
-  __webpack_require__(115),
-  /* template */
-  __webpack_require__(116),
-  /* styles */
-  null,
-  /* scopeId */
-  null,
-  /* moduleIdentifier (server only) */
-  null
+var normalizeComponent = __webpack_require__(1)
+/* script */
+var __vue_script__ = __webpack_require__(115)
+/* template */
+var __vue_template__ = __webpack_require__(116)
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
 )
-Component.options.__file = "C:\\Users\\xu feng\\Desktop\\blog\\resources\\assets\\js\\components\\front\\Ppv.vue"
+Component.options.__file = "resources\\assets\\js\\components\\front\\Ppv.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] Ppv.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -31646,7 +31858,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 			axios.post(api + 'ppv').then(function (r) {
 				_this.color = 'is-success';
 				Bus.$emit('notify', window.lan.paid);
-				axios.post('/ppv', { post: _this.post }).then(function (r) {
+				axios.post('/ppv/' + _this.post).then(function (r) {
 					setTimeout(function () {
 						location.reload();
 					}, 3000);
@@ -31665,63 +31877,208 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* 116 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', {
-    staticClass: "is-pulled-right"
-  }, [_c('button', {
-    staticClass: "button is-success",
-    attrs: {
-      "type": "button"
-    },
-    on: {
-      "click": function($event) {
-        _vm.isActive = true
-      }
-    }
-  }, [_vm._v(_vm._s(_vm.btnText))]), _vm._v(" "), _c('div', {
-    staticClass: "modal",
-    class: {
-      'is-active': _vm.isActive
-    }
-  }, [_c('div', {
-    staticClass: "modal-background",
-    on: {
-      "click": function($event) {
-        _vm.isActive = false
-      }
-    }
-  }), _vm._v(" "), _c('div', {
-    staticClass: "modal-card"
-  }, [_c('section', {
-    staticClass: "modal-card-body"
-  }, [_c('notify', {
-    attrs: {
-      "color": _vm.color
-    }
-  }), _vm._v(" "), _c('form', {
-    on: {
-      "submit": function($event) {
-        $event.preventDefault();
-        _vm.onSubmit($event)
-      }
-    }
-  }, [_c('table', {
-    staticClass: "table is-fullwidth"
-  }, [_vm._m(0), _vm._v(" "), _c('tr', [_c('th', [_vm._v("卡号四位数")]), _c('td', [_vm._v(_vm._s(_vm.last4))])])]), _vm._v(" "), _c('div', {
-    staticClass: "has-text-centered"
-  }, [_c('submit', {
-    attrs: {
-      "text": "确认付款"
-    }
-  })], 1)])], 1)])])])
-},staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('tr', [_c('th', [_vm._v("本次需付费")]), _c('td', [_vm._v("$1.49")])])
-}]}
-module.exports.render._withStripped = true
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "is-pulled-right" }, [
+    _c(
+      "button",
+      {
+        staticClass: "button is-success",
+        attrs: { type: "button" },
+        on: {
+          click: function($event) {
+            _vm.isActive = true
+          }
+        }
+      },
+      [_vm._v(_vm._s(_vm.btnText))]
+    ),
+    _vm._v(" "),
+    _c("div", { staticClass: "modal", class: { "is-active": _vm.isActive } }, [
+      _c("div", {
+        staticClass: "modal-background",
+        on: {
+          click: function($event) {
+            _vm.isActive = false
+          }
+        }
+      }),
+      _vm._v(" "),
+      _c("div", { staticClass: "modal-card" }, [
+        _c(
+          "section",
+          { staticClass: "modal-card-body" },
+          [
+            _c("notify", { attrs: { color: _vm.color } }),
+            _vm._v(" "),
+            _c(
+              "form",
+              {
+                on: {
+                  submit: function($event) {
+                    $event.preventDefault()
+                    _vm.onSubmit($event)
+                  }
+                }
+              },
+              [
+                _c("table", { staticClass: "table is-fullwidth" }, [
+                  _vm._m(0),
+                  _vm._v(" "),
+                  _c("tr", [
+                    _c("th", [_vm._v("卡号四位数")]),
+                    _c("td", [_vm._v(_vm._s(_vm.last4))])
+                  ])
+                ]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  { staticClass: "has-text-centered" },
+                  [_c("submit", { attrs: { text: "确认付款" } })],
+                  1
+                )
+              ]
+            )
+          ],
+          1
+        )
+      ])
+    ])
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("tr", [_c("th", [_vm._v("本次需付费")]), _c("td", [_vm._v("$1.49")])])
+  }
+]
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
      require("vue-hot-reload-api").rerender("data-v-43df9a8a", module.exports)
+  }
+}
+
+/***/ }),
+/* 117 */,
+/* 118 */,
+/* 119 */,
+/* 120 */,
+/* 121 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(1)
+/* script */
+var __vue_script__ = __webpack_require__(122)
+/* template */
+var __vue_template__ = __webpack_require__(123)
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources\\assets\\js\\components\\front\\InvoiceBtn.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
+if (Component.options.functional) {console.error("[vue-loader] InvoiceBtn.vue: functional components are not supported with templates, they should use render functions.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-4683d70b", Component.options)
+  } else {
+    hotAPI.reload("data-v-4683d70b", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 122 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+	props: ['invoice'],
+	data: function data() {
+		return {
+			loading: false
+		};
+	},
+
+	methods: {
+		download: function download() {
+			var _this = this;
+
+			this.loading = true;
+			axios.get(api + 'invoice?invoiceId=' + this.invoice, {
+				responseType: 'blob'
+			}).then(function (r) {
+				var link = document.createElement('a');
+				link.href = window.URL.createObjectURL(r.data);
+				link.download = _this.invoice + ".pdf";
+				link.click();
+				link.remove();
+			}).then(function (r) {
+				_this.loading = false;
+			});
+		}
+	}
+});
+
+/***/ }),
+/* 123 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "button",
+    {
+      staticClass: "button is-default is-small",
+      class: { "is-loading": _vm.loading },
+      on: { click: _vm.download }
+    },
+    [_vm._v("Download")]
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+     require("vue-hot-reload-api").rerender("data-v-4683d70b", module.exports)
   }
 }
 

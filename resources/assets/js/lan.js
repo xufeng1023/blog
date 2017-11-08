@@ -18,7 +18,7 @@ window.language = {
 		preview: '可预览',
 		notFree: '会员观看',
 		playing: '播放中...',
-		memberOnly: '请先登入账号或续费观看影片',
+		memberOnly: '请订阅会员或购买影片观看',
 		resume: '重新激活订阅',
 		resumeDesc: '您当前剩下的有效天数将会被保留, 不会浪费',
 		cancel: '取消订阅',

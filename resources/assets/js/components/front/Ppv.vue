@@ -41,7 +41,7 @@
 				.then(r => {
 					this.color = 'is-success';
 					Bus.$emit('notify', window.lan.paid);
-					axios.post('/ppv', {post:this.post})
+					axios.post('/ppv/' + this.post)
 					.then(r => {
 						setTimeout(() => {
 							location.reload();

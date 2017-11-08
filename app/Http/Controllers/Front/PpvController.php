@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Front;
 
 use Carbon\Carbon;
-use App\{User, Post, Ppv};
+use App\{Post, Ppv};
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -14,12 +14,12 @@ class PpvController extends Controller
 		$this->middleware('auth');
 	}
 
-    public function store(Request $request)
-    { return response($request->post, 422);
-    	// Ppv::updateOrCreate([
-    	// 	'user_id' => auth()->id, 'post_id' => $post->id
-    	// ], [
-    	// 	'ends_at' => Carbon::now()->addDay()
-    	// ]);
+    public function store(Post $post)
+    {
+    	Ppv::updateOrCreate([
+    		'user_id' => auth()->id(), 'post_id' => $post->id
+    	], [
+    		'ends_at' => Carbon::now()->addDay()
+    	]);
     }
 }
