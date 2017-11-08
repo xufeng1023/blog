@@ -16,7 +16,7 @@ Route::get('/settings/subscription', 'Front\UserController@changePlan');
 Route::get('/settings/invoices', 'Front\UserController@invoices');
 Route::post('/settings/account', 'Front\UserController@updateAccount');
 Route::post('/post/{post}/updateViews', 'Front\PostController@updateViews');
-Route::post('/ppv/{user}/{post}', 'Front\PpvController@store');
+Route::post('/ppv', 'Front\PpvController@store');
 Route::post('/user/instance', 'Front\UserController@createInstance');
 Route::delete('/user/delete', 'Front\UserController@delete');
 

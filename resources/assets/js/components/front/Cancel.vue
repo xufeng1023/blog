@@ -14,7 +14,7 @@
 			cancel() {
 				this.sending = true;
 
-				axios.post(api + 'cancel/' + auth.id, {apiToken: auth.api_token})
+				axios.post(api + 'cancel')
 				.then(r => {
 					location.assign('/settings/subscription');
 				})

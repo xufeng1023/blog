@@ -21,9 +21,8 @@
 			update(e) {
 				Bus.$emit('loading-start');
 				let formData = new FormData(e.target);
-				formData.append('apiToken', auth.api_token);
 
-				axios.post(api + 'updateCard/' + auth.id, formData)
+				axios.post(api + 'updateCard', formData)
 				.then(r => {
 					location.reload();
 				})

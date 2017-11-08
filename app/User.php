@@ -12,11 +12,11 @@ class User extends Authenticatable
 {
     use Notifiable, Billable, HasApiTokens;
 
+    protected $appends = ['plan','ends_at','next_bill_at','is_member'];
+
     protected $fillable = ['email', 'password'];
 
-    protected $appends = ['plan'];
-
-    protected $visible = ['api_token', 'email', 'id', 'plan', 'card_last_four'];
+    protected $visible = ['api_token','card_brand','card_last_four','email','plan','ends_at','next_bill_at','is_member'];
 
     public function saveApiToken()
     {
@@ -31,15 +31,29 @@ class User extends Authenticatable
 
     public function getPlanAttribute()
     {
-        if($sub = $this->subscription('main')) {
-            return $sub->stripe_plan;
-        }
+        $sub = $this->subscription('main');
+        return $sub? $sub->stripe_plan : null;
     }
 
     public function getEndsAtAttribute()
     {
-        if($sub = $this->subscription('main')) {
-            return $sub->ends_at;
-        }
+        $sub = $this->subscription('main');
+        return $sub && $sub->ends_at? $sub->ends_at->format('Y-m-d') : null;
+    }
+
+    public function getNextBillAtAttribute()
+    {
+        $sub = $this->subscription('main');
+        return $sub? $sub->updated_at->addMonth()->format('Y-m-d') : null;
+    }
+
+    public function getIsMemberAttribute()
+    {
+        return $this->subscribed('main');
+    }
+
+    public function getSubscriptionAttribute()
+    {
+        return $this->subscription('main');
     }
 }

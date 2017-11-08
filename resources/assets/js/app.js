@@ -21,15 +21,13 @@ if (api) {
 }
 
 let auth = document.head.querySelector('meta[name="auth"]');
-window.auth = auth.content? JSON.parse(auth.content) : null;
-if(window.auth) {
-	window.axios.defaults.headers.common['Authorization'] = 'Bearer ' + window.auth.api_token
+if(auth) {
+	window.auth = auth.content? JSON.parse(auth.content) : null;
+	if(window.auth) {
+		window.axios.defaults.headers.common['Authorization'] = 'Bearer ' + window.auth.api_token
+	}
+	auth.remove();
 }
-auth.remove();
-
-let member = document.head.querySelector('meta[name="member"]');
-window.member = member.content;
-member.remove();
 
 let lang = document.querySelector('html').lang;
 window.lan = window.language[lang];

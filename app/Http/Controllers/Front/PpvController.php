@@ -14,12 +14,12 @@ class PpvController extends Controller
 		$this->middleware('auth');
 	}
 
-    public function store(User $user, Post $post)
-    {
-    	Ppv::updateOrCreate([
-    		'user_id' => $user->id, 'post_id' => $post->id
-    	], [
-    		'ends_at' => Carbon::now()->addDay()
-    	]);
+    public function store(Request $request)
+    { return response($request->post, 422);
+    	// Ppv::updateOrCreate([
+    	// 	'user_id' => auth()->id, 'post_id' => $post->id
+    	// ], [
+    	// 	'ends_at' => Carbon::now()->addDay()
+    	// ]);
     }
 }

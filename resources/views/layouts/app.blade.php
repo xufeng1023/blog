@@ -5,10 +5,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <meta name="api-token" content="{{ config('app.api_token') }}">
     <meta name="api" content="{{ config('app.api') }}">
     <meta name="auth" content="{{ $auth }}">
-    <meta name="member" content="{{ $auth? $auth->subscribed('main') : false }}">
     <title>@yield('title'){{ config('app.name', 'Laravel') }} - @lang('index.desc')</title>
     @yield('style')
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">

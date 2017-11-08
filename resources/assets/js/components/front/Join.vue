@@ -66,7 +66,7 @@
 						this.color = 'is-success';
 						this.endInError(window.lan.paid);
 						setTimeout(() => {
-							//location.reload();
+							location.reload();
 						}, 2000);
 					})
 					.catch(({response}) => {

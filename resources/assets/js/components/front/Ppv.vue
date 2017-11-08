@@ -1,6 +1,6 @@
 <template>
 	<div class="is-pulled-right">
-		<button type="button" class="button is-danger" @click="isActive = true">{{ btnText }}</button>
+		<button type="button" class="button is-success" @click="isActive = true">{{ btnText }}</button>
 		<div class="modal" :class="{'is-active': isActive}">
             <div class="modal-background" @click="isActive = false"></div>
             <div class="modal-card">
@@ -37,11 +37,11 @@
 		methods: {
 			onSubmit() {
 				Bus.$emit('loading-start');
-				axios.post(api + 'ppv/' + auth.id, {'apiToken': auth.api_token})
+				axios.post(api + 'ppv')
 				.then(r => {
 					this.color = 'is-success';
 					Bus.$emit('notify', window.lan.paid);
-					axios.post('/ppv/' + auth.id + '/' + this.post)
+					axios.post('/ppv', {post:this.post})
 					.then(r => {
 						setTimeout(() => {
 							location.reload();

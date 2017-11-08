@@ -11,17 +11,17 @@
             @if($auth->subscribed('main'))
 	        	@if($auth->ends_at)
 	            	<h3 class="subtitle is-6 has-text-danger">
-	                	@lang('index.sub will end', ['date' => $auth->ends_at->format('Y-m-d')]) 
+	                	@lang('index.sub will end', ['date' => $auth->ends_at]) 
 	                </h3>
 	        	@else
 	            	<h3 class="subtitle is-6">
-	            		@lang('index.next bill', ['date' => $auth->subscription('main')->created_at->addMonth()->format('Y-m-d')]) 
+	            		@lang('index.next bill', ['date' => $auth->next_bill_at]) 
 	            	</h3>
 	            @endif
             @else
             	@if($auth->ends_at)
             		<h3 class="subtitle is-6 has-text-danger">
-	                	@lang('index.sub ended', ['date' => $auth->ends_at->format('Y-m-d')]) 
+	                	@lang('index.sub ended', ['date' => $auth->ends_at]) 
 	                </h3>
             	@endif
             @endif

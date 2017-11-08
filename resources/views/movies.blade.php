@@ -18,7 +18,7 @@
                         <a href="/movie/{{ $post->slug }}">
                             <figure class="image is-16by9">
                                 <img src="{{ asset('/storage/'.$post->thumbnail) }}">
-                                @if($post->preview)
+                                @if($post->preview && (!$auth || !$auth->is_member))
                                     <span class="tag preview is-success">@lang('index.preview')</span>
                                 @endif
                             </figure>

@@ -41,9 +41,7 @@
 					return;
 				}
 
-				formData.append('apiToken', auth.api_token);
-
-				axios.post(api + 'subscribe/' + auth.id, formData)
+				axios.post(api + 'subscribe', formData)
 				.then(({data}) => {
 					this.color = 'is-success';
 					Bus.$emit('loading-end');
@@ -60,11 +58,5 @@
 				});
 			}
 		}
-		// created() {
-		// 	axios.get('/plans')
-		// 	.then(({data}) => {
-		// 		this.plans = data;
-		// 	})
-		// }
 	}
 </script>

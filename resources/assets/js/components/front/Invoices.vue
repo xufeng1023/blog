@@ -27,7 +27,7 @@
 		},
 		methods: {
 			fetch() {
-				axios.get(api + 'invoices/' + auth.id + '?apiToken=' + auth.api_token)
+				axios.get(api + 'invoices')
 				.then(r => {
 					this.invoices = r.data
 					if(!r.data) {
@@ -40,7 +40,7 @@
 			},
 			download(invoiceId) {
 				this.loading = true;
-				axios.get(api + 'invoice/' + auth.id + '?invoiceId=' + invoiceId,
+				axios.get(api + 'invoice?invoiceId=' + invoiceId,
 				{
 				    responseType: 'blob'
 				})
