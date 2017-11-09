@@ -7,6 +7,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="api" content="{{ config('app.api') }}">
     <meta name="auth" content="{{ $auth }}">
+    <meta name="google-site-verification" content="yMq8HejvoSmmerIYSzoHzMcIhXzqSWdG3q4z2rzaPqc">
     <title>@yield('title'){{ config('app.name', 'Laravel') }} - @lang('index.desc')</title>
     @yield('style')
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
