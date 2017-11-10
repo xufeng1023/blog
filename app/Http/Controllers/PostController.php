@@ -97,4 +97,10 @@ class PostController extends Controller
     {
         return Post::where('title', 'LIKE', "%{$request->q}%")->get()->toJson();
     }
+
+    public function sd(Post $post)
+    {
+        $post->sd = !$post->sd;
+        $post->save();
+    }
 }

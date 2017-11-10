@@ -13,6 +13,11 @@
         <div class="form-group">
             <label>Views: <span class="badge">{{ post.views }}</span></label>
         </div>
+        <div class="checkbox">
+    		<label>
+      			<input type="checkbox" @change="onChange"> High Definition
+	    	</label>
+	  	</div>
     </form>
 </template>
 
@@ -32,5 +37,16 @@
 			}
 		},
 		components: { 'title-input': titleInput },
+		methods: {
+			onChange() {
+				axios.put('/admin/sd/' + this.post.slug)
+				.then(r => {
+					Bus.$emit('flash', {
+						message: 'Post sd changed!',
+						type: 'success'
+					})
+				});
+			}
+		}
 	}
 </script>

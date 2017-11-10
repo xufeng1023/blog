@@ -26,6 +26,7 @@ Route::prefix('admin')->middleware('admin')->group(function() {
 	Route::get('/posts/search', 'PostController@search');
 	Route::resource('posts', 'PostController');
 	Route::resource('videos', 'VideoController');
+	Route::put('/sd/{post}', 'PostController@sd');
 	Route::patch('/videos/{video}/preview', 'VideoController@setPreview');
 	Route::patch('/videos/{video}/clearPreview', 'VideoController@clearPreview');
 	Route::resource('images', 'ImageController');

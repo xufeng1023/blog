@@ -169,4 +169,13 @@ class AdminTest extends TestCase
         $this->deleteUselessFile($video1->link);
         $this->deleteUselessFile($video2->link);
     }
+
+    function test_admin_can_toggle_the_sd_of_a_post()
+    {
+        $post = $this->create('Post');
+        $this->assertDatabaseHas('posts', ['id' => $post->id, 'sd' => 0]);
+
+        $this->login()->put("/admin/sd/{$post->slug}");
+        $this->assertDatabaseHas('posts', ['id' => $post->id, 'sd' => 1]);
+    }
 }

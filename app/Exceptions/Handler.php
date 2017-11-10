@@ -46,6 +46,10 @@ class Handler extends ExceptionHandler
     {
         if(app()->environment() === 'testing') throw $exception;
 
+        if ($exception instanceof \Illuminate\Session\TokenMismatchException) {
+            return redirect('login');
+        }
+
         return parent::render($request, $exception);
     }
 
