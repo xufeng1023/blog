@@ -10,17 +10,13 @@ class PostController extends Controller
 {
     public function index()
     {
-    	$posts = Post::latest()->paginate(16);
+    	$posts = Post::latest()->paginate(9);
 
     	return view('movies', compact('posts'));
     }
 
     public function show(Post $post)
     {
-        if(app()->environment() === 'testing') {
-            return [$post, $post->preview];
-        }
-
         $canWatch = auth()->user()? auth()->user()->can('watch', $post) : false;
 
     	return view('movie', compact('post', 'canWatch'));

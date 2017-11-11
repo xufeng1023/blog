@@ -12,7 +12,7 @@ class PpvTest extends TestCase
 	public function test_guests_can_not_add_ppv()
 	{
 		$this->expectException('Illuminate\Auth\AuthenticationException');
-		$this->post("/ppv/1/1");
+		$this->post("/ppv/1");
 	}
 
 	public function test_auth_user_can_add_ppv()

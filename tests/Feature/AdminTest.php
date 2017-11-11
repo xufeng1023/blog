@@ -44,7 +44,7 @@ class AdminTest extends TestCase
         $postImage = $this->create('Image', ['post_id' => $video->post->id]);
         $videoThumbnail = $this->create('Image', ['video_id' => $video->id]);
         $this->login()->delete('/admin/posts/'.$video->post->slug);
-        $this->assertDatabaseMissing('posts', $video->post->toArray());
+        $this->assertDatabaseMissing('posts', ['id' => $video->post->id]);
         $this->assertDatabaseMissing('images', ['slug' => $postImage->slug]);
         $this->assertDatabaseMissing('images', ['slug' => $videoThumbnail->slug]);
         $this->assertDatabaseMissing('videos', ['slug' => $video->slug]);

@@ -17,10 +17,10 @@ class UserTest extends TestCase
 
     public function test_user_can_update_their_account()
     {
-    	$data = ['name' => 'name', 'email' => 'email@email.com'];
+    	$data = ['email' => 'email@email.com'];
     	$user = $this->create('User', $data);
     	
-    	$data = ['name' => $user->name, 'email' => 'email2@email.com'];
+    	$data = ['email' => 'email2@email.com'];
 		$this->login($user)->post('/settings/account', $data);
     	$this->assertDatabaseHas('users', $data);
     }
