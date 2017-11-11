@@ -43,9 +43,9 @@
                                     <a class="navbar-item" href="/admin">admin</a>
                                 @endif
                             @else
-                                <!-- <a class="navbar-item {{ $uri == 'login'? 'is-active':'' }}" href="/login">@lang('index.login')</a> -->
                                 <login></login>
                                 <login-modal></login-modal>
+                                <!-- <a class="navbar-item {{ $uri == 'join'? 'is-active':'' }}" href="/join">@lang('index.join')</a> -->
                                 <div class="navbar-item">
                                     <a class="button is-warning is-fullwidth" href="/join">@lang('index.join')</a>
                                 </div>

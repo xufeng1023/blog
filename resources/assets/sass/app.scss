@@ -27,7 +27,7 @@ a.navbar-item:hover {
 	background-color: inherit;
 }
 a.navbar-item.is-active {
-	background-color: inherit;
+	background-color: #292929;
 }
 @media screen and (max-width: 1023px) {
 	.navbar-menu {
@@ -91,8 +91,22 @@ sup {
 		display: none;
 	}
 }
+@media screen and (max-width: 326px) {
+	.navbar, .navbar-menu, .navbar-start, .navbar-end {
+		margin-left: inherit;
+	}
+}
 @media screen and (min-width: 769px), print {
 	.modal-content, .modal-card {
 	    
     }
+}
+@media screen and (max-width: 1023px) {
+	.navbar-menu {
+		padding: 0;
+	}
+	.navbar-item {
+		align-items: center;
+    	display: flex;
+	}
 }
