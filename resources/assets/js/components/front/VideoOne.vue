@@ -14,7 +14,7 @@
 		data() {
 			return {
 				previewText: window.lan.notFree,
-				memberOnly: !this.video.is_free && !window.member && !this.can,
+				memberOnly: !this.video.is_free && !this.can,
 				playingText: window.lan.playing,
 				playing: false,
 				mouseLeft: true 
@@ -27,9 +27,13 @@
 		},
 		methods: {
 			play() {
-				if(this.memberOnly) {
+				if(!this.video.is_free && !auth) {
+					Bus.$emit('notify', window.lan.notLogin);
+					return;
+				}
+				
+				if(!this.video.is_free && this.memberOnly) {
 					Bus.$emit('notify', window.lan.memberOnly);
-					window.scrollTo(0, -50000);
 					return;
 				}
 

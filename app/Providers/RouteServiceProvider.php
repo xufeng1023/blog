@@ -28,6 +28,10 @@ class RouteServiceProvider extends ServiceProvider
         Route::bind('image', function($value) {
             return \App\Image::whereSlug('upload/'.$value)->first();
         });
+
+        Route::bind('postId', function($value) {
+            return \App\Post::whereId($value)->first();
+        });
     }
 
     /**

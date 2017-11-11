@@ -43,13 +43,6 @@ class Post extends Model
         return $this;
     }
 
-    public function getPreview()
-    {
-        $video = $this->videos()->orderBy('is_free', 'desc')->first();
-        if($video) $video->load('thumbnail');
-        return $video;
-    }
-
     public function updateViews()
     {
         $this->increment('views');
@@ -62,7 +55,7 @@ class Post extends Model
 
         if(!$video) $video = $this->videos->first();
 
-        return $video? $video : null;
+        return $video ?: null;
     }
 
     public function getThumbnailAttribute()

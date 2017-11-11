@@ -8,14 +8,14 @@
 			autoplay 
 		>
 	    </video>
-	    <notify color="is-danger"></notify>
+	    <notify color="is-danger" stay="true"></notify>
 	</div>
 	
 </template>
 
 <script>
 	export default {
-		props: ['preview', 'post'],
+		props: ['preview', 'post', 'can'],
 		data() {
 			return {
 				now: null,
@@ -38,9 +38,11 @@
 				errorDisplay: false
 			}, function() {
 				this.volume(0.4);
-				this.setTimeout(() => {
-					self.updatePostViews();
-				}, 30000);
+				if(self.now.is_free || (auth && auth.is_member)) {
+					this.setTimeout(() => {
+						self.updatePostViews();
+					}, 30000);
+				}
 				this.hotkeys({
 					seekStep: 10,
 					enableVolumeScroll: false
@@ -53,24 +55,28 @@
 		},
 		methods: {
 			load() {
-				axios.get('/video/'+this.now.slug+'/checkSlug')
-				.then( () => {
-					this.video.src({
-						type: "video/mp4",
-						src: '/video/' + this.now.slug + '?' + Math.random().toString(36).substring(2)
-					});
-				})
-				.catch( (e) => {
-					if(e.response.status === 404) return;
+				if(!this.now.is_free && !auth) {
+					Bus.$emit('notify', window.lan.notLogin);
+				} else if(!this.now.is_free && !this.can) {
+					Bus.$emit('notify', window.lan.memberOnly);
+				} else {
+					axios.get('/video/'+this.now.slug+'/checkSlug')
+					.then( () => {
+						this.video.src({
+							type: "video/mp4",
+							src: '/video/' + this.now.slug + '?' + Math.random().toString(36).substring(2)
+						});
+					})
+					.catch( (e) => {
+						if(e.response.status === 404) return;
 
-					Bus.$emit('notify', e.response.data);
-					this.video.reset();
-
-					if(this.now.thumbnail) {
-						this.video.poster('/storage/' + this.now.thumbnail.slug);
-					}
-				})
-				
+						Bus.$emit('notify', e.response.data);
+						this.video.reset();
+					})
+				}
+				if(this.now.thumbnail) {
+					this.video.poster('/storage/' + this.now.thumbnail.slug);
+				}
 				Bus.$emit('nowPlaying', this.now.slug);
 			},
 			updatePostViews() {

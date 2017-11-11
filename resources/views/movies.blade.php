@@ -18,8 +18,15 @@
                         <a href="/movie/{{ $post->slug }}">
                             <figure class="image is-16by9">
                                 <img src="{{ asset('/storage/'.$post->thumbnail) }}">
-                                @if($post->preview && (!$auth || !$auth->is_member))
-                                    <span class="tag preview is-success">@lang('index.preview')</span>
+                                @if($post->preview)
+                                    <div class="preview">
+                                        @if($post->sd)
+                                            <span class="tag is-info">@lang('index.sd')</span>
+                                        @endif
+                                        @if($post->preview->is_free && (!$auth || !$auth->is_member))
+                                            <span class="tag is-success">@lang('index.preview')</span>
+                                        @endif
+                                    </div>
                                 @endif
                             </figure>
                             <p>{{ $post->title }}</p>

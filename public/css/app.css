@@ -10850,7 +10850,7 @@ hr {
   border-bottom: 1px solid #504f4f;
 }
 
-.tag.preview {
+figure .preview {
   position: absolute;
   border-radius: inherit;
   bottom: 0;
@@ -10962,10 +10962,19 @@ sup {
           justify-content: center;
 }
 
-@media screen and (min-width: 769px), print {
-  .modal-content,
-  .modal-card {
-    width: 320px;
+@media screen and (min-width: 300px) {
+  .navbar,
+  .navbar-menu,
+  .navbar-start,
+  .navbar-end {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    margin-left: auto;
+  }
+
+  .navbar-burger {
+    display: none;
   }
 }
 

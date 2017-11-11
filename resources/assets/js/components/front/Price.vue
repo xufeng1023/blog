@@ -1,6 +1,7 @@
 <template>
 	<article class="message hand" :class="[chozen]" @click="choose" @mouseenter="onEnter" @mouseleave="onLeave">
         <div class="message-header fd-v">
+        	<div>{{ planText.type }}</div>
             <div class="flex">
                 <sup class="is-size-5">$</sup>
                 <span class="is-size-1">{{ planText.price }}<sub class="is-size-5">/{{ planText.unit }}</sub></span>

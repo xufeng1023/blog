@@ -38,8 +38,8 @@ return [
 	'update' => '更新',
 	'cc safe desc' => '本网站在数据处理, 认证和支付过程中使用安全协议和SSL加密.',
 	'preview' => '可预览',
-	'need to login' => '请登入账号观看本影片',
-	'expired' => '请续费会员或购买本影片',
+	'need to login' => '请登入账号观看影片',
+	'expired' => '请续费会员或购买影片观看',
 	'account updated' => '账号更新完成',
 	'no micro' => '请不要用Microsoft Edge或Internet Explorer打开本网站',
 	'resume desc' => '重新激活订阅后, 任何未使用的有效天数都可以继续被使用, 并且不需要马上付费.',
@@ -51,5 +51,6 @@ return [
 	'ppv member' => '非订阅型用户',
 	'ppv desc' => '非订阅型用户只需为要观看的影片付费, 影片24小时有效, 一键付费, 无月费. 此计划适合初次体验本网站的新成员们.',
 	'greeting' => '尊敬的用户您好',
+	'sd' => '高清',
 
 ];

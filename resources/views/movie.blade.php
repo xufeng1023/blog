@@ -9,9 +9,9 @@
     <div class="columns">
         <div class="column is-two-thirds">
             @if($post->preview) 
-                <video-frame post="{{ $post->slug }}" :preview="{{ $post->preview }}"></video-frame>
+                <video-frame post="{{ $post->slug }}" :preview="{{ $post->preview }}" can="{{ $canWatch }}"></video-frame>
             @endif
-            <div class="columns">
+            <div class="columns is-mobile">
                 @if(!$auth || $canWatch)
                     <div class="column">
                 @else
@@ -21,7 +21,7 @@
                 </div>
                 @if($auth && !$canWatch)
                     <div class="column is-2">
-                        <ppv post="{{ $post->slug }}"></ppv>
+                        <ppv :post="{{ $post }}"></ppv>
                     </div>
                 @endif
             </div>
@@ -47,7 +47,7 @@
                 </div>
             </article>
             @foreach($post->images->chunk(4) as $chunks)
-                <div class="columns">
+                <div class="columns is-mobile">
                     @foreach($chunks as $image)
                         <div class="column is-one-quarter">
                             <image-one :image="{{ $image }}"></image-one>

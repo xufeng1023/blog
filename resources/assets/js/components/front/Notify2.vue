@@ -21,7 +21,7 @@
             }
 
             Bus.$on(
-                'notify', message => this.flash(message)
+                'notify2', message => this.flash(message)
             );
         },
 

@@ -43287,7 +43287,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 	props: ['data'],
 	data: function data() {
 		return {
-			post: JSON.parse(this.data)
+			post: this.data
 		};
 	},
 
@@ -43340,11 +43340,36 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }, [_vm._v(_vm._s(_vm.post.views))])])]), _vm._v(" "), _c('div', {
     staticClass: "checkbox"
   }, [_c('label', [_c('input', {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.post.sd),
+      expression: "post.sd"
+    }],
     attrs: {
       "type": "checkbox"
     },
+    domProps: {
+      "checked": Array.isArray(_vm.post.sd) ? _vm._i(_vm.post.sd, null) > -1 : (_vm.post.sd)
+    },
     on: {
-      "change": _vm.onChange
+      "change": _vm.onChange,
+      "__c": function($event) {
+        var $$a = _vm.post.sd,
+          $$el = $event.target,
+          $$c = $$el.checked ? (true) : (false);
+        if (Array.isArray($$a)) {
+          var $$v = null,
+            $$i = _vm._i($$a, $$v);
+          if ($$el.checked) {
+            $$i < 0 && (_vm.post.sd = $$a.concat([$$v]))
+          } else {
+            $$i > -1 && (_vm.post.sd = $$a.slice(0, $$i).concat($$a.slice($$i + 1)))
+          }
+        } else {
+          _vm.post.sd = $$c
+        }
+      }
     }
   }), _vm._v(" High Definition\n\t    \t")])])])
 },staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;

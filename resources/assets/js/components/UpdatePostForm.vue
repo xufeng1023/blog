@@ -15,7 +15,7 @@
         </div>
         <div class="checkbox">
     		<label>
-      			<input type="checkbox" @change="onChange"> High Definition
+      			<input type="checkbox" @change="onChange" v-model="post.sd"> High Definition
 	    	</label>
 	  	</div>
     </form>
@@ -28,7 +28,7 @@
 		props: ['data'],
 		data() {
 			return {
-				post: JSON.parse(this.data)
+				post: this.data
 			}
 		},
 		filters: {

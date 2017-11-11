@@ -19,7 +19,7 @@ class PpvTest extends TestCase
 	{
 		$post = $this->create('Post');
 		$user = $this->create('User');
-		$this->login($user)->post("/ppv/{$user->id}/{$post->slug}");
+		$this->login($user)->post("/ppv/{$post->id}");
 		$this->assertDatabaseHas('ppvs', ['user_id'=>$user->id,'post_id'=>$post->id]);
 	}
 }

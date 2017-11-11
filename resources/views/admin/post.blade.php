@@ -7,7 +7,7 @@
             <div class="panel panel-default">
                 <div class="panel-body">
                     @include('error')
-                    <update-post-form data="{{ $post }}"></update-post-form>
+                    <update-post-form :data="{{ $post }}"></update-post-form>
                     <hr>
                     <image-input post="{{ $post->id }}" image="{{ $post->images }}"></image-input>
                     <hr>
