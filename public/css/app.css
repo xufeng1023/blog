@@ -10985,6 +10985,16 @@ sup {
   .navbar-end {
     margin-left: inherit;
   }
+
+  .navbar-brand .navbar-item {
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+  }
+
+  .navbar-item.join {
+    padding-left: 0;
+    padding-right: 0;
+  }
 }
 
 @media screen and (max-width: 1023px) {

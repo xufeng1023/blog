@@ -3,7 +3,7 @@
 		<div class="field">
 	    	<label for="card-number" v-text="cardNumber"></label>
 	    	<div class="control">
-                <input id="card-number" type="text" class="input" v-model="number" @keyup="formatNumber" @keypress="onKeypress" name="number" required>
+                <input id="card-number" type="number" class="input" v-model="number" @keyup="formatNumber" @keypress="onKeypress" name="number" required>
             </div>
 	  	</div>
 	  	<div class="columns">
@@ -21,7 +21,7 @@
 		      	<div class="field">
 			    	<label for="cvc" v-text="cardCvc"></label>
 			    	<div class="control">
-				    	<input type="text" class="input" id="cvc" name="cvc" v-model="cvc" @keyup="formatCvc" @keypress="onKeypress" required>
+				    	<input type="number" class="input" id="cvc" name="cvc" v-model="cvc" @keyup="formatCvc" @keypress="onKeypress" required>
 				    </div>
 			  	</div>
 		    </div>

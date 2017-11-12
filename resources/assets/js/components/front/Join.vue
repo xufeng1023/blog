@@ -24,10 +24,16 @@
 			},
 			onSubmit(e) {
 				Bus.$emit('loading-start');
-
+				let fm = $(e.target).serializeArray();
+				var ob = {};
+				$.each( fm, function( i, field ) {
+			      	ob[field.name] = field.value
+			    });
+				console.log(ob);
+				return;
 				let formData = new FormData(e.target);
 
-				if(formData.has('plan') === false) {
+				if(formData.has('plan') === false) {alert('error');
 					this.endInError(window.lan.chooseAPlan);
 					return false;
 				}

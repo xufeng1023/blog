@@ -95,6 +95,14 @@ sup {
 	.navbar, .navbar-menu, .navbar-start, .navbar-end {
 		margin-left: inherit;
 	}
+	.navbar-brand .navbar-item {
+		padding-left: 0.5em;
+		padding-right: 0.5em;
+	}
+	.navbar-item.join {
+		padding-left: 0;
+		padding-right: 0;
+	}
 }
 @media screen and (min-width: 769px), print {
 	.modal-content, .modal-card {

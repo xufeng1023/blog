@@ -46,8 +46,8 @@
                                 <login></login>
                                 <login-modal></login-modal>
                                 <!-- <a class="navbar-item {{ $uri == 'join'? 'is-active':'' }}" href="/join">@lang('index.join')</a> -->
-                                <div class="navbar-item">
-                                    <a class="button is-warning is-fullwidth" href="/join">@lang('index.join')</a>
+                                <div class="navbar-item join">
+                                    <a class="button is-warning" href="/join">@lang('index.join')</a>
                                 </div>
                             @endauth
                         </div>
@@ -74,6 +74,7 @@
     </section>
 
     @yield('script')
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
     <script src="{{ asset('js/app.js') }}"></script>
 </body>
 </html>

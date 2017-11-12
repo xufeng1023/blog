@@ -37,7 +37,7 @@ window.language = {
 			type: '非订阅型会员',
 			price: '0',
 			label: '0.00',
-			unit: '每月',
+			unit: '月',
 			time: '影片有效期24小时',
 			desc: '只需为观看影片付费',
 			cancel: '普通:$1.35 高清:$3.45',
@@ -47,7 +47,7 @@ window.language = {
 			type: '订阅型会员',
 			price: '15',
 			label: '15.00',
-			unit: '每月',
+			unit: '月',
 			time: '每月自动付款一次',
 			desc: '30天内观看所有影片',
 			cancel: '可以随时取消订阅'

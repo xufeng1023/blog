@@ -23,7 +23,7 @@
                     <input type="checkbox" name="remember" class="is-hidden" checked>
 
                     <div class="field">
-                            <button type="submit" class="button is-primary is-fullwidth">{{ btnText }}</button>
+                        <button type="submit" class="button is-primary is-fullwidth has-text-centered">{{ btnText }}</button>
                     </div>
                     <div class="has-text-centered">
                         <a class="button is-link has-text-grey-light" href="/password/reset">{{ passForgetText }}</a>
