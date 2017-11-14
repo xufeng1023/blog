@@ -20,7 +20,7 @@
 		methods: {
 			update(e) {
 				Bus.$emit('loading-start');
-				let formData = new FormData(e.target);
+				let formData = this.$parent.formToJson(e.target);
 
 				axios.post(api + 'updateCard', formData)
 				.then(r => {

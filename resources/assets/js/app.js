@@ -40,7 +40,6 @@ Vue.component('videoOne', require('./components/front/VideoOne.vue'));
 Vue.component('videoFrame', require('./components/front/VideoFrame.vue'));
 Vue.component('imageOne', require('./components/front/ImageOne.vue'));
 Vue.component('imageModal', require('./components/front/ImageModal.vue'));
-Vue.component('changePlan', require('./components/front/ChangePlan.vue'));
 Vue.component('updateCard', require('./components/front/UpdateCard.vue'));
 Vue.component('cancel', require('./components/front/Cancel.vue'));
 Vue.component('join', require('./components/front/Join.vue'));
@@ -62,6 +61,13 @@ const app = new Vue({
 		this.navBarInit();
 	},
 	methods: {
+		formToJson(form, ob = {}) {
+			let fm = $(form).serializeArray();
+			$.each(fm, function( i, field ) {
+		      	ob[field.name] = field.value
+		    });
+		    return ob;
+		},
 		navBarInit() {
 			var $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
 

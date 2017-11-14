@@ -49,6 +49,12 @@
 				});
 			});
 
+			this.video.on('ended', () => {
+				if(self.now.is_free && (!auth || (!auth.is_member || !self.can))) {
+					Bus.$emit('notify', window.lan.memberOnly);
+				}
+			});
+
 			Bus.$on('play', video => {
 				this.now = video;
 			})

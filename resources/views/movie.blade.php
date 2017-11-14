@@ -32,10 +32,10 @@
                 </div>
             </article>
             
-            <div class="columns">
+            <div class="columns is-mobile is-multiline">
                 @foreach($post->videos as $video)
                     @if($video->thumbnail)
-                        <div class="column is-one-quarter">
+                        <div class="column is-one-quarter-tablet is-half-mobile">
                             <video-one :video="{{ $video }}" can="{{ $canWatch }}"></video-one>
                         </div>
                     @endif
@@ -57,6 +57,7 @@
             @endforeach
         </div>
     </div>
+    @if($auth && $canWatch)
     <image-modal inline-template>
         <div class="modal" :class="{'is-active': isActive}" id="viewImageModal">
             <div class="modal-background" @click="isActive = false"></div>
@@ -68,6 +69,7 @@
             <button class="modal-close is-large" aria-label="close" @click="isActive = false"></button>
         </div>
     </image-modal>
+    @endif
 </div>
 @endsection
 

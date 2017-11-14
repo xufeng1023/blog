@@ -24,42 +24,35 @@
 			},
 			onSubmit(e) {
 				Bus.$emit('loading-start');
-				let fm = $(e.target).serializeArray();
-				var ob = {};
-				$.each( fm, function( i, field ) {
-			      	ob[field.name] = field.value
-			    });
-				console.log(ob);
-				return;
-				let formData = new FormData(e.target);
+				let formData = this.$parent.formToJson(e.target);
 
-				if(formData.has('plan') === false) {alert('error');
+				if(!formData.plan) {
 					this.endInError(window.lan.chooseAPlan);
 					return false;
 				}
 
-				if(!formData.get('email').includes('@')) {
+				if(!formData.email.includes('@')) {
 					this.endInError(window.lan.badEmail);
 					return false;
 				}
 				
-				if(!formData.get('expiration').includes('/')) {
+				if(!formData.expiration.includes('/')) {
 					this.endInError(window.lan.badCardInfo);
 					return false;
 				}
 
-				let cvcLength = formData.get('cvc').length;
+				let cvcLength = formData.cvc.length;
 				if(cvcLength !== 3 && cvcLength !== 4) {
 					this.endInError(window.lan.badCardInfo);
 					return false;
 				}
 
-				if(formData.get('password').length < 6) {
+				if(formData.password.length < 6) {
 					this.endInError(window.lan.passWrong);
 					return false;
 				}
 
-				if(formData.get('password') != formData.get('password_confirmation')) {
+				if(formData.password != formData.password_confirmation) {
 					this.endInError(window.lan.passWrong);
 					return false;
 				}

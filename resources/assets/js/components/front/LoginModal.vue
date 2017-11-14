@@ -58,7 +58,7 @@
         },
 		methods: {
 			onSubmit(e) {
-				let fm = new FormData(e.target);
+				let fm = this.$parent.formToJson(e.target);
 
 				axios.post('/login', fm)
 				.then(({data}) => {

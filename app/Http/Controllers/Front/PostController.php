@@ -10,7 +10,7 @@ class PostController extends Controller
 {
     public function index()
     {
-    	$posts = Post::latest()->paginate(9);
+    	$posts = Post::latest()->paginate(12);
 
     	return view('movies', compact('posts'));
     }

@@ -14,17 +14,15 @@
 		methods: {
 			change(e) {
 				Bus.$emit('loading-start');
-				let formData = new FormData(e.target);
+				let formData = this.$parent.formToJson(e.target);
 
-				if(!formData.get('plan')) {
+				if(!formData.plan) {
 					Bus.$emit('notify', 'Select a plan.');
 					Bus.$emit('loading-end');
 					return;
 				}
 
-				formData.append('apiToken', auth.api_token);
-
-				axios.post(api + 'changePlan/' + auth.id, formData)
+				axios.post(api + 'changePlan', formData)
 				.then(r => {
 					location.reload();
 				})

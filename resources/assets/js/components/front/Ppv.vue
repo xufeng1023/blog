@@ -33,7 +33,7 @@
 				last4: auth? auth.card_last_four : '',
 				isActive: false,
 				color: '',
-				price: this.post.sd? '$3.25' : '$1.45'
+				price: this.post.sd? '$3.25' : '$1.35'
 			}
 		},
 		methods: {

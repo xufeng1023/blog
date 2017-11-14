@@ -4,7 +4,8 @@
 <div class="container">
     <div class="columns is-centered">
         <div class="column is-narrow">
-            <h1 class="title is-5 has-text-centered">@lang('index.selectplan')</h1>
+            <h1 class="title is-5 has-text-centered">@lang('index.welcome')</h1>
+            <h2 class="subtitle is-5 has-text-centered">@lang('index.selectplan')</h2>
             <join inline-template>
                 <form method="POST" autocomplete="off" @submit.prevent="onSubmit">
                     <notify :color="color"></notify>
@@ -49,7 +50,6 @@
                             <submit text="{{ __('index.join') }}" class="is-fullwidth"></submit>
                         </div>
                     </div>
-                    <small class="has-text-grey">*@lang('index.no micro')</small>
                 </form>
             </join>
         </div>

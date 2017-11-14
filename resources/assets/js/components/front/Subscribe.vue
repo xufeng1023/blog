@@ -6,7 +6,7 @@
 				<div class="select">
 				  	<select name="plan">
 				    	<option v-for="plan in plans" :value="plan.id">
-					    	{{ plan.unit + ' - ' + plan.label }}
+					    	{{ '$' + plan.label + ' - ' + plan.unit }}
 					    </option>
 				  	</select>
 				</div>
@@ -33,9 +33,9 @@
 		methods: {
 			onSubmit(e) {
 				Bus.$emit('loading-start');
-				let formData = new FormData(e.target);
+				let formData = this.$parent.formToJson(e.target);
 
-				if(!formData.get('plan')) {
+				if(!formData.plan) {
 					Bus.$emit('notify', 'Select a plan.');
 					Bus.$emit('loading-end');
 					return;
