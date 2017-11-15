@@ -22,6 +22,7 @@ Route::delete('/user/delete', 'Front\UserController@delete');
 
 Route::prefix('admin')->middleware('admin')->group(function() {
 	Route::get('/', 'PostController@index');
+	Route::get('/users', 'UserController@index');
 	Route::post('/videos/thumbnail/{video}', 'VideoController@thumbnail');
 	Route::get('/posts/search', 'PostController@search');
 	Route::resource('posts', 'PostController');
@@ -30,18 +31,6 @@ Route::prefix('admin')->middleware('admin')->group(function() {
 	Route::patch('/videos/{video}/preview', 'VideoController@setPreview');
 	Route::patch('/videos/{video}/clearPreview', 'VideoController@clearPreview');
 	Route::resource('images', 'ImageController');
-	//
-	Route::get('/factory', function() {
-		factory('App\Video', 20)->create()->each(function($video) {
-			factory('App\Image')->create([
-				'post_id' => $video->post->id,
-				'is_thumbnail' => 1
-			]);
-			factory('App\Image')->create(['post_id' => $video->post->id]);
-			factory('App\Image')->create(['video_id' => $video->id]);
-		});
-	});
-	//
 });
 
 // auth
