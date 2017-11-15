@@ -16,6 +16,8 @@ class User extends Authenticatable
 
     protected $fillable = ['email', 'password'];
 
+    protected $with = ['subscriptions'];
+
     protected $visible = ['api_token','card_brand','card_last_four','email','plan','ends_at','next_bill_at','is_member'];
 
     public function saveApiToken()
@@ -50,11 +52,6 @@ class User extends Authenticatable
     public function getIsMemberAttribute()
     {
         return $this->subscribed('main');
-    }
-
-    public function getSubscriptionAttribute()
-    {
-        return $this->subscription('main');
     }
 
     public function sendPasswordResetNotification($token)
