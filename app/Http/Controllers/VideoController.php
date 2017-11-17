@@ -95,19 +95,8 @@ class VideoController extends Controller
      */
     public function destroy(Video $video)
     {
-        $video->deleteThumbnail()->deleteFiles()->delete();
+        $video->deleteFiles()->delete();
         return ['message' => 'Video deleted!'];
-    }
-
-    public function thumbnail(Request $request, Video $video)
-    {
-        if($thumbnail = $video->thumbnail) $thumbnail->deleteFiles()->delete();
-
-        $video = $video->thumbnail()->create([
-            'slug' => $request->image->store('upload', 'public')
-        ]);
-
-        return ['src' => $video->slug];
     }
 
     public function setPreview(Video $video)

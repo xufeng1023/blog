@@ -9,30 +9,16 @@ class Video extends Model
 {
     protected $fillable = ['post_id', 'slug', 'link'];
 
-    protected $with = ['thumbnail'];
+    protected $visible = ['slug', 'link', 'is_free'];
 
     public function getRouteKeyName()
     {
         return 'slug';
     }
 
-    public function thumbnail()
-    {
-    	return $this->hasOne(Image::class);
-    }
-
     public function post()
     {
         return $this->belongsTo(Post::class);
-    }
-
-    public function deleteThumbnail()
-    {
-    	if($this->thumbnail) {
-    		$this->thumbnail->deleteFiles()->delete();
-    	}
-    	
-    	return $this;
     }
 
     public function deleteFiles()

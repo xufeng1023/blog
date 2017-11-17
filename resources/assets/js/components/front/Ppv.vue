@@ -1,11 +1,11 @@
 <template>
 	<div class="is-pulled-right">
-		<button type="button" class="button is-success" @click="isActive = true">{{ btnText }}</button>
+		<button type="button" class="button is-warning" @click="isActive = true">{{ btnText }}</button>
 		<div class="modal" :class="{'is-active': isActive}">
             <div class="modal-background" @click="isActive = false"></div>
             <div class="modal-card">
                 <section class="modal-card-body">
-                	<notify2 :color="color"></notify2>
+                	<notify :color="color"></notify>
                     <form @submit.prevent="onSubmit">
                     	<table class="table is-fullwidth">
                     		<tr><th>本次需付费</th><td>{{ price }}</td></tr>
@@ -23,10 +23,9 @@
 
 <script>
 	import submit from './Submit.vue';
-	import notify2 from './Notify2.vue';
 	export default {
 		props: ['post'],
-		components: {submit, notify2},
+		components: {submit},
 		data() {
 			return {
 				btnText: window.lan.ppvBtn,
@@ -42,7 +41,7 @@
 				axios.post(api + 'ppv/' + this.post.slug)
 				.then(r => {
 					this.color = 'is-success';
-					Bus.$emit('notify2', window.lan.paid);
+					Bus.$emit('notify', window.lan.paid);
 					axios.post('/ppv/' + this.post.id)
 					.then(r => {
 						setTimeout(() => {
@@ -52,7 +51,7 @@
 				})
 				.catch(r => {
 					this.color = 'is-danger';
-					Bus.$emit('notify2', window.lan.payFailed);
+					Bus.$emit('notify', window.lan.payFailed);
 				})
 				.then(r => {
 					Bus.$emit('loading-end');

@@ -1,6 +1,6 @@
 <template>
     <div class="modal" :class="{'is-active': isActive}">
-        <div class="modal-background" @click="isActive = false"></div>
+        <div class="modal-background" @click="closeModal"></div>
         <div class="modal-card">
             <section class="modal-card-body">
                 <form method="POST" action="/login" @submit.prevent="onSubmit" ref="form">
@@ -46,7 +46,8 @@
                 joinText: window.lan.newUser,
                 passForgetText: window.lan.passForget,
 				isActive: false,
-				errors: []
+				errors: [],
+                bodyEl: window.document.querySelector('body')
 			}
 		},
         created() {
@@ -54,9 +55,14 @@
                 this.errors = [];
                 this.$refs.form.reset();
                 this.isActive = true;
+                this.bodyEl.style.position = 'fixed';
             });
         },
 		methods: {
+            closeModal() {
+                this.isActive = false;
+                this.bodyEl.style.position = 'inherit';
+            },
 			onSubmit(e) {
 				let fm = this.$parent.formToJson(e.target);
 

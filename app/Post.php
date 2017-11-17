@@ -8,7 +8,7 @@ class Post extends Model
 {
     protected $fillable = ['title', 'slug', 'views'];
 
-    protected $with = ['images', 'videos'];
+    protected $hidden = ['created_at', 'updated_at'];
 
     public function getRouteKeyName()
     {
@@ -37,7 +37,7 @@ class Post extends Model
     public function deleteVideos()
     {
         $this->videos->each(function($item) {
-            $item->deleteThumbnail()->deleteFiles()->delete();
+            $item->deleteFiles()->delete();
         });
 
         return $this;
@@ -51,17 +51,14 @@ class Post extends Model
 
     public function getPreviewAttribute()
     {
-        $video = $this->videos->where('is_free', 1)->first();
-
-        if(!$video) $video = $this->videos->first();
-
-        return $video ?: null;
+        $canWatch = auth()->user()? auth()->user()->can('watch', $this) : false;
+        $video = $this->videos->where('is_free', !$canWatch)->first();
+        return $video ?: $this->videos->first();
     }
 
     public function getThumbnailAttribute()
     {
-        $image = $this->images->where('is_thumbnail', 1)->first();
-        return $image? $image->slug : null;
+        return $this->images->where('is_thumbnail', 1)->first();
     }
     // admin
     public function videoSlug()
