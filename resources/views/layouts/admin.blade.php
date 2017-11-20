@@ -26,8 +26,8 @@
 
                 <div class="collapse navbar-collapse" id="app-navbar-collapse">
                     <ul class="nav navbar-nav">
-                        <li><a href="/admin">Posts</a></li>
-                        <li><a href="/admin/users">Users</a></li>
+                        <li {{ $uri == 'admin'? 'class=active' : '' }}><a href="/admin">Posts</a></li>
+                        <li {{ $uri == 'admin/users'? 'class=active' : '' }}><a href="/admin/users">Users</a></li>
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
                         <li><a href="/admin">{{ Auth::user()->name }}</a></li>

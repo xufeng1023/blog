@@ -6,6 +6,7 @@
         <div class="col-sm-12">
             <div class="table-responsive">
                 <table class="table table-hover">
+                    @include('admin._tableCaption', ['total' => $users->count()])
                     <thead>
                         <tr><th>Email</th><th>Member</th><th>Plan</th><th>Card</th><th>Next Bill</th></tr>
                     </thead>

@@ -18,6 +18,7 @@
             </div>
             <div class="table-responsive">
                 <table class="table table-hover">
+                    @include('admin._tableCaption', ['total' => $posts->count()])
                     <thead>
                         <tr><th>Title</th><th>Views</th><th></th></tr>
                     </thead>
