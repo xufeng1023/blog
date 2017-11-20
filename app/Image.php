@@ -9,7 +9,7 @@ class Image extends Model
 {
     protected $fillable = ['post_id', 'slug'];
 
-    protected $visible = ['slug'];
+    protected $visible = ['slug', 'is_thumbnail'];
 
     public function getRouteKeyName()
     {

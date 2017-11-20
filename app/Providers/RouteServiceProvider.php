@@ -26,7 +26,7 @@ class RouteServiceProvider extends ServiceProvider
         parent::boot();
 
         Route::bind('image', function($value) {
-            return \App\Image::whereSlug('upload/'.$value)->first();
+            return \App\Image::whereSlug('upload/'.$value)->orWhere('slug', 'upload2/'.$value)->first();
         });
 
         Route::bind('postId', function($value) {

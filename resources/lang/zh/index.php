@@ -39,7 +39,7 @@ return [
 	'update' => '更新',
 	'cc safe desc' => '本网站在数据处理, 认证和支付过程中使用安全协议和SSL加密.',
 	'preview' => '可预览',
-	'need to login' => '请登入账号观看完整影片',
+	'need to login' => '现在播放的是影片预览',
 	'expired' => '请订阅会员或购买影片',
 	'account updated' => '账号更新完成',
 	'resume desc' => '重新激活订阅后, 任何未使用的有效天数都可以继续被使用, 并且不需要马上付费.',

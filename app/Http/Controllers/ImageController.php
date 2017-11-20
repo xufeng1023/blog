@@ -36,7 +36,7 @@ class ImageController extends Controller
     public function store(Request $request)
     {
         foreach($request->images as $key => $image) {
-            $slugs[$key]['slug'] = $image->store('upload', 'public');
+            $slugs[$key]['slug'] = $image->store('upload2', 'public');
             $pic = Image::create([
                 'post_id' => $request->postId,
                 'slug' => $slugs[$key]['slug'] 

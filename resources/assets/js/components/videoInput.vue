@@ -50,7 +50,7 @@
 			onChange(e) {
 				var loaded = 0
 				var start = 0
-				let step = 2 * 1024 * 1024 // 1m
+				let step = 8 * 1024 * 1024 // 1m
 				var end = start + step
 
 				let file = e.target.files[0]

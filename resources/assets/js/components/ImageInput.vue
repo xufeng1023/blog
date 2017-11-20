@@ -76,7 +76,7 @@
 					})
 			},
 			thumb(slug) {
-				axios.put('/admin/images/'+slug.replace('upload/', ''))
+				axios.put('/admin/images/'+slug.replace('upload/', '').replace('upload2/', ''))
 					.then(r => {
 						this.images.forEach(image => {
 							image.is_thumbnail = 0
@@ -90,7 +90,7 @@
 					})
 			},
 			remove(slug) {
-				axios.delete('/admin/images/'+slug.replace('upload/', ''))
+				axios.delete('/admin/images/'+slug.replace('upload/', '').replace('upload2/', ''))
 					.then(r => {
 						this.removeImage(slug)
 

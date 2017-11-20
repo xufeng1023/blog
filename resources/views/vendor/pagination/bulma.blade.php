@@ -1,15 +1,15 @@
 @if ($paginator->hasPages())
-    <nav class="level" role="navigation" aria-label="pagination">
-        <ul class="level-item">
+    <nav class="pagination is-centered" role="navigation" aria-label="pagination">
+        <ul class="pagination-list">
         {{-- Previous Page Link --}}
         @if ($paginator->onFirstPage())
-            <li class="disabled"><span>&laquo;</span></li>
+            <a class="pagination-previous" disabled>上一页</a>
         @else
-            <li><a href="{{ $paginator->previousPageUrl() }}" rel="prev" class="pagination-previous">&laquo;</a></li>
+            <a href="{{ $paginator->previousPageUrl() }}" class="pagination-previous">上一页</a>
         @endif
 
         {{-- Pagination Elements --}}
-        @foreach ($elements as $element)
+        <!-- @foreach ($elements as $element)
             {{-- "Three Dots" Separator --}}
             @if (is_string($element))
                 <li class="disabled"><span>{{ $element }}</span></li>
@@ -29,13 +29,13 @@
                     @endif
                 @endforeach
             @endif
-        @endforeach
+        @endforeach -->
 
         {{-- Next Page Link --}}
         @if ($paginator->hasMorePages())
-            <li><a href="{{ $paginator->nextPageUrl() }}" rel="next" class="pagination-next">&raquo;</a></li>
+            <a href="{{ $paginator->nextPageUrl() }}" class="pagination-next">下一页</a>
         @else
-            <li class="disabled"><span>&raquo;</span></li>
+            <a class="pagination-next" disabled>下一页</a>
         @endif
     </ul>
     </nav>
