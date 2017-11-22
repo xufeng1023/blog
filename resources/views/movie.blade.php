@@ -8,34 +8,35 @@
 <div class="container">
     <div class="columns">
         <div class="column is-two-thirds">
-            <div class="field">
+            <div class="field videoWrap">
                 <video-frame 
                 :thumbnail="{{ $post->thumbnail }}" 
                 slug="{{ $post->slug }}"
                 :preview="{{ $post->preview }}"
                 >
                 </video-frame>
+                @if(!$auth) 
+                    <div class="notification insideVideoNotify">@lang('index.need to login')</div>
+                @else
+                    @cannot('watch', $post)
+                        <div class="notification insideVideoNotify">
+                            @if(!$auth->plan)
+                                @lang('index.need to buy')
+                            @else
+                                @lang('index.expired')
+                            @endif
+                        </div>
+                    @endcannot
+                @endif
             </div>
 
             @if(!$auth)    
-                <div class="notification is-danger level is-mobile">
-                    <div class="level-left">
-                        <div class="level-item">@lang('index.need to login')</div>
-                    </div>
-                    <div class="level-right">
-                        <login class="level-item"></login>
-                    </div>
-                </div>
+            <div class="field">
+                <login class="button is-danger" btn-text="{{ trans('index.login to watch') }}"></login>
+            </div>
             @else
                 @cannot('watch', $post)
-                    <div class="notification is-danger level is-mobile">
-                        <div class="level-left">
-                            <div class="level-item">@lang('index.expired')</div>
-                        </div>
-                        <div class="level-right">
-                            <ppv :post="{{ $post }}"></ppv>
-                        </div>
-                    </div>
+                    <ppv :post="{{ $post }}"></ppv>
                 @endcannot
             @endif
 

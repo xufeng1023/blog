@@ -1,6 +1,6 @@
 <template>
-	<div class="is-pulled-right">
-		<button type="button" class="button is-warning" @click="isActive = true">{{ btnText }}</button>
+	<div class="field">
+		<button type="button" class="button is-danger" @click="isActive = true">{{ btnText }}</button>
 		<div class="modal" :class="{'is-active': isActive}">
             <div class="modal-background" @click="isActive = false"></div>
             <div class="modal-card">

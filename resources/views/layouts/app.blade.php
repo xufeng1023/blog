@@ -43,7 +43,7 @@
                                     <a class="navbar-item" href="/admin">admin</a>
                                 @endif
                             @else
-                                <login></login>
+                                <login class="navbar-item" btn-text="{{ trans('index.login') }}"></login>
                                 <login-modal></login-modal>
                                 <!-- <a class="navbar-item {{ $uri == 'join'? 'is-active':'' }}" href="/join">@lang('index.join')</a> -->
                                 <div class="navbar-item join">

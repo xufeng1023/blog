@@ -8,7 +8,7 @@ window.language = {
 		cvc: '卡后三位数',
 		choose: '选择',
 		update: '更新',
-		subscribe: '订阅',
+		subscribe: '订阅会员',
 		chooseAPlan: '请选择以下一种观看方式',
 		total: '本次需付费',
 		badCardInfo: '无效的信用卡信息',

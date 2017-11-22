@@ -2,9 +2,8 @@
     <nav class="pagination is-centered" role="navigation" aria-label="pagination">
         <ul class="pagination-list">
         {{-- Previous Page Link --}}
-        @if ($paginator->onFirstPage())
-            <a class="pagination-previous" disabled>上一页</a>
-        @else
+
+        @if (!$paginator->onFirstPage())
             <a href="{{ $paginator->previousPageUrl() }}" class="pagination-previous">上一页</a>
         @endif
 
@@ -32,10 +31,9 @@
         @endforeach -->
 
         {{-- Next Page Link --}}
+        
         @if ($paginator->hasMorePages())
             <a href="{{ $paginator->nextPageUrl() }}" class="pagination-next">下一页</a>
-        @else
-            <a class="pagination-next" disabled>下一页</a>
         @endif
     </ul>
     </nav>

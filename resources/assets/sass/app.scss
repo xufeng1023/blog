@@ -82,6 +82,17 @@ sup {
 .message.plan .message-header{
     justify-content: center;
 }
+.videoWrap {
+	position: relative;
+}
+.insideVideoNotify {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    border-radius: 0;
+    padding: 1em;
+    background-color: rgba(255, 56, 96, 0.2);
+}
 @media screen and (min-width: 300px) {
 	.navbar, .navbar-menu, .navbar-start, .navbar-end {
 		display: flex;

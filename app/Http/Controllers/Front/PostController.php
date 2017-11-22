@@ -10,12 +10,12 @@ class PostController extends Controller
     public function index()
     {
     	$posts = Post::with('images')->latest()->paginate(8);
-
+ 
     	return view('movies', compact('posts'));
     }
 
     public function show(Post $post)
-    { 
+    {
         $post->append(['thumbnail', 'preview']);
 
     	return view('movie', compact('post'));
