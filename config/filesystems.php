@@ -55,6 +55,13 @@ return [
             'visibility' => 'public',
         ],
 
+        'public2' => [
+            'driver' => 'local',
+            'root' => public_path(),
+            'url' => env('APP_URL').'/st',
+            'visibility' => 'public',
+        ],
+
         'space' => [
             'driver' => 's3',
             'key' => env('DO_SPACES_KEY'),

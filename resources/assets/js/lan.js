@@ -32,6 +32,7 @@ window.language = {
 		resumed: '感谢您再次回来, 马上为您刷新...',
 		badApi: '您的请求暂时无法执行, 请稍后再试',
 		notLogin: '请登入账号观看完整影片',
+		more: '查看更多',
 		ppv: {
 			id: 'ppv',
 			type: '非订阅型会员',

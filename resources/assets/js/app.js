@@ -48,6 +48,7 @@ Vue.component('resume', require('./components/front/Resume.vue'));
 Vue.component('subscribe', require('./components/front/Subscribe.vue'));
 Vue.component('invoices', require('./components/front/Invoices.vue'));
 Vue.component('ppv', require('./components/front/Ppv.vue'));
+Vue.component('movies', require('./components/front/Movies.vue'));
 Vue.component('login', require('./components/front/Login.vue'));
 if(!window.auth) {
 	Vue.component('loginModal', require('./components/front/LoginModal.vue'));

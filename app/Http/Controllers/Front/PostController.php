@@ -9,9 +9,11 @@ class PostController extends Controller
 {
     public function index()
     {
-    	$posts = Post::with('images')->latest()->paginate(8);
- 
-    	return view('movies', compact('posts'));
+        if(request()->wantsJson()) {
+            return Post::with('images')->latest()->paginate(8);
+        }
+    	
+    	return view('movies');
     }
 
     public function show(Post $post)

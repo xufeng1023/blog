@@ -55,7 +55,6 @@ class Video extends Model
     public function play()
     {
         $file = storage_path('app/public/'.$this->link);
-
         (new VideoStream($file))->start();
     }
 }

@@ -10,6 +10,8 @@ class Post extends Model
 
     protected $hidden = ['created_at', 'updated_at'];
 
+    protected $appends = ['thumbnail'];
+
     public function getRouteKeyName()
     {
         return 'slug';

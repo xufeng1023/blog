@@ -64,7 +64,7 @@
         
         @if($uri != '/')
             <footer class="hero-foot">
-                <div class="section is-size-7 has-text-grey-dark">
+                <div class="section is-size-7 has-text-grey-dark noPaddingTop">
                     <hr>
                     <P class="">@lang('index.Iswear')</P>
                     <p>© {{ date('Y') }} {{ config('app.name', 'DollyIsland') }}.</p>
