@@ -7,8 +7,16 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="api" content="{{ config('app.api') }}">
     <meta name="auth" content="{{ $auth }}">
+    <meta name="robots" content="noindex">
     <meta name="google-site-verification" content="yMq8HejvoSmmerIYSzoHzMcIhXzqSWdG3q4z2rzaPqc">
     <title>@yield('title'){{ config('app.name', 'Laravel') }} - @lang('index.desc')</title>
+	<!-- <script async src="https://www.googletagmanager.com/gtag/js?id=UA-110236831-1"></script>
+	<script>
+  		window.dataLayer = window.dataLayer || [];
+  		function gtag(){dataLayer.push(arguments);}
+  		gtag('js', new Date());
+  		gtag('config', 'UA-110236831-1');
+	</script> -->
     @yield('style')
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
@@ -43,7 +51,7 @@
                                     <a class="navbar-item" href="/admin">admin</a>
                                 @endif
                             @else
-                                <login></login>
+                                <login class="navbar-item" btn-text="{{ trans('index.login') }}"></login>
                                 <login-modal></login-modal>
                                 <!-- <a class="navbar-item {{ $uri == 'join'? 'is-active':'' }}" href="/join">@lang('index.join')</a> -->
                                 <div class="navbar-item join">

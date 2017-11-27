@@ -43,7 +43,8 @@ class PostController extends Controller
 
         $post = Post::create([
             'title' => $request->title,
-            'slug' => str_slug($request->title) ?: $request->title
+            //'slug' => str_slug($request->title) ?: $request->title
+            'slug' => $request->title
         ]);
 
         return redirect('/admin/posts/'.$post->slug.'/edit');

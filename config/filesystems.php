@@ -55,6 +55,15 @@ return [
             'visibility' => 'public',
         ],
 
+        'space' => [
+            'driver' => 's3',
+            'key' => env('SPACE_KEY'),
+            'secret' => env('SPACE_SECRET'),
+            'endpoint' => env('SPACE_ENDPOINT'),
+            'region' => env('SPACE_REGION'),
+            'bucket' => env('SPACE_BUCKET'),
+        ],
+
         's3' => [
             'driver' => 's3',
             'key' => env('AWS_KEY'),
