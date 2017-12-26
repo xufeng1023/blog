@@ -21,10 +21,15 @@ class VideoStream
      */
     private function open()
     {
-        if (!($this->stream = fopen($this->path, 'rb'))) {
+        $context = stream_context_create([
+            'space' => [
+                'seekable' => true
+            ]
+        ]);
+
+        if (!($this->stream = fopen($this->path, 'rb', false, $context))) {
             die('Could not open stream for reading');
         }
-
     }
 
     /**
@@ -39,6 +44,10 @@ class VideoStream
         header("Last-Modified: ".gmdate('D, d M Y H:i:s', @filemtime($this->path)) . ' GMT' );
         $this->start = 0;
         $this->size  = filesize($this->path);
+
+        // $headers  = get_headers($this->path, 1);
+        // $this->size    = $headers['Content-Length'];
+
         $this->end   = $this->size - 1;
         header("Accept-Ranges: 0-".$this->end);
 

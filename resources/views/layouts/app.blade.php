@@ -14,7 +14,7 @@
 </head>
 <body>
     <section id="app" class="hero is-black is-fullheight">
-        @if($uri && $uri != '/')
+
             <div class="hero-head">
                 <nav class="navbar is-dark">
                     <div class="navbar-brand">
@@ -54,7 +54,7 @@
                     </div>
                 </nav>
             </div>
-        @endif
+
 
         @yield('banner')
         

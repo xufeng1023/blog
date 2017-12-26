@@ -54,7 +54,15 @@ class Video extends Model
 
     public function play()
     {
-        $file = storage_path('app/public/'.$this->link);
+        //$file = storage_path('app/public/'.$this->link);
+        
+        Storage::disk('space')->setVisibility($this->link, 'public');
+        $adapter = Storage::disk('space')->getAdapter();
+        $client = $adapter->getClient();
+        $client->registerStreamWrapper();
+
+        $file = "s3://dollyisland/{$this->link}";
+        // \Log::info("s43 file {$file}");
         (new VideoStream($file))->start();
     }
 }

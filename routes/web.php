@@ -1,9 +1,9 @@
 <?php
 
-Route::get('/', function() {
-	return view('front');
-})->middleware('guest');
-
+// Route::get('/', function() {
+// 	return view('front');
+// })->middleware('guest');
+Route::get('/', 'Front\PostController@index');
 Route::get('/movies', 'Front\PostController@index');
 Route::get('/movie/{post}', 'Front\PostController@show');
 Route::get('/video/{video}', 'Front\VideoController@stream');
