@@ -22,6 +22,10 @@ class AppServiceProvider extends ServiceProvider
                 $view->with('auth', auth()->user() ?: null);
             }
         );
+
+        \App\Ip::firstOrCreate(
+            ['ip' => \Request::server('REMOTE_ADDR')]
+        );
     }
 
     /**
